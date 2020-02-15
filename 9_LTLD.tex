@@ -1,0 +1,412 @@
+\documentclass{article}
+
+\usepackage{lipsum}
+\usepackage[margin=1in,includefoot]{geometry}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{bbm}
+
+% header and footer stuff
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+%\fancyhead{}
+\fancyfoot{}
+\fancyfoot[R]{\thepage\ }
+\renewcommand{\headrulewidth}{0pt}
+%
+
+\begin{document}
+
+\begin{titlepage}
+	\begin{center}
+	
+	\line(1,0){300}\\
+	[5mm]
+	\huge{\bfseries Legendre transform and Large deviation theory}\\
+	[2mm]
+	\line(1,0){200}\\
+	[2cm]
+	\textsc{\Large Meccanica statistica del disequilibrio: fondamenti e applicazioni} \\
+	[8cm]
+	
+	\end{center}
+	
+	\begin{flushright}
+	\textsc{\LARGE Jacopo Pasqualini}\\
+	[0.5cm]
+	\textsc{\large Università degli studi di Torino\\
+	[0.5cm]
+	A.A. 2019/2020 }
+	\end{flushright}
+	
+\end{titlepage}
+
+\section{Legendre transform and large deviation theory}\label{sec:langapp}
+
+Thermodynamics can be formulated and reformulated in many different guises. For instance in the \emph{entropy} formulation the equilibrium states are characterized by a maximum of the entropy, as a function of the \emph{extensive} parameters subject to constraints in place (e.g. constant energy).
+This is  equivalent to the \emph{energy} representation, in which the equilibrium states has minimum energy, under the constraint of constant entropy.In all cases, a constraint is fixed and another quantity is extremized. The equivalence is due to the fact that the fundamental surface of states $S=S(U,V,N_1,...,n_t)$, is convex, is a homogeneous function of extensive parameters:
+
+\begin{equation}
+S(\lambda U, \lambda V, \lambda N_1, ... , \lambda N_t) = \lambda S(U,V,N_1,...,N_t) \quad \textit{ and } \quad \frac{\partial S}{\partial U} \Big |_{V,N_1,...,N_t} > 0
+\end{equation}
+
+the second equation enstablish the monotonicity in U. So that the equation of the surface con be inverted and written alternatively as $U=U(S,V,N_1,...N_t)$
+
+In both representations, the extensive parameters play the role of independent variables, whereas intensive parameters are derived concepts. This is in contrast to experimental practice, which finds often easier to control intensive variables.
+
+In particular, there is no tool to directly measure the entropy, while thermometers and thermostat are common laboratory equipment. Let us derive one further formulation of thermodynamics, on terms of intensive parameters,
+
+Formally, let the fundamental relation take the form $Y=Y(X_0,X_1,...,X_t)$ for the extensive variables $Y$, $X_i$ and introduce $P_k = \frac {\partial Y}{\partial X_k}$ (if $Y$, $X_k$ ) are extensive, $P_k$ are intensive.
+
+Begin with $t=1$. $P$ in the slope of the curve $Y=Y(X)$ hence does not suffice by itself to express the set of states, but knowledge of the tangent lines suffice so, let $\Psi$ be the intercept of the tangent line as a function of $P$ so we can write $\Psi = \Psi(P)$ is totally equivalent to $Y=(X)$.
+
+Then $P$ is the only needed independent variable in the new equivalent representation. In other words, $Y=Y(X)$ is a fundamental relation in the "Y-representation", whereas $\Psi = \Psi(P)$ is an equivalent fundamental relation in the "$\Psi$-representation". $\Psi$ is ontained from $Y$ as a \emph{Legendre transformation} we look for the intercept $\Psi$ of the line of slope $P$ tangent to $Y=Y(X)$, i.e. we minimize the distance between $Y$ and $PX+q$
+
+\begin{equation}
+inf|Y-(PX+q)|=0 \quad \rightarrow \quad q^* = \Psi = Y - PX
+\end{equation}
+
+Indeed
+
+$$P = \frac{Y-\Psi}{X-0} \quad \rightarrow \quad \Psi = Y _ PX $$
+
+$\Psi$ is so called Legendre transform of $Y$; it exist if $Y$ is convex, i.e. if $Y'$ changes by changing $X$ everywhere. This allows us to invert the relation $P=P(X)$ and obtain $X=X(P)$: e.g. $\frac{d^2 Y}{d^2 X} > 0$ implies strictly increasing $P(X) = \frac{d Y}{d X}$ and a different $P$ for different $X$, or a different $X$ for different $P$. In other words we can write $\Psi = \Psi(P)$.
+
+Then, 
+
+$$\Psi = Y - PS $$
+
+$$ d \Psi = d Y - d P X = - x d P  \rightarrow -x = \frac{d \Psi}{ d P}$$
+
+If $\frac{d^2 \Psi}{d^2 X} \neq 0$, verified by convex $\Psi$, $X=X(P)$ con be inverted to yield $P=P(X)$ can be used to obtain $Y=Y(X)$, where now $Y = \Psi + PX$, with $\Psi = \Psi(P(X))$ and $P=P(X)$.
+
+Let us compare the relation between the representation $\Psi$ and the representation $Y$ (the first in terms of intensive parameter $P$. the second in term of the extensive X):
+
+\begin{align*}
+\textit{EXTENSIVE:} \quad \quad & \textit{INTENSIVE:} \\
+\textit{ Y-representation } \quad \quad & \textit{$\Psi$ representation} \\
+Y = Y(X) \quad  \quad& \Psi = \Psi(P) \\
+P = \frac{d Y}{d X} \quad \quad & x = - \frac{d \Psi}{d P} \\
+\Psi = -PX + Y \quad \quad & Y = PX + \Psi \\
+\end{align*}
+
+$$ \textit{(new rel)} = \textit{(old rel)} -  \textit{(new var)} \times \textit{(old var)}$$
+In general, we have:
+
+\begin{align*}
+\textit{the fundamental relation} \quad & Y=Y(xX_0,...,X_t) \\
+\textit{partial slope of tangent hyperplanes} \quad & P_k = \frac{\partial Y}{\partial X_k} \\
+\textit{intercet of hyperplanes } \quad & \Psi = \Psi(P_0,...,P_t) = Y -\sum_{k=0}^{t} P_k X_k
+\end{align*}
+
+$$d \Psi = - \sum_{k=0}^{t} X_k dP_k \rightarrow x_l = -\frac{\partial Psi}{\partial P_k}$$
+
+NOTE: a Legendre transformation may even be performed on a subset of coordinates.
+
+In classical mechanics, the fundamental relation is the lagrangian:
+
+$$\mathcal{L} = \mathcal{L}(v_1,..,v_r,q_1,...,q_r)$$
+
+one then introduces the generalized momenta, the new variables $$P_k = \frac{\partial L}{ \partial v_k}$$ and compute the Legendre transformation of the lagrangian with the respect of velocities, obtaining the hamiltonian:
+
+$$ -H = L - \sum_{k=1}^{r} p_k v_k$$
+$$ H = H(p_1,...,p_r,q_1,...,p_r)$$
+
+In thermodynamics, the fundamental relation in energy-representation is $U=U(S,V,N_1,...,N_r)$ and its derivatives are the intensive parameters of the system considered:
+
+$$T = \frac{\partial U}{\partial S} \quad -P =  \frac{\partial U}{\partial V} \quad \mu_r = \frac{\partial U}{\partial N_r}$$
+
+The Legendre transform functions of U ore called \emph{thermodynamic potentials} e.g. $F=U-TS$ where elimination of $U$ and $S$ yields $F=F(T,V,N_1,...,N_r)$ then:
+
+$$ -S = \frac{\partial F}{\partial T} \quad U = F + TS$$
+
+The \emph{Helmoltz potential} (free energy) is the partial Legendre transform of U which replaces the entropy S by the temperature T as independent variable.
+
+Its elementary variation gives:
+
+$$d F = - S dT - P dV + \sum_{k=1}^{t} \mu_k dN_k$$
+
+The \emph{Enthalpy} is the partial Legendre transform of U that replaces the volume V by the pressure P as independent variable
+
+$$H = U + PV $$
+$$ dH = T dS + V dP +  \sum_{k=1}^{t} \mu_k dN_k$$
+
+The sing inversion in $P$ because $P$ is the intensive parameter associated with $V$.
+
+$$U = H - PV \quad V = \frac{\partial H}{\partial P}$$
+
+The \emph{Gibbs free energy} is the partial Legendre transform of the energy $U$ which replaces the entropy $S$ by the temperature $T$, and the the volume $V$ by the pressure $P$ as independent variables:
+
+$$U=U(S,V,N_k) \quad T = \frac{\partial U}{\partial S} \quad -P = \frac{\partial U}{\partial V}$$
+
+$$G = U - TS + PV \quad G=G(T,P,N_k)$$
+
+$$dG = -SdT+Vdp+\sum_{k=1}^{t} \mu_k dN_k$$
+
+If one starts from the entropy formulation with fundamental relation $S=S(U,V,N_1,...,N_t)$ performing Legendre transformation one obtains the so called \emph{Massieu function} which is particularly useful in irreversible thermodynamics ind in the theory of fluctuations.
+
+Replacing $U$ by $\frac{\partial S}{\partial U} = \frac{1}{T}$ leads to
+
+$$S*[ \frac{1}{T} ] = S - \frac{1}{T} U = - \frac{F}{T}$$
+
+Expressing $V$ by $\frac{\partial S}{\partial V} =  \frac{P}{T}$ yields
+
+$$S*[ \frac{P}{T} = S -  \frac{P}{T} V] \quad -V =  \frac{\partial S*}{\partial(\frac{P}{T})}$$
+
+By replacing U by $ \frac{1}{T}$ and V by $ \frac{P}{T}$ and with similar procedure as in the former Legendre transformation, yields
+
+$$S*[ \frac{1}{T}, \frac{P}{T}] = S -  \frac{1}{T} U -  \frac{P}{T} V =  - \frac{1}{T} G$$
+
+The above constitutes the phenomenological thermodynamic description. Statistical mechanics tries to reproduce thermodynamics from the molecular point ov view that is characterized by fluctuating microscopic quantities, for which a statistical description os required. For instance, consider a large isolated system R, of which we observe a part s. Let X be an extensive variable of s, i.e. a \textit{local} variable.
+In general X fluctuates and its statistics can be quite generally given by a sort of \emph{canonical distribution}
+
+
+$$ f(x) = \frac{1}{e^{\Psi(h)}} e^{-hx} \quad \quad \textit{with } \quad e^{\Psi(h)} = \int_{-\infty}^{\infty} e^{-hx} dN(x)$$
+
+Where $N(x)$ can be selected according to the needs (quite arbitrarily or quite generally), so that one can write:
+
+$$\mathbbm{P}(x < x_0) = \int_{-\infty}^{x_0} e^{-hx} dN(x) e^{\Psi(h)}$$
+
+Introduce the moment generating function of X:
+
+\begin{equation}
+\langle e^{\alpha X} \rangle = e^{-\Psi(x)} \int e^{\alpha x} e^{-hx} dN(x) = e^{-\Psi(x)} \int e^{-(h-\alpha) x} dN(x) = e^{-\Psi(h)} e^{\Psi(h-\alpha)}
+\end{equation}
+
+The cumulant generating function is then :
+
+$$
+\ln \langle e^{\alpha x} \rangle = -\Psi(h) + \Psi(h-\alpha) = -\Psi(h) + \sum_{n=0}^{\infty} \frac{(-\alpha)^n}{n!} \Psi^{(n)}(h) = \sum_{n=1}^{\infty} \frac{(-\alpha)^n}{n!} \Psi^{(n)}(h) = \sum_{n=1}^{\infty} \frac{(-\alpha)^n}{n!} \langle x^n \rangle_c
+$$
+
+\begin{equation}
+\langle x^n \rangle_c = (-1)^n \Psi^{(n)}(h)	
+\end{equation}
+
+Independently on the meaning of x and of N, let us call \emph{entropy} the following quantity:
+
+$$S = - k_B \int f(x) \ln f(x) dN(x) =- k_B \int f(x)[-\Psi(h) -hx ] dN(x) = k_B \Psi(h) k_B \ln \langle x \rangle $$
+
+\begin{equation}
+k_B \Psi(h) = S - k_B \ln \langle x \rangle
+\end{equation}
+
+Then $k_B \Psi$ looks like the "Massieu function" of $S$ in which the variable $\langle x \rangle $ is replaced by the variable $k_B h$, $k_B h = \frac{\partial}{\partial \langle x \rangle}$ can be interpreted as an intensive field conjugated to the extensive variable $x$; indeed we also have:
+
+\begin{align*}
+\langle x \rangle = & \ e^{-\Psi(h)} \int x e^{-hx} dN = \ e^{-\Psi(h)} (-\frac{\partial}{\partial h} \int e^{-hx} dN) = \\
+= & \ e^{-\Psi(h)} \frac{\partial  e^{\Psi(h)}}{\partial h} = \ e^{-\Psi(h)} \ \Psi' \  e^{\Psi(h)} = \frac{\partial \Psi}{\partial h} = \frac{\partial( k_B \Psi)}{\partial (k_B h)} \\
+\end{align*}
+
+If we identify $x$ with mechanical energy $E$ and $\langle x \rangle $ with intensive energy $U$ and $k_B h = \frac{1}{T}$ so that $h = \beta$, then whatever choice for $N(x)$ leads to:
+
+$$k_B \Psi = S - k_B T U = S - \frac{1}{T} U = - \frac{1}{T} F$$
+
+\begin{equation}
+\Psi(\beta) = - \beta F(\beta)
+\end{equation}
+ and the cumulants reproduce all known thermodynamic relations.
+ 
+then
+
+$$\langle E \rangle_c = - \frac{d}{d \beta} (-\beta F(\beta)) =U$$
+
+$$\langle E^2 \rangle_c = - \frac{d^2}{d \beta^2} (-\beta F(\beta)) = k_B T^2 c_V(T) $$
+
+$$\langle E^3 \rangle_c = - \frac{d^3}{d \beta^3} (-\beta F(\beta)) = k_B^2 T^3 [2c_v + T \frac{d c_V}{d T}]$$
+
+in the former calculations it may help $\frac{d}{d T} = - k_B \beta^2 \frac{d}{d \beta} $
+
+These cumulants represent the connection between the fluctuations of $X = E$ and the derivatives of the associated thermodynamic potential $\Psi$. The above relations allows us to compute microscopic quantities, such as mechanical energy and its fluctuations, in terms of equilibrium macroscopic quantities: the process opposite to the one usually thought to be follow and in the large N limit, any observable fluctuation will be a large deviation.
+
+\subsection{General theory of Legendre transform}
+
+The Legendre transform is mathematical algorithm which allows us to pass from functions defined on its dual space (the space of linear functionals on the original space)
+
+DEF: let $y=f(x)$ be convex ($f''(x)>0$). Take $p \in \mathbbm{R}$ and consider the line $y=px$. Introduce $F(p,x)=px-f(x)$ and look for the point $x(p)$ wich maximizes $F$ at constant $p$:
+
+$$g(p) = F(p,x(p)) = \max_{x} \{ px-f(x) \} $$
+
+Is called the \emph{Legendre transform} of $f$, with the respect of $x$. 
+The point $x(p)$ is found to imposing $\frac{df}{dx} = p - f'(x)=0$ i.e. $f'(x)=p$, hence the condition $f''>0$ makes it univocally determined, if it exists makes it univocally determined, if it exists with the respect our thermodynamic notation, here we have $g = - \Psi$, $y=f$, $P=p$, $X=x$.
+Let us show a couple of meaningful examples:
+
+EX1: 
+$$f(v) = \frac{m}{2}v^2 \quad F(p,v) = pv -  \frac{m}{2}v^2$$ 
+$$\frac{\partial F}{\partial v} = p-mv \quad v(p)=\frac{1}{m}p $$
+$$g(p) = F(p,v(p)) = \frac{p^2}{2m}$$
+
+EX2:
+Now, let $f(x)$ be defined as follows:
+
+\begin{displaymath}
+	f(x) = \left\{
+	\begin{array}{lr}
+		p_1x+q_1 & : x \leq x_0\\
+		p_2x+q_2 & : x \geq x_0
+	\end{array}
+	\right.
+\end{displaymath}
+
+with the condition $p_1 x_0 + q_1 = p_2 x_0 + q_2$
+
+A straightforward calculation leads, for F(p,x):
+
+\begin{displaymath}
+F(p,x) = \left\{
+\begin{array}{lr}
+px - p_1x - q_1 & : x \leq x_0\\
+px - p_2x - q_2 & : x \geq x_0
+\end{array}
+\right.
+\end{displaymath}
+
+Here we cannot find $x(p)$ by differentiation, but the point of maximum difference between $px$ and $f(x)$ is clearly in the convex part of the angle, so one can write:
+
+$g(p) = x_0p -p_1 x_0 - q_1 = x_0 p - p_2 x_0 - q_2$
+
+For $p<p_1$ and $p>p_2$, $y=px$ does not cut the convex part of the angle so the domain of $g$ is: $\mathcal{D}(g) = [p_1,p_2]$, also:
+
+$$g(p_1) = p_1 x_0 - p_1 x_0 - q_1 = - q_1  \quad g(p_2) = p_2 x_0 - p_2 x_0 - q_2 = - q_2 $$
+$$ p_0 x_0 = p_1 x_0 q_1 = p_2 x_0 + q_2 \rightarrow g(p_0)=0$$
+
+This example leads to the conclusion that, convex polynomial f produce a convex polynomial g, such that vertices of f correspond to segments of g and segments of f correspond to vertices of g.
+If $f''>0$ and $g''>0$ therefore one may perform the Legendre transform twice of a given function.
+
+THEOREM: 
+$\mathcal{L}(f) = g \rightarrow \mathcal{L}(g) = \mathcal{L}^2(f)=f$ i.e. the Legendre transform is an involution, hence is an operator with unit norm.
+
+COR: consider the family of straight lines $y=px-g$ for some g. The envelop of these lines is the function $f(x)$ whose Legendre transform is g.
+
+\subsection{Large deviation theory}
+
+Large defiation theory is a generalization of the central limit theorem and the law of large numbers.
+Consider a sequence of $N$ coin tosses, where $H=1$ and $T=-1$, let $X$ be the random variable of the outcome ot the n-th tossing, $ n \in \{v1,...,N \}$ such that $\alpha$ is the probability of $H$, and $1-\alpha$ is the probability of $T$.
+
+Introduce the R.V. :
+
+$$Y_N = \frac{1}{N} \sum_{n=1}^{N} X_n$$
+
+which takes values in $[-1,1]$. For large $N$, the values of $Y_N$ are closely spaced. If the tosses are independent, central limit theorem states that:
+
+$$\mathbbm{P}[Y_N \leq y] \approx \int_{-\infty}^{y} \frac{1}{\sqrt{2 \pi \sigma^2}} e^{-\frac{N(y'-\langle y \rangle)^2}{2 \sigma^2}} dy'$$
+
+Where 
+
+$$\langle y \rangle = \alpha (+1) + (1-\alpha)(-1) = 2 \alpha -1$$
+
+$$\langle y^2 \rangle =  \alpha (+1) + (1-\alpha)(+1) = 1 \rightarrow \sigma^2 = \langle y^2 \rangle - \langle y \rangle^2 = 4 \alpha (\-\alpha)  $$
+
+This approximation, however, is good only for small deviations from the mean i.e. for $ \mathcal{O} (y_N - \langle y \rangle ) < \mathcal{O}(\frac{1}{\sqrt{N}} )$. Therefore, let us introduce the exact calculation, based on enumeration the possible cases, reinterpreting the classical notion of probability modulated by $\alpha$ and $1-\alpha$.
+
+For $K$ heads and $N-K$ tails we have:
+
+$$Y_N = \frac{1}{N} \sum_{k=1}{N} X_K =  \frac{1}{N}[K(+1) + (N-K)(-1)] = \frac{2K-N}{N} \rightarrow $$
+
+$$\mathbbm{P}[Y_N = \frac{2K}{N}-1] = \frac{N!}{K!(N-K)!} \alpha^K (1-\alpha)^{N-K}$$
+
+For moderately large N, N-K, K, one may use Stirling approximation, that yields 
+
+$$ n! \approx \sqrt{2 \pi n} \frac{n^n}{e^n} \rightarrow \ln n! = n \ln n - n + \mathcal{O}(\ln n)$$
+
+One may further introduce a new variable $p$ such that $K = pN$ $N-K=(1-p)N$ $p \in [0,1]$ and express
+
+$$\mathbbm{P}[Y_N = 2p-1] = e^{-N I(p)} $$
+
+where $p=\alpha$ means $Y_N = \langle Y \rangle $
+
+One finds that, for large N, K, N-K :
+
+$$ I(p) = I(p;\alpha) = p \ln \frac{p}{\alpha} + (1-p) \ln \frac{1-p}{1-\alpha}$$
+
+which is known as \emph{relative entropy} of $p$ with the respect of $\alpha$ or \emph{Kullback-Liebler divergence}.
+
+Clearly $I(p;\alpha) > 0$ for $\alpha \neq p$, and  $I(p;\alpha) = 0$ for $\alpha=p$. 
+
+Indeed, for large N,K,N-K writing $\mathbbm{P}[Y_N=2p-1] = e^{-NI(p;\alpha)}$ implies:
+
+\begin{align*}
+NI(p;\alpha) = & - \ln[ N! \alpha^{pN}(1-\alpha)^{(1-p)N}] + \ln[(pN)![(1-p)N]!] = \\
+= & - \ln N! - pN \ln \alpha - (1-p)N \ln(1-\alpha) + \ln(pN!) + \ln[(1-p)N]! \approx \\
+\approx & -\{ N\ln N - N + pN\ln \alpha + (1-p)N \ln (1-\alpha) \} + pN \ln pN - pN + (1-p)N \ln (1-p)N - (1-p)N = \\
+= & pN \ln \frac{p}{\alpha} + (1-p)N \ln \frac{1-p}{1-\alpha}
+\end{align*}
+
+so
+
+$$I(p;\alpha) \approx p \ln \frac{p}{\alpha} + (1-p) \ln \frac{1-p}{1-\alpha} $$
+
+as anticipated.
+
+The argument can be repeated in a higher dimension case, leading to:
+
+$$I(p_1,...,p_m;\pi_1,...,\pi_m) = \sum_{j=1}^{m} p_j \ln \frac{p_j}{\pi_j}$$
+
+If $\pi_j$ are the $m$ probabilities of the random variables taking the values $a_1,...,a_m$ rather than only $\alpha$ $1-\alpha$. 
+
+Coming back to one dimension replace $p$ with $y=2p-1$ and the function $I$ can be replaced bt
+
+$$ S(y;\alpha) = \frac{y+1}{2} \ln \frac{y+1}{2\alpha} + \frac{y-1}{2} \ln \frac{y-1}{2\alpha}$$
+
+which is called as \emph{Cramer function}, and one obtains 
+
+\begin{equation}
+ \mathbbm{P}[Y_N = y] \approx e^{-NS(y)}
+\end{equation}
+
+For values $y$ close to $\langle Y \rangle$ i.e. $p$ close to $\alpha$ one realizes that the central limit approximation is good. Indeed, take $p=\alpha + \epsilon $. Then:
+
+\begin{align*}
+I(p;\alpha) = & (\alpha + \epsilon) \ln \Big (\frac{\alpha + \epsilon}{\alpha} \Big )+ (1-\epsilon  - \alpha) \ln  \Big ( \frac{1 - \alpha - \epsilon}{1-\alpha} \Big ) = \ (\alpha + \epsilon ) \ln \Big (1 + \frac{\epsilon}{\alpha} \Big ) + (1 -\alpha - \epsilon) \ln \Big (1 - \frac{\epsilon}{1-\alpha} \Big ) = \\
+= & \ (\alpha + \epsilon ) \Big [\frac{\epsilon}{\alpha} - \frac{\epsilon^2}{2 \alpha^2} + \mathcal{O} \Big (\frac{\epsilon^3}{\alpha^3} \Big ) \Big ] + (1-\alpha -\epsilon) \Big [- \frac{\epsilon}{1 - \alpha} - \frac{\epsilon^2}{2(1-\alpha)^2} + \mathcal{O} \Big (\frac{\epsilon^3}{(1-\alpha)^3} \Big ) \Big ] = \\
+= & \ \epsilon - \frac{e^2}{2\alpha} + \mathcal{O} \Big (\frac{\epsilon^3}{\alpha^2} \Big ) + \frac{\epsilon^2}{\alpha^2} - \frac{\epsilon^3}{2 \alpha^2} + \mathcal{O} \Big (\frac{\epsilon^4}{\alpha^3} \Big ) - \epsilon + \frac{\epsilon^2}{2(1-\alpha)} +  \mathcal{O} \Big (\frac{\epsilon^3}{(1-\alpha)^2} \Big ) +  \frac{\epsilon^2}{(1-\alpha)} -  \frac{\epsilon^3}{2(1-\alpha)^2} + \mathcal{O}\Big ( \frac{\epsilon^4}{(1-\alpha)^3} \Big ) = \\
+= & \ \frac{\epsilon^2}{2 \alpha} + \mathcal{O}\Big ( \frac{\epsilon^3}{\alpha^2} \Big ) +  \frac{\epsilon^2}{2(1-\alpha)} + \mathcal{O} \Big (\frac{\epsilon^3}{(1-\alpha)^2} \Big ) = \ \frac{\epsilon^2}{2\alpha(1-\alpha)} + \mathcal{O} \Big (\epsilon^3 \Big ) = \ \frac{(1-\alpha)^2}{2\alpha(1-\alpha)} +  \mathcal{O} \Big (\epsilon^3 \Big ) 
+\end{align*}
+
+At the same time:
+
+$$ \frac{(y-\langle y \rangle)^2}{2 \sigma^2} = \frac{(2p-1-2\alpha+1)^2}{8\alpha (1-\alpha)} = \frac{(p-\alpha)^2}{2\alpha (1-\alpha)} $$
+
+so:
+
+$$ e^{-NI(p;\alpha)} \approx e^{-N \frac{\epsilon^2}{2 \alpha (1-2\alpha)}} = e^{-N \frac{(y-\langle y \rangle)^2}{2 \sigma^2}}$$
+
+Consider indeed the random variable $NY_N = \sum_{n=1}^{N} x_n$ where the $x_n$ are independent and identically distributed random variables. Let $x$ be any of them; Its cumulant generating function is $L(q)= \ln \langle e^{qx} \rangle$- Then, by independence  we have:
+
+$$\langle e^{qNY_N} \rangle = \langle e^{ q \sum_{n=1}^{N} } \rangle = \langle e^{qX_1} ... e^{qX_n} \rangle = \langle e^{qX} \rangle^N = e^{L(q) N} $$
+
+Moreover 
+
+$$\langle e^{qNY_N} \rangle  = \sum_{k=0}^{N} e^{qNy_k} P(y_k) \quad \textit{where} \ \ Ny_k \in \{ -N,...,N \}$$
+
+which are $N+1$ values including 0 if $N$ is even, including $-1,1$ if $N$ is odd. $-N$ if i got $0$ heads, $-N+2$ if one head etc.. 
+
+Furthermore
+
+$$ \langle e^{qNY_N} \rangle \approx \sum_{k=0}^{N} e^{qNy_k} e^{-NS(y_k)} = \sum_{k=0}^{N} e^{-N[S(y_k)-qy_k]}$$
+
+For large N, this sum is dominated by the cases for which the argument of the exponential is largest, so
+
+$$\langle e^{NL(q)} \rangle = \mathcal{O}( e^{N \sup_{y}[q y - S(y)]}) $$
+
+More precisely, given a range of values around the $\sup$, the number of terms in it only grows linearly with N so
+
+$$ \langle e^{qNy_N} \rangle \approx CN  e^{N \sup_{y}[q y - S(y)]}$$
+
+$$ e^{NL( q)} \approx \mathcal{O}(N) e^{N \sup_{y}[q y - S(y)]} $$
+
+$$ NL(q) \approx \ln \mathcal{O}(N) + N \sup_{y}[q y - S(y)] $$
+
+$$ L(Q) =  \sup_{y}[q y - S(y)] + \frac{ \ln \mathcal{O}(N) }{N}$$
+
+Which says that L is the Legendre transform of S, and viceversa.
+For dependent variables $X_N$ one defines
+
+$$L(q) = \lim_{N \to \infty } \frac{1}{N} \ln \langle e^{q \sum_{n=1}^{N} X_n} \rangle $$
+
+This way we see how to identify macroscopic thermodynamic quantities and microscopic fluctuating quantities.
+
+In particular we may continue the analogy and proceed with the cumulants.
+
+\end{document}

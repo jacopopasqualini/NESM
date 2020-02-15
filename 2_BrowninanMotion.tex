@@ -1,0 +1,226 @@
+\documentclass{article}
+
+\usepackage{lipsum}
+\usepackage[margin=1.6in,includefoot]{geometry}
+
+\usepackage{amsmath}
+\usepackage{bbm}
+
+% header and footer stuff
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+%\fancyhead{}
+\fancyfoot{}
+\fancyfoot[R]{\thepage\ }
+\renewcommand{\headrulewidth}{0pt}
+%%%%%%%EMANUELE%%%%%%%%
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+\newcommand*\Diff[1]{\mathop{}\!\mathrm{d^#1}}
+\newcommand*\Tder[1]{\mathop{}\!\frac{\diff #1}{\diff \mathrm{t}}}
+\newcommand*\tder[1]{\mathop{}\!\frac{\partial #1}{\partial \mathrm{t}} }
+ %%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\begin{titlepage}
+	\begin{center}
+	
+	\line(1,0){300}\\
+	[5mm]
+	\huge{\bfseries Brownian Motion}\\
+	[2mm]
+	\line(1,0){200}\\
+	[2cm]
+	\textsc{\Large Meccanica statistica del disequilibrio: fondamenti e applicazioni} \\
+	[8cm]
+	
+	\end{center}
+	
+	\begin{flushright}
+	\textsc{\LARGE Jacopo Pasqualini}\\
+	[0.5cm]
+	\textsc{\large Università degli studi di Torino\\
+	[0.5cm]
+	A.A. 2019/2020 }
+	\end{flushright}
+	
+\end{titlepage}
+
+\section{Brownian Motion}\label{sec:bromot}
+
+A small particle of mass $m$ immersed in a fluid experiences a friction force, given by Stoke's law $F_{c} = - \alpha v$ (physical dimensions of alpha are: $[\alpha] = Kg/s$ ) hence, with $\dot{x}=v$, the equation of motion is
+
+\begin{equation}
+m\dot{v}+\alpha v = 0
+\end{equation}
+
+Dividing by the mass, we identify the time scale $\gamma = \alpha/m=1/ \tau$, where $ \tau = 1/ \gamma$, $[\tau]=sec$. Since we wrote the equation of motion with the Newton's law, all the quantities we are dealing with are macroscopic, so we can interpret the time scale $\tau$ as macroscopic and well distinguished by the main-free time of kinetic theory.
+
+Now we can write the equation of motion as $\dot{v}+\gamma v = 0$, wich is trivial to solve. The solution is:
+
+\begin{equation}
+v(t)=v(0)  e^{-t/ \tau}
+\end{equation}
+
+This deterministic equation holds when the mass of the particle is much greater than that of the molecules of the fluid, which may then be thought of as a continuous. If it is similar it may fee the impacts from the single fluid molecules, and its equation of motion should be much more complicated. However, there is an intermedial range in which the particle feels some action of hydrodynamic type (Stokes) and of molecular kind (although not the single impacts)
+
+For instance, let the particle be spherical, so the friction coefficient is given by $\alpha = 6 \pi a \eta $. A typical pollen grain has $a = 10^{-4}\mathrm{m}=10^{-2}\mathrm{cm}$, $m= 10^{-7}\mathrm{g}$ and at room temperature and pressure $\eta=10^{-2}\mathrm{ g/{cm \cdot sec}}$ which give $\tau \approx 10^{-4}\mathrm{sec}$. After a few $\tau$'s the particle should stop. This time is very short, but certainly much larger than molecular times ($10^{-12}$, $10^{-12}$). We can say something analogous for the mass, that is much larger than the mass of water molecules ($M_{H_{2}O}=3\cdot 10^{-23}$).
+
+This places the motion of the pollen in an intermediate situation, between the micro and the macro dynamics, well distinguished from the two. The pollen grain is at one time affected by the micro and the macro forces, which makes inappropriate the purely macroscopic description, as indeed the pollen does not stop after $10^{-3}$ seconds, while the molecular dynamics description is too complicated, because $10^{16}$ molecules have to cooperate in order to have an affect on the motion of the pollen grain. 
+
+How con we take into count the effects of all the water molecules on the pollen grain? We can modify the equation of motion including a new term, wrote as a sum of all the contributes. Even if the explicit formula of the singular forces can not be wrote, we can get some insight about the system. Assuming the model as deterministic, we can write:
+
+\begin{equation}
+m \dot{v} =  - \alpha v + \Gamma(t) =  - \alpha v + \sum_{i=1}^{N} F_{i}
+\end{equation}
+
+Where the index $i$ runs over all the $N \approx 10^{16}$ water molecules. Then we need to write the equation of motion for all the single water molecules:
+
+\begin{equation}
+m_j \dot{v_j} = - F_j +  \sum_{ \substack{k=1 \\ k \neq j }}^{N} F_{j,k}
+\end{equation}
+
+Even if we don't know the particular expression for the forces between pollen and molecules $F_i$ and between molecules $F_{j,k}$ we can get some useful insights about the model. \textit{In principle}, we can formally integrate the first equation, getting:
+
+\begin{equation}
+v(t) = v(0) e^{-\gamma t} + \int_{0}^{t} e^{- \gamma (t-t')} \Gamma(t') dt'
+\end{equation} 
+
+We have not solved the problem at all, because we have hidden a huge amount of unavailable information, such as the initial conditions of the system, which are needed to properly integrate the equation. Both quantities $v$ and $\Gamma$ should be wrote as: 
+
+$$v(t) = v(t;x_1(0),...,x_N(0),v_1(0),...,v_N(0) )$$ 
+$$\Gamma(t) = \Gamma (t;x_1(0),...,x_N(0),v_1(0),...,v_N(0) )$$
+
+This makes the problem unfeasible, not only because the initial condition of the water molecules cannot be given, and even if they could be given the approach would be useless, but because every time the process is repeated the initial condition would be different so the calculations would have to be repeated every time and no prediction would be made: \underline{knowledge of previous calculations and experiments would be useless for new experiments}. Clearly no understanding of the phenomenon would be obtained.
+
+Therefore, it is not just a particular matter that we cannot fully complete our program; it is even useless. What remain is the possibility of extracting less detailed, useful information and the most obvious are the average properties of the phenomenon: \textit{averages} over the collection of all particle initial conditions.
+
+Therefore, we consider an ensemble of identical systems, from the macroscopic point of view, which differ at the microscopic level, and cover all possible cases; e.g. which start from all possible initial conditions. In principle, even if not in practice we can now compute the $exact$ dynamics of all systems and compute the desired averages.
+\newline
+
+\textbf{NOTE:} the fact that we know what happens on average (in the sense of ensembles) does not mean that we know what happens to a single system. So, \textit{in principle}, we still cannot make any predictions on the single system. \newline
+\newline
+
+However, if all the different values of a microscopic quantity are experienced by a single system in time then, perhaps, the value obtained by averaging over the ensemble may be obtained as time average corresponding to a macroscopic measurement. Whether this actually happens or not, it depends on the system and the quantity at hand, here only experience can tell. This requires observation scales exceedingly larger than the microscopic scales. If this condition is verified, then there is room for intermediate scales which are, in turn, largely separated from the microscopic and the macroscopic ones. Indeed the case of the Brownian motion has time scales such as $10^{-12}$, $10^{-4}$, $10^{1}$ sec. 
+
+In this case, for the mesoscopic scale, it is necessary to rely in averages over $10^{3}$, $10^{4}$ histories, each of macroscopic duration to make any kind of predictions. Therefore let us draw come observable conclusion from our assumption, and see how they agree with experience.
+\newline
+
+Rewrite the equation of motions, associating the presence of a force whose properties are known only on average. Starting from the differential form $ dv + \gamma \cdot v \cdot dt = d  \tilde{\Gamma} $, when the operation $ \Gamma = d \tilde{\Gamma} /{dt}$ makes sense (in the one of the stochastic processes) we can write:
+
+\begin{equation}
+\dot{v} + \gamma v = \Gamma(t) 
+\end{equation}
+
+% c'è da scrivere che però anche v diventa stocastica
+This equation is called \textbf{stochastic differential equation} because it contains a new stochastic therm, $\Gamma$, so even velocity is no more a deterministic quantity and becomes stochastic. What can be assumed about this new term? 
+\newline
+
+For instance:
+
+\begin{itemize}
+
+	\item Since we expect $F_{f}$ to give no direction to the mass $m$ hence $\mathbbm{E}[v(t)]$ to follow the macroscopic hydrodynamics.
+	$$\mathbbm{E}[\Gamma(t)] = 0 $$ 
+
+	\item If we expect the collisions with different molecules of fluid to be indipendent, if they happen to be separated by sufficiently large time intervals. For $|t-t'| > \tau_{0} \geq 0 $ 
+
+	$$ \mathbbm{E}[ \Gamma(t) \Gamma(t')] = 0 $$
+
+	\item But usually $\tau_0 \ll \tau = 1/\gamma$, so the correlation time is negligible respect the characteristic time of the system, so people for sake of simplicity consider:
+
+	$$  \mathbbm{E}[ \Gamma(t) \Gamma(t')] = q \delta(t-t') $$
+
+	\item the probability distribution of $\Gamma(t)$'s values \textit{ is gaussian}.
+
+\end{itemize}
+
+% ma la distribuzione spettrale non è la trasformata di fourier delle ampiezze? %
+A noise term, such as $F_{f}$ or $\Gamma$, is called \textbf{white} if it is $\delta$-correlated, because its spectral distribution (its Fourier transform) is then indipendent of the frequency, otherwise it is called \textbf{colored}.\newline
+
+Physically $\Gamma(t)$ is stochastic because it represents something that varies from ensemble member to ensemble member, i.e. \textit{in principle} it replaces the deterministic term (CORREGGERE) $\Gamma(t;p(0),q(0)$, and is not known which ensemble member the state $(p(0),q(0))$ is at hand. Consequently, $v(t)$, which should be $v(t;p(0),q(0))$ turn into stochastic: Not knowing the dynamical state $(p(0),q(0))$ we do not know what $v(t;p(0),q(0))$ will do, then it only remains to investigate the stochastic properties of $v$ and $x$. For sake of simplicity we assume that all particles have the same initial condition in velocity $v_{i,0} = v_0$, $i=1...N$.
+
+Since we made assumptions about the statistic of $\Gamma$ we can calculate the first two moment of the $v$: 
+\begin{itemize}
+
+\item The \textbf{mean}:
+
+	$$ \mathbbm{E}[v(t)] = v_0 e^{-\gamma t} + \int_{0}^{t} e^{- \gamma (t-t')} \mathbbm{E}[\Gamma(t')] dt' = v(0) e^{-\gamma t} $$
+
+\end{itemize}
+
+The asymptotic behavior in time is mathematically trivial, but physically meaningful:
+
+\begin{equation}
+ \mathbbm{E}[v(t)] \xrightarrow{t \xrightarrow{} \infty} 0
+\end{equation}
+% OCCHIO AD APPLICARE DECENTEMENTE IL PRIMO PRINCIPIO
+If the system is isolated and no mean motion is observed, then the force $\Gamma$ does not work on the system otherwise, according to the first law of thermodynamics, it would freeze.
+
+\begin{itemize}
+
+\item The \textbf{auto-correlation}:
+
+	\begin{align*} 
+	\mathbbm{E}[v(t_1) v(t_2)] &= \\
+	&= \mathbbm{E}[ (v_0 e^{-\gamma t_1}+ \int_{0}^{t_1} e^{- \gamma (t_1-t_1')}\Gamma(t_1') dt_1') \cdot (v_0 e^{-\gamma t_2} + \int_{0}^{t_2}e^{- \gamma (t_2-t_2')} \Gamma(t_2') dt_2') ]  \\ 
+	&=  v_0^2 e^{-\gamma(t_1 + t_2)} + \textit{zero mean terms} +  \int_{0}^{t_1} dt_1' \int_{0}^{t_2} dt_2' e^{-\gamma(t_1+t_2-t_1'-t_2')} \mathbbm{E}[ \Gamma(t_1') \Gamma(t_2')] \\
+	&=  v_0^2 e^{-\gamma(t_1 + t_2)} + \int_{0}^{t_1} dt_1' \int_{0}^{t_2} dt_2' e^{-\gamma(t_1+t_2-t_1'-t_2')} q \delta(t_1'-t_2')  \\
+	&=  v_0^2 e^{-\gamma(t_1 + t_2)} + \frac{q}{2\gamma} ( e^{-\gamma|t_1-t_2|} - e^{-\gamma(t_1 + t_2)} ) \\
+	\end{align*}
+
+\end{itemize}
+
+Is easy to study the asymptotic behaviour of the auto-correlation, which gives:
+
+\begin{equation}
+\mathbbm{E}[v(t_1) v(t_2)] \xrightarrow{t\xrightarrow{} \infty}  \frac{q}{2\gamma} e^{-\gamma|t_1-t_2|}
+\end{equation}
+
+If $t_1=t_2=t$ the auto-correlation becomes the variance $\mathbbm{E}[v(t_1) v(t_2)] = \mathbbm{E}[v(t)^2]$ and, multiplying by $\frac{m}{2}$ we can interpretate this quantity as the mean kinetic energy of the pollen grain:
+
+$$ \frac{m}{2} \mathbbm{E}[v^2] = \lim\limits_{t \to \infty} \frac{m}{2} \mathbbm{E}[v(t)^2]  =\frac{qm}{4\gamma}$$
+
+Since we considered, for sake of simplicity, the system as unidimensional if the equipartition of energy theorem holds:
+
+$$ \mathbbm{E}[E_k] = \frac{1}{2}k_b T = \frac{qm}{4\gamma} $$
+
+Now we can get informations about the asymptotic behavior of position's cumulant:
+
+
+\begin{align*}
+\mathbbm{E}[(x(t)-x_0)^2] &= \mathbbm{E}[ \int_{0}^{t} v(t_1) dt_1 \int_{0}^{t} v(t_2) dt_2 ] \\
+&= \int_{0}^{t} dt_1 \int_{0}^{t} dt_2  \mathbbm{E}[v(t_1) v(t_2) ] \\
+& = (v_0^2 - \frac{q}{2 \gamma}) \cdot ( \frac{1-e^{-\gamma t}}{\gamma}) +  \frac{q}{2 \gamma} ( \frac{2t}{\gamma} - \frac{2}{\gamma^2}(1-e^{-\gamma t}))\
+\end{align*}
+
+We are interested in the asymptotic behavior:
+
+\begin{equation}
+ \mathbbm{E}[(x(t)-x_0)^2] \xrightarrow{} \frac{q}{\gamma^2} \cdot t
+\end{equation}
+
+So, shifting the coordinates by $x_0$, the main result of the former calculations will is the Einstein-Smoluchoski diffusion law:
+
+\begin{equation}
+\langle x^2(t) \rangle \sim D\cdot t
+\end{equation}
+
+which allow us to calculate the diffusion coefficient as:
+
+\begin{equation}
+D = \frac{q}{\gamma^2}=\frac{k_B T}{m \gamma} = \frac{k_{B} T }{6 \pi \eta a} = \mu k_B T
+\end{equation}
+\newline
+
+The Boltzmann constant $k_{B}$ is related to the \textit{ Avogadro Number} $N_A $ through the constant of ideal gases, indeed we have $k_{B} = \frac{R}{N_{A}}$. 
+The importance of Einstein idea of linking macroscopic and microscopic quantities may hardly be overstimated. For one thing, linking $D$, easily accessible via the observable $\langle x^2(t) \rangle$, to $N_{A}$ meant the feasibility of determining $N_{A}$ (which Avogadro never knew) and definitively silenced the question about the existence of atoms.
+
+We introduced a new constant $\mu$, the linear response coefficient, which depend on the property of the fluid, geometry and mass of the pollen grain. The formula obtained is a particular case of the general \textit{fluctuation-dissipation theorem}, but there is an inconsistency from the thermodynamical point of view. One can do an analogy between the Ohm law $V=RI$ and $D = \mu k_B T$, linking $V$ with $D$, $\mu$ with $R$ and $I$ with $k_B T$. While the Ohm law states that i the potential $V$ is obtained dissipating work done on the system by $I$ trough $R$, in the case of diffusion there's no external work at all. This kind of paradox seems to doom mesoscopic theory to fail, but will be solved later.
+
+
+
+
+
+
+\end{document}

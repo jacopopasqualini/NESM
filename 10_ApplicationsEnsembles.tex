@@ -1,0 +1,371 @@
+\documentclass{article}
+
+\usepackage{lipsum}
+\usepackage[margin=1in,includefoot]{geometry}
+
+\usepackage{amsmath}
+\usepackage{bbm}
+
+% header and footer stuff
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+%\fancyhead{}
+\fancyfoot{}
+\fancyfoot[R]{\thepage\ }
+\renewcommand{\headrulewidth}{0pt}
+%
+
+\begin{document}
+
+\begin{titlepage}
+	\begin{center}
+	
+	\line(1,0){300}\\
+	[5mm]
+	\huge{\bfseries Modern Applications of Ensembles}\\
+	[2mm]
+	\line(1,0){200}\\
+	[2cm]
+	\textsc{\Large Meccanica statistica del disequilibrio: fondamenti e applicazioni} \\
+	[8cm]
+	
+	\end{center}
+	
+	\begin{flushright}
+	\textsc{\LARGE Jacopo Pasqualini}\\
+	[0.5cm]
+	\textsc{\large Universita' degli studi di Torino\\
+	[0.5cm]
+	A.A. 2019/2020 }
+	\end{flushright}
+	
+\end{titlepage}
+
+\section{Modern Applications of Ensembles}\label{sec:langapp}
+
+Consider a classical system in contact with a heat bath at temperature T. Let $\lambda$ be an externally controllable parameter, like the position of the piston in this example:
+
+(IMAGE)
+
+If $\lambda$ varies slowly form $\lambda_i$ to $\lambda_f$ the entropy changes as:
+
+\begin{equation}
+\Delta S = S_f - S_i = \int_{i}^{f} \frac{dQ}{T} = \frac{Q}{T}
+\end{equation}
+
+In particular, in this case T is the temperature of bath and system in the whole process. One also has
+
+\begin{equation}
+\Delta F = \Delta U - T \Delta S
+\end{equation}
+
+ $$ \Delta S - \frac{1}{T} \Delta U = \frac{1}{T}(Q - \Delta U) = -  \frac{1}{T} \Delta F = - \frac{1}{T} W =  - \frac{1}{T} W_r $$
+
+Where $\Delta F$ is the irreversible work.
+
+Which identifies the variation of the free energy with the reversible work done on the system. If the process is not quasi-static, 
+
+$$\Delta S > \frac{Q}{T} \quad \textit{ implies } \quad - \frac{\Delta F}{T} > \- \frac{W}{T} \quad \textit{i.e.}$$
+
+
+$$\Delta F < W \quad \textit{and} \quad W_r < W$$
+
+because of energy losses.
+
+What can be said when the transformation $i \to f$ is arbitrarily performed? If piston is moved very fast, work on piston is $W_P = \int F dT$ but this may vary from time to time.
+
+\subsection{The Jarzynski equality}
+
+Consider a N-particle system in equilibrium with a heat bath at temperature T. Let the system depend on a parameter $\lambda$, which is externally controlled. When $\lambda$ is a function of time, which changes from value A to value B in a time  $\tau$ : $\lambda = \lambda(t)$, $\lambda(0) = A$, $\lambda(\tau) = B$, the system is taken out of equilibrium and the work $W$ is done on it.
+
+Suppose the same protocol $\lambda:[0,\tau] \to \mathbbm{R}$ is repeated many times, always beginning from the same initial state, at temperature T and with $\lambda(0) = A $. Let the hamiltonian of system and environment be given by:
+
+\begin{equation}
+H(\Gamma;\lambda) = H(x;\lambda) + H_E(y) + h_{int}(x,y)
+\end{equation}
+
+where x contains all coordinates and momenta of the system, y those of the heat bath and $\Gamma = (x,y)$. Morover, H is the bare system anergy, $H_E$ is the bare reservoir energy and $h_ {int}$ us the interaction energy. 
+
+Let N be the total number of particles in system + reservoir. This means that \emph{ststem + reservoir makes an isolated system} (eg a collid as system and water as reservoir) and, typically, the reservoir is much larger than the system. However, before the experiment begins, this whole abject is made equilibrate with a still much larger "super- environment" at temperature T, so that the initial state $\Gamma_0$ to be canonical, i.e. it is sampled with probability:
+
+$$p(\Gamma_0) = \frac{1}{Y_A} e^{-\beta H(\Gamma_0;A)}$$
+
+The system is then isolated, and its asymptotic state should be the microcaninical at energy $E_{\infty} = H(\Gamma_0,A)$, \emph{if the protocol $\lambda$ does not come from an outside entity}.
+
+Remark: $\Gamma_0$ cannot be known and varies from experiment to experiment.
+
+Here $ Y_{\lambda} = \int d \Gamma  e^{-\beta H(\Gamma_0;A)} $ is the canonical partition function at fixed T and $\lambda$. Despite the system + environment are isolated, one assumes that $\lambda$ can be externally acted upon. Let $\gamma(\Gamma,\tau) = \{ S^t \Gamma \}_{t \in [0,\tau]}$ be a phase space trajectory while $\lambda$ varies according to the chosen protocol $\lambda(t)$, $t \in [0,\tau]$ Different experiments begin with different $\Gamma$ so follow different paths $\gamma$.
+
+Nevertheless, the external work performed on the system is a given fixed quantity, if done in quasi-static conditions, because thermodynamic quantities, being averaged over all possible micro-states, do not depend on $\Gamma_0$.
+
+What if the process is not quasi-static?
+
+Jarzinsky interprets the quantity $H(x,\lambda)$ as the internal energy and writes:
+
+\begin{equation}
+H(x_{\tau};B) - H(x_0;A) = \int_{\gamma} dt \ \dot{\lambda} \frac{\partial H}{\partial \lambda}(x_t;\lambda_t) + \int_{\gamma} dt \ \dot{x} \frac{\partial H}{\partial x}(x_t;\lambda_t)
+\end{equation}
+
+where $x_t$ and $\lambda_t$ are the values of the coordinates x and $\lambda$ at time $t \in [0,\tau]$. Then, he says, it is natural to take:
+
+\begin{equation}
+W = \int_{\gamma} dt \ \dot{\lambda} \frac{\partial H}{\partial \lambda} \quad Q = \int_{\gamma} dt \ \dot{x} \frac{\partial H}{\partial x}
+\end{equation}
+
+Where the first term is interpreted as the energy variation due to $\lambda$, or the work done on the system and the second as the heat absorbed by the system.
+
+These definition are criticizable [Cohen-Mazu] but Jarzynski claims that W remains valid.
+
+Assuming $\frac{d H}{dt} = \frac{\partial H}{\partial t}$ and $\frac{\partial H_E}{\partial \lambda} = \frac{\partial h_{int}}{\partial \lambda} = 0$
+From the overall process one has:
+
+\begin{align*}
+& H(S^{\tau} \Gamma; B) - H(\Gamma, A) = \int_{\gamma} dt \ \frac{d}{dt} H(S^t \Gamma; \lambda_t) = \\
+& \int_{\gamma} dt \ \dot{\lambda} \frac{\partial H}{\partial \lambda}(S^t \Gamma; \lambda_t) = \int_{\gamma} dt \ \dot{\lambda} \frac{\partial H}{\partial \lambda}(x_t \Gamma; \lambda_t) = W(\Gamma,\gamma)
+\end{align*}
+
+where we used the usual rule for hamiltonian derivative respect to time $ \frac{dH}{dt} = \frac{\partial H}{\partial t} + \{ H,H \} = \frac{\partial H}{\partial t} $, the independence of $H_E$ and $h_{int}$ on $\lambda$, $\frac{ \partial H_e}{ \partial \lambda} = \frac{ \partial h_{int} }{ \partial \lambda} = 0 $  and the chain rule for $\lambda$.
+
+Therefore one must expect a dependence of the work on both the initial $\Gamma$ and the path $\gamma$, or just on $\Gamma$, if the protocol $\lambda$ is fixed.
+
+As reasonable the work done equals the global energy change, except for the assumption that the global system is isolated, hence H should be constant.
+
+Repeat the experiment very many times, with fixed protocol $\lambda$. $W = W(\Gamma)$ will vary from case to case, so compute the ensemble average:
+
+\begin{equation}
+\langle e^{- \beta W} \rangle = \lim_{M \to \infty} \frac{1}{M} \sum_{n=1}^{M} e^{- \beta W_n}
+\end{equation}
+
+Where $W_n$ is the  work done on the n-th experiment, out of M, and $\beta = \frac{1}{k_B T}$ and T is the initial temperature.
+The average weighs equally all experiments, hence it only depends on the frequency with which the various initial states are picked up. 
+
+Therefore, in the ideal $M \to \infty$ limit, one has the canonical average obtaining, according to Jarzynski interpretation of W:
+
+\begin{align*}
+\langle e^{-\beta W} \rangle &= \int d\Gamma \ \frac{1}{Y_A} e^{-\beta H(\Gamma;A)} \ e^{-\beta W(\Gamma)} = \\
+&= \frac{1}{Y_A} \int d\Gamma \ e^{-\beta H(\Gamma;A)} \ e^{\beta H(\Gamma;A)}\ e^{-\beta H(S^{\tau}\Gamma;B)} =  \frac{1}{Y_A} \int d\Gamma \ e^{-\beta H(S^{\tau}\Gamma;B)}
+\end{align*}
+
+Now, change variable from $\Gamma$ to $\Gamma' = S_{\lambda}^{\tau} \Gamma$. Then:
+
+$$  \int d\Gamma \ e^{-\beta H(S^{\tau}\Gamma;B)} = \int d \Gamma' \  e^{-\beta H(\Gamma';B)} \big | \frac{\partial \Gamma'}{\partial \Gamma} \big |^{-1}$$
+
+As the dynamics are hamiltonian, $\big | \frac{\partial \Gamma'}{\partial \Gamma} \big | = 1$. Then we may write:
+
+$$\langle e^{-\beta W} \rangle = \int d \Gamma' \ \frac{1}{Y_A} e^{-\beta H(\Gamma',B)} = \frac{Y_B}{Y_A} $$
+
+As the initial and final hamiltonians appear in this result, the deterministic protocol $\lambda(t)$ is irrelevant as long as $\lambda(0) = A$, $\lambda(\tau) = B$.
+
+\emph{PROBLEM: which fraction of W is don on the system of interest only?}
+
+Indeed, system and heat bath interact and some of the work may affect $h_{int}$ and it is not clear which part of this work on the system and which on the bath.
+
+At this stage, Jarzynski introduces:
+
+$$ H^*(x;\lambda) = H(x;\lambda) - \frac{1}{\beta} \ln \langle e^{-\beta h_{int}(x,.)}\rangle_E$$
+
+where
+
+$$ \langle e^{-\beta h_{int}(x,.)}\rangle_E = \frac{\int dy \ e^{-\beta h_{int}(x,y)} \ e^{- \beta H_E(y)} }{ \int dy \ e^{-\beta H_E(y)} }$$
+
+is the average of the exponential of $h_{int}$ over the degrees of freedom, at system's state $x$. Then, some people argue that the state of the system is described by:
+
+$$p_s(x;\lambda) = \frac{1}{Z_{\lambda}} e^{-\beta H^*(x;\lambda)} \quad Z_{\lambda} = \int dx e^{-\beta H^*(x;\lambda)}$$
+
+one than obtains:
+
+\begin{align*}
+Z_{\lambda} & = \int dx \ e^{-\beta H^*(x;\lambda)} = \int dx \ exp \Big \{-\beta H(x;\lambda) + \frac{\int dy  \ e^{-\beta h_{int}(x,y)} e^{- \beta H_E(y)} }{ \int dy \ e^{-\beta H_E(y)} } \Big \} \\
+& = \int dx \ e^{-\beta H(x;\lambda)}  \frac{\int dy \ e^{-\beta h_{int}(x,y)} \ e^{- \beta H_E(y)} }{ \int dy \ e^{-\beta H_E(y)} } = \frac{1}{ \int dy \ e^{-\beta H_E(y)}} \int dx \, dy \ e^{-\beta[H(x;\lambda)+H_E(y)+h_{int}(x,y)]} \\
+& = \frac{Y_{\lambda}}{ \int dy \ e^{-\beta H_E(y)}} \longrightarrow \\
+\end{align*}
+
+\begin{equation}
+\longrightarrow \frac{Z_B}{Z_A} = \frac{Y_B}{Y_A}
+\end{equation}
+
+Here, the same $\beta$ is used in $Z_{\lambda}$ for both $\lambda=A$, $\lambda=B$. As the state is supposed to be described by $e^{-\beta H^*}$ this means that the asymptotic state still is at same $T$. Note that the result is the same for $h_{int}=0$.
+
+Now if we assume that the free energy at (T,A) and (T,B) is given by
+
+$$ F_{\lambda} = - \frac{1}{\beta} \ln Z_{\lambda} \quad \lambda = A,B \quad Z_{\lambda}=e^{-\beta F_{\lambda}}$$
+
+as in normal canonical situations, one obtains the Jarzynski equality:
+
+\begin{equation}
+\langle e^{-\beta W} \rangle = e^{-\beta [F(B)-F(A)]}
+\end{equation}
+
+Various comments are in order:
+
+\begin{itemize}
+	\item this is a relation between (supposedly) thermodynamic quantities (F) and external (arbitrarily far from equilibrium) work. Differently from \emph{far} it gives info on equilibrium from non-equilibrium experiments, and is thus very useful if applicable
+	\item it is a \emph{transient / ensemble} relation: \\
+			transient: it is a  sophisticated property of a non-steady state.\\
+			ensemble : it makes sense only for a single object (differently from thermodynamics relations).\\
+	\item because $ \ln \langle \Phi \rangle \geq \langle \ln \Phi \rangle$ for positive $\Phi$, one has $\langle W \rangle \geq F(B) - F(A)$ consistently with the second law of thermodynamics, that it does not represent the holy grail of second law, since $\langle W \rangle$ is not a thermodynamic quantity and the relation says nothing about the behavior of a single system.
+	\item the relation has original content when the LTE is broken (otherwise it falls back on thermodynamic predictions). Hence it is most interesting in small systems or, more difficult to achieve in presence of very strong driving capable of breaking LTE
+	\item F(B) \emph{is not} the free energy after time $\tau$, but the one asymptotically reached if $\lambda$ remains remains fixed at $B$. Relaxation to canonical ensemble at $\lambda=B$ does not even need to be achieved. The canonical state is in the initial state. Indeed it is not guaranteed that the new equilibrium is reached.
+	\item Apart from the physical meaning of the various quantities, which may be questioned, thus from the canonical ensemble what happen to other ensembles?
+\end{itemize}
+
+$$H(\Gamma,\lambda) \quad \Gamma = (x,y) \quad \lambda = \lambda(\epsilon)$$
+$$H(\Gamma,\lambda) = H(x,\lambda) + H_E(y) + h_{int}(x,y)$$
+
+$$\textit{ IMAGE OF PISTON }$$
+
+As an example, $H$ may be the one of a colloidal system, $H_E$ is the hamiltonian of water and $h_{int}$ is the usual interaction term. 
+If $\lambda$ is too fast, exchanged heat is $0$ but contact between system and environment, $h_{hint}$ may be approximately the same ad for slow $\lambda$, when process is quasi static:
+
+$$\int dy \ e^{-\beta h_{int}(x,y)} e^{-beta H_E(y)}$$
+
+has no information about whether $\lambda$ is fast or slow.
+
+\subsection{Crooks Relation}
+
+Consider a classical system in contact with a heat bath and having finitely many states $x=1,2,...,N$ of energies $E=E_1,E_2,...,E_N$. Let the equilibrium state the canonical:
+
+$$\rho(x|(\beta,E) = \pi_x = \frac{e^{-\beta E_x}}{\sum_{x'=1}^{N} e^{-\beta E_{x'}}} = e^{\beta F - \beta E_x }$$
+
+with
+
+$$F(\beta,E) = - \frac{1}{\beta} \ln \sum_{x=1}^{N} e^{-\beta E_x} = \textit{free energy}$$
+
+Consider a stochastic markovian evolution with times $t=0,1,...,\tau$. Introduce the transition matrix M as:
+
+$$M(t) = (M_{i,j}(t))_1^N \quad M_{i,j}(t) \geq 0 \ \forall i,j,t \quad \sum_{i=1}^{N} M_{i,j}(t)=1 \ \forall j,t$$
+
+where time dependence is allowed. Let $\rho(t)$ be the state at time t, so the dynamics are given by
+
+$$\rho_i(t+1) = \sum_{j=1}^{N} \ M_{i,j}(t) \ \rho_j(t) \quad \forall \ i=1,...,N  \ \forall \ t $$
+
+Let us assume that $E=E(T)$ but that it is \emph{finite} $\forall \ t=0,1,...,\tau$. Furthermore, assume that 
+
+$\pi(t) = M(t) \ \pi(t)$ if $\pi(t)$ is canonical at energy $E(t)$ and inverse temperature $\beta$. M is then called \emph{balanced} (less restrictive than detailed balance $M_{i,j}\pi(t) = M_{j,i}\pi_i(t)$).
+
+Separate the dynamics in two subsets:
+
+\begin{itemize}
+	\item $t=0$ state $i=x(0)$, energy $E_i(0)$
+	\item $t=0^+$ state $j=x(1)$, energy $E_j(0)$
+	\item $t=1$ state $j=x(1)$, energy $E_j(1)$
+\end{itemize}
+
+Where the energies of the different states have changed because of a perturbation.
+In the first substep, energy: 
+
+$$ a = E_j(0)-E_i(0)$$
+
+Has flown in form of heat into the system, because of a perturbation which has altered the energy levels.
+
+In the second substep the system responds making the work:
+
+$$ W = E_j(1) - E_j(0)$$
+
+Repeating this for $\tau$ time steps, one has
+
+$$Q(x) = \sum_{t=0}^{\tau -1}[E_{x(t+1)}(t) - E_{x(t)}(t)]$$
+
+$$W(x) = \sum_{t=0}^{\tau -1}[E_{x(t+1)}(t+1) - E_{x(t+1)}(t)]$$
+
+and the energy variation $\Delta E$ is given by:
+
+$$\Delta E = E_{x(\tau)}(\tau) - E_{x(0)}(0) = W + Q $$
+
+The reversible work is given by:
+
+$$W_r = \Delta F = F(\beta,E(\tau)) - F(\beta,E(0))$$
+
+and the dissipative work by:
+
+$$ W_d = W - W_r $$
+
+In general, these quantities depend on the path $x(t)$, except for $W_r$ and $\Delta E$ which depend only on initial and final states.
+
+Crooks introduces a kind of time reversion:
+
+$$\hat{x}(t) = x(\tau - t) \quad \hat{E}(t) = E(\tau - t)$$
+
+The time evolution corresponding to $\hat{x}$, $\hat{E}$ is obtained also by application of
+
+$$\hat{M}(t) = [diag \ \pi(\tau-t)] M(\tau-t)^T [diag \ \pi(\tau-t)]^{-1}$$
+
+where $diag \pi$ is the diagonal matrix with diagonal antries $(diag \ \pi)_{i,i} = \pi_i$
+
+\emph{REMARK} the reversed time indicies run from 1 to $\tau$ rather than 0 to $\tau-1$, so $M(t)$ transforms $t$ into $t+1$, while $\hat{M}(t)$ transforms t-1 into t:
+
+$$\hat{\rho} = \hat{M}(t) \hat{\rho}(t-1)$$
+
+The canonical distribution $\hat{\pi}(t)$ at $\beta$ and $\hat{E}(t)$ is preserved by $\hat{M}(t)$. One then obtains:
+
+$$Q(x) = -Q(\hat{x}) \quad W(x) = -W(\hat{x}) \quad W_d(x) = -W_d(\hat{x})$$
+
+Crooks introduces the quantities: 
+$$P(x|M) \quad \hat{P}(\hat{x}| \hat{M})$$
+
+As the probabilities of path $x=\big ( x(0),...,x(\tau) \big )$ and path $\hat{x} =  \big (\hat{x}(1),...,\hat{x}(\tau+1) \big ) = \big ( x(\tau),...,x(0) \big )$ 
+
+\emph{REMARK}: in the microscopic description (q,p) the reverse trajectory does not track back itself since it has opposite sign. Here it traces itself exactly back.
+
+Then one may write
+
+\begin{align*}
+ \frac{P(x|M)}{\hat{P} \hat{x}| \hat{M})} &= \frac{\prod_{t=0}^{\tau -1} P \big (x(t) \to x(t+1) \big )}{\prod_{t=1}^{\tau } P \big ( \hat{x}(t) \to \hat{x}(t+1) \big ) } \frac{\pi_{x(0)}(0)}{\pi_{x(\tau)}(\tau)} = \prod_{t=0}^{\tau -1} \frac{\pi_{x(t+1)}(t)}{\pi_{x(t)}(t)} \\
+& =  e^{ - \beta \sum_{t=0}^{\tau-1} [ E_{x(t+1)}(t) -  E_{x(t)}(t)] } = e^{-\beta Q(x)}
+\end{align*}
+
+So the forward and the backward paths have probability ratio that depends on what has been called the heat of the forward path:
+
+\begin{equation}
+ \frac{P(x|M)}{\hat{P}(\hat{x}| \hat{M})} =  e^{-\beta Q(x)}
+\end{equation}
+
+Consider an ensemble of trajectories and the average of a function $\mathcal{I}$ of the different paths. Le be $\{ X(0)\} $ the set (ensemble) of all paths $x$ of any initial condition $x(0)$ Introduce the forward average:
+
+$$ \langle \mathcal{I} \rangle_F = \sum_{\{ X(0)\} } Prob(\textit{init. cond. of path x, given } \ \beta , \ E(0) ) \times Prob(\textit{path}) \ \mathcal{I}(x) = \sum_{\{ X(0)\} } \rho(x(0)| \beta, E(0) ) \ P(x|M) \ \mathcal{I}(x)$$
+
+Thanks to equation (9) one then has:
+
+$$ \frac{ \rho \big (  x(0) \ | \ \beta,E(0) \big ) P(x | M) }{  \rho \big ( \hat{x}(0) \ | \ \beta,\hat{E}(0) \big ) \hat{P}( \hat{x} | \hat{M} ) } = e^{\beta[\Delta E - \Delta F - Q ]} = e^{\beta [W(x)-\Delta F]} = e^{\beta W_d(x)}$$
+
+Where $\Delta F $ is calculated in the forward path. Introduce $\hat{\mathcal{I}}(x) = \mathcal{I}(x) $ so one obtains:
+
+$$ \langle \mathcal{I} \rangle_F =\sum_{\{ X(0)\} } \rho(\hat{x(0)}| \beta, \hat{E(0)} ) \ \hat{P}(\hat{x}|\hat{M}) \ \hat{\mathcal{I}}(x) \ e^{-\beta W_d(\hat{x})} = \langle \hat{\mathcal{I}} e^{-\beta W_d} \rangle_R $$
+
+Where the index R states for the average over reverse paths.
+
+Now set $G(x) = \mathcal{I}(x) e^{-\beta W_d(x)} = \hat{\mathcal{I}}(\hat{x}) e^{-\beta W_d(x)} =  \hat{\mathcal{I}}(\hat{x}) e^{-\beta W_d(\hat{x})} = \hat{G}(\hat{x}) $
+
+By definition so one may write the above as:
+
+\begin{equation}
+\langle \hat{\mathcal{I}} \rangle_R = \langle \mathcal{I} e^{-\beta W_d} \rangle_F
+\end{equation}
+
+From which various relations can be obtained, for instance:
+
+$$ \mathcal{I} = \hat{\mathcal{I}} = 1 \rightarrow \langle e^{-\beta W_d} \rangle_F = \langle 1 \rangle_R = 1$$
+
+If one does not average over all paths, but only looks at the probabilities that $W=a$ in the forward path and -a in the reverse path one obtains:
+
+$$\frac{P_{A \to B}(W=a)}{{P_{B \to A}(W=-a)}}$$
+
+But again it is all based on the canonical ensemble.
+
+Very many other relations have been derived by similar arguments. Here are some of the best known:
+
+$$W_d = \langle W \rangle - \Delta F = \frac{1}{\beta} \sum_{\textit{all paths}} P(x) \ln \frac{P(x)}{\hat{P}(\hat{x})}$$
+
+and
+
+$$\frac{1}{\mathcal{O}_{\tau}} \ln \frac{P(x)}{\hat{P}(\hat{x})} = 1 $$
+
+$\mathcal{O}_{\tau}$ appropriate varialbe A,B non-equilibrium steady state.
+
+
+
+
+
+
+
+\end{document}

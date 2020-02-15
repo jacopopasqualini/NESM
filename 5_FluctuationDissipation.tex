@@ -1,0 +1,357 @@
+\documentclass{article}
+
+\usepackage{lipsum}
+\usepackage[margin=1.6in,includefoot]{geometry}
+
+\usepackage{amsmath}
+\usepackage{bbm}
+
+% header and footer stuff
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+%\fancyhead{}
+\fancyfoot{}
+\fancyfoot[R]{\thepage\ }
+\renewcommand{\headrulewidth}{0pt}
+%%%%%%%EMANUELE%%%%%%%%
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+\newcommand*\Diff[1]{\mathop{}\!\mathrm{d^#1}}
+\newcommand*\Tder[1]{\mathop{}\!\frac{\diff #1}{\diff \mathrm{t}}}
+\newcommand*\tder[1]{\mathop{}\!\frac{\partial #1}{\partial \mathrm{t}} }
+\newcommand*\mean[1]{\mathop{}\!\langle#1 \rangle }
+ %%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\begin{titlepage}
+	\begin{center}
+	
+	\line(1,0){300}\\
+	[5mm]
+	\huge{\bfseries Fluctuation - Dissipation Motion}\\
+	[2mm]
+	\line(1,0){200}\\
+	[2cm]
+	\textsc{\Large Meccanica statistica del disequilibrio: fondamenti e applicazioni} \\
+	[8cm]
+	
+	\end{center}
+	
+	\begin{flushright}
+	\textsc{\LARGE Jacopo Pasqualini}\\
+	[0.5cm]
+	\textsc{\large Università degli studi di Torino\\
+	[0.5cm]
+	A.A. 2019/2020 }
+	\end{flushright}
+	
+\end{titlepage}
+
+\section{Fluctuation Dissipation Theorem}\label{sec:langapp}
+% OCCHIO DARE SIMBOLI DIVERSI A MEDIE TEMPORALI E DI ENSAMBLE
+
+%One way to generalize the Langevin point of view is trough Fourier analysis of stochastic processes. Let be $z(t)$ a time finite stochastic process with $t \in [0,T]$. This finite interval of time is crucial for Fourier analysis usage, and will allow us to decompose out stochastic process in an infinite series of Fourier modes, but their coefficients will be calculated with an integral over a finite amount of time. At the right moment we will calculate the quantities of our interest in the limit $T \to \infty$. Suppose we can write our stochastic variable $z(t)$ as an infinite series of Fourier modes:
+
+% APPENDIX 1 : PAGES 5a 5b
+
+% APPENDIX 2 : Re(gamma) consistency
+%\begin{equation}
+%I_{\Gamma}(0) = \int_{-\infty}^{\infty} \langle \gamma(0) \gamma(t) \rangle e^{-i \omega t} dt = \frac{k_B T}{m}  \int_{-\infty}^{\infty} [\gamma(t) - \gamma(-t)]e^{-i \omega t} dt =\frac{k_B T}{m}  [ \widetilde{ \gamma}(\omega) +  \widetilde{ \gamma}(-\omega) ] = \frac{k_B T}{m}  [ \widetilde{ \gamma}(\omega) +  \widetilde{ \gamma }^*(\omega) ] = \frac{2 k_B T}{m} \mathfrak{Re} (\widetilde{\gamma}(t))
+%\end{equation} 
+
+% APPENDIX 2 : Integrals and squares
+% da fine pag 10 fino a fine pag 12
+In this chapter we look at what are the relations that concerns fluctuations from the expected value and dissipation of fluctuations to the expected value of an observable of the system $B$. Also we will use the following notation:
+$$ \textit{expected value, average in time} \Rightarrow \Bar{*}  $$
+$$ \textit{expected value, average in probability} \Rightarrow \langle  * \rangle$$
+\subsection{Something on Stationary Stochastic Processes}
+
+In general, let $z(t)$ be a stationary stochastic process, which is observed for a time $t \in [0,T]$. We may pretend that it is periodic of period $T$, which is indifferent, since we do not observe it after this amount of time and since $T$ can be as large as we like. Then we can expand z as:
+
+\begin{equation}
+z(t) = \sum_{n = - \infty}^{ \infty} a_n e^{i \omega_n t}
+\end{equation}
+
+%where $a_n$ and $\omega_n$ are called, respectively, Fourier coefficents and Fourier frequencies. They can be calculated as:
+
+\begin{equation}
+a_n = \frac{1}{T} \int_{0}^{T} z(t) e^{-i \omega_n t} dt \textit{  ,  } \omega_n = \frac{2 \pi n}{T}
+\end{equation}
+
+If $T$ is large, $T \to \infty$, then $\omega_n - \omega_{n-1} = \frac{2 \pi}{ T } \sim 0$ we can consider $\omega$ as an almost continuous variable in n, for the relevant $n$. For $z \in \mathbbm{R}$ we need $a_n = \alpha_n + i \beta_n$ and $a_{-n} = a_n^*=\alpha_n-i\beta_n$. As $z$ is a random variable, so is $a_n$ and one should compute averages in two different ways. The first is over all possible initial conditions $z_i(0)$ and the same noise. The second is over all realizations of noise and always the same initial condition $z_i(0)$, but with the same statistical properties.
+
+Since $z$ is a stationary process there is no time dependence: $z(t) = z$. So time averages are irrelevant:
+
+\begin{align*}
+   \langle a_0 \rangle &= \frac{1}{T} \int_{0}^{T} \langle z(t) \rangle dt = \langle z \rangle \\
+\langle a_n \rangle &= \frac{1}{T} \int_{0}^{T} \langle z(t) \rangle e^{-i \omega_n t}dt = 0 \textit{, if n $\ne$ 0}  
+\end{align*}
+$$$$
+
+Consider now the time average for a single realization:
+
+$$\overline{z}^T = \frac{1}{T} \int_{0}^{T} z(t) dt = a_0$$
+\newpage
+In general $ \langle a_0 \rangle \ne a_0$. The process $z$ is called \textit{ergodic} if:
+
+\begin{equation}
+\lim\limits_{T \to \infty} \overline{z}^T  = \mean{z}
+\end{equation}
+
+The difference may arise because $ \overline{z}^T$ is in fact a function of the initial condition $z(0)$ or of the different realizations of the noise. In most cases of interest, however, stationary stochastic process are ergodic and we assume this to be the case in the following. Then $a_0 = \mean{a_0} = \mean{z}$ and the process $y(t) = z(t) - \mean{z}$ has $\mean{b_n}=0$, for all $n \in \mathbbm{Z}$.
+
+The \textbf{average strength} of the Fourier component $a_n$ is defined by:
+
+$$\langle |a_n|^2 \rangle = \langle \alpha_n^2 \rangle + \langle \beta_n^2 \rangle $$
+
+and the \textbf{average intensity} around frequency $\omega$ is defined by:
+
+\begin{equation}
+I_T(\omega) \Delta \omega = \sum_{\omega_n \in [\omega, \omega +\Delta \omega]} \langle |a_n|^2 \rangle \approx  \langle |a_{\omega}|^2 \rangle \frac{T}{2 \pi}  \Delta \omega
+\end{equation}
+
+where, using $\omega_n = \frac{2 \pi n}{T} \Rightarrow \frac{n}{\omega_n} = \frac{T}{2 \pi}$ that is the number of frequencies per unity of frequency and we assumed $T$ large so that many frequencies fall within the interval large $\Delta \omega$ around $\omega$: even if it is small, all $\omega_n \in [\omega, \omega +\Delta \omega]$ are approximately equal, so we can follow the same reasoning for $a_n$, which leads to $a_n \approx a_w$ since they are continuous in $\omega$. Dividing by $\Delta \omega$, and taking $T \to \infty$ which makes this correct we introduce the intensity spectrum of process $z(t)$:
+
+\begin{equation}
+I(\omega) = \lim\limits_{T \to \infty} \frac{T}{2 \pi} \langle |a_w|^2 \rangle
+\end{equation}
+
+Clearly, to have finite $I$, the power for each frequency goes to zero as their number $n \to \infty$. By analogy with electrical networks (Kubo II pr. 17) $I$ is called \textbf{power spectrum of} $z(t)$. Indeed, the average power is defined by:
+
+\begin{equation}
+\frac{1}{T} \int_{0}^{T} z(t)z^*(t) dt = \frac{1}{T} \sum_{n = -\infty}^{\infty} \sum_{m = -\infty}^{\infty} a_n a_m^* \int_{0}^{T} e^{i(\omega_m-\omega_n)t} dt = \sum_{n = -\infty}^{\infty} |a_n|^2
+\end{equation}
+
+For instance for electrical circuits, one obtains the power as: $P(t) = I(t)V(t) = RI^2(t)$ in the linear regime.
+\newline
+
+Let $\phi(t) = \langle z(t_0) z(t_0+t) \rangle$ be the autocorrelation of $z$ which does not depend on $t_0$ if $z$ is stationary. The \textbf{Wiener-Khinchin theorem} asserts that the knowledge of the spectrum is equivalent to the knowledge of the autocorrelation:
+
+$$I(\omega) = \int_{- \infty}^{ \infty } \phi(t) e^{-i \omega t} dt $$
+
+\begin{equation}
+\phi (t) = \int_{- \infty}^{ \infty } I(\omega) e^{i \omega t} d\omega
+\end{equation}
+\subsection{Application to Brownian Motion: White Noise}
+
+With the last theorem in our pocket, we can have a deeper insight of brownian motion with it's Fourier analysis. Let us expand the velocity and the stochastic perturbation:
+
+\begin{equation}
+\Gamma(t) = \sum_{n = -\infty}^{\infty} \frac{1}{ 2 \pi} \Gamma_n e^{ i\omega_n t} \quad v(t) = \sum_{n = -\infty}^{\infty} \frac{1}{ 2 \pi} v_n e^{ i\omega_n t}
+\end{equation}
+
+Then, substituting the Fourier expansions in the equation of motion:
+
+$$ \sum_{n = -\infty}^{\infty} i \omega_n v_n e^{ i\omega_n t} =  - \sum_{n = -\infty}^{\infty}  \gamma v_n e^{ i\omega_n t} + \sum_{n = -\infty}^{\infty} \Gamma_n e^{ i\omega_n t}  $$
+
+we obtain a relation between the velocity Fourier coefficients and the stochastic perturbation ones:
+
+\begin{equation}
+ i \omega_n v_n = -  \gamma v_n + \Gamma_n \Rightarrow v_n = \frac{\Gamma_n}{i \omega_n + \gamma}
+\end{equation}
+
+For the power spectra of $v,\gamma$ we have:
+
+$$ I_v(\omega) = \lim\limits_{T \to \infty} \frac{T}{2 \pi} \langle |v_n|^2 \rangle = \lim\limits_{T \to \infty} \frac{T}{2 \pi} \langle \frac{ \Gamma_n }{\omega_n^2 + \gamma^2} \rangle = \lim\limits_{T \to \infty}  \frac{T}{2 \pi} \langle |\Gamma_n|^2 =\frac{I_{\Gamma(\omega)}}{\omega_n^2 + \gamma^2}$$
+
+where in the last passage we approximated $\omega_n \approx \omega$, $\Gamma_n \approx \Gamma$ since all those values lay in very little intervals, where we can consider their Fourier coefficients constant. So we obtain a relation between the power spectra of velocity and the stochastic force
+
+\begin{equation}
+I_v(\omega) = \frac{1}{\omega_n^2 + \gamma^2} I_{\Gamma(\omega)}
+\end{equation}
+
+In the simplest case $I_{\Gamma(\omega)} = I_{\Gamma} = \textit{const} $, in which case the spectrum is said to be \textit{white}. Consequently, $I_v$ is called \textit{Lorentian} and we can write:
+
+$$ \phi_{\Gamma}(t_1 - t_2 ) = \langle \Gamma(t_1) \Gamma(t_2) \rangle = \frac{1}{2 \pi} \int_{- \infty}^{\infty } I_{\Gamma} e^{i \omega (t_1 - t_2)} d\omega = I_{\Gamma} \delta(t_1 - t_2)$$
+
+Where $I_{\Gamma}$ plays the same role of $q$ in the Langevin treatment. Then we can calculate the autocorrelation of $v$:
+
+$$ \phi_{v}(t_1 - t_2 ) = \langle v(t_1) v(t_2) \rangle = \frac{I_{\Gamma} }{2 \pi} \int_{- \infty}^{\infty } \frac{ e^{i \omega (t_1 - t_2)} }{\omega_n^2 + \gamma^2} d\omega $$
+
+with some little modifications we obtain the same expression for the velocity autocorrelation as in the Langevin approach:
+
+\begin{equation}
+ \langle v(t_1) v(t_2) \rangle = \frac{ I_{\Gamma} }{2 \pi} \frac{\pi}{\gamma} e^{-\gamma(t_1)-t_2} \quad \forall t_1, t_2 \in \mathbbm{R}
+\end{equation}
+
+ So velocity autocorrelation decays exponentially in time and if the equipartition of energy theorem holds, we obtain agreement between the expressions for $I_{\Gamma}$ and the "intensity of the stochastic force" $q$ from the Langevin approach:
+ 
+ \begin{align*}
+\langle v^2 \rangle = \frac{ I_{\Gamma} }{ 2 \gamma} & \Rightarrow I_{\Gamma}  =2 \gamma \langle v^2 \rangle \\
+m 2 \gamma = k_B T & \Rightarrow  I_{\Gamma}  = \frac{2 \gamma k_B T}{m} = q_{Langevin}\\
+ \end{align*}
+
+% SUBSECTION:
+% Application: Johnson-Nyquist noise:
+\subsection{Application: Johnson-Nyquist noise}
+Potential difference at the ands of a resistance in a RC circuit in equilibrium at temperature $T$. It was measured by Johnson and explained by Nyquist in 1928. In some experiments, one electron at time is emitted by a filament (schottky). Because of their temperature $T$ electrons move to right and left with the equal probability, so there is not current. But on short time scales, one may find more electrons going left than right, and viceversa. Thus the voltage $U(t)$ fluctuates with zero mean. The variance of this fluctuations must be related to that. Let $Q(t) = C U(t)$ be the charge in the capacitor, and try this description: 
+
+$$ R \frac{dQ}{dt} = - \frac{1}{C}Q + \eta(t), \quad$$
+$$ \dot{Q} + \frac{1}{RC} Q = \dot{Q} + \gamma Q = \frac{1}{R} \eta, \quad  \textit{dividing by C:} \quad \dot{U} + \gamma U  = \frac{1}{RC} \eta$$
+
+If we write $\langle \eta(t) \eta(t') \rangle = 2 R k_B T \delta(t-t')$ we have a Langevin equation comparable with the one for the brownian motion. In particular:
+
+$$\langle \frac{\eta(t)}{R}  \frac{\eta(t')}{R} \rangle = \frac{2 k_B T}{R} \delta(t-t') \Rightarrow q_R = \frac{2k_B T}{R} $$
+
+and
+
+$$\langle \frac{\eta(t)}{RC}  \frac{\eta(t')}{RC} \rangle = \frac{2 k_B T}{RC^2} \delta(t-t') \Rightarrow q_U = \frac{2k_B T}{RC^2} $$
+
+In analogy with the Langevin approach we can write some equations for the interesting quantities of the problem:
+$$\langle v \rangle = 0 \Rightarrow \langle Q \rangle =0 , \langle U \rangle =0 $$
+
+$$ \langle v^2 \rangle = \frac{q}{2 \gamma} = \frac{k_B T}{m} \Rightarrow $$
+
+$$\Rightarrow \langle Q^2 \rangle = \frac{q_Q}{2 \gamma} = C k_B T, \quad  \langle U^2 \rangle = \frac{q_U}{2 \gamma} = \frac{k_B T}{C}$$
+
+$$\textit{we also have: } \quad \langle Q(t)Q(t') \rangle = k_B T C e^{-\frac{|t-t'|}{RC}} \quad \textit{etc. etc.}$$
+
+In particular for the power spectrum we obtain:
+
+$$ I_c(\omega) = \frac{ q }{ \gamma^2(1 + \frac{\omega^2}{\gamma^2}) } \Rightarrow I_U(\omega) = \frac{ q_U }{\gamma^2(1 + \frac{\omega^2}{\gamma^2} )} = \frac{ 2 R k_B T}{1 + (RC\omega)^2} $$
+
+for low frequencies $\omega \ll (RC)^-1$, $I_v$ does not depend on $C$ : $I_U(\omega) \approx 2 R k_B T $, which is experimentally confirmed.
+
+\subsection{Generalization of Brownian Motion}
+The study of brownian motion is important because many fluctuating phenomena are analogous to it, but it is not sufficiently general. First of all one usually replaces the condition of white spectrum for $\Gamma$, and is led to consider \textit{retarded} frictions. In particular one may consider:
+
+\begin{equation}
+\dot{v(t)} = - \int_{- \infty}^{ \infty } \gamma(t-t') v(t') dt' + \Gamma(t)
+\end{equation}
+
+which is linear and, therefore, con be treated by harmonic analysis. We give the expression of the Fourier transform and anti-transform : 
+
+\begin{equation}
+v(t) = \frac{1}{2 \pi} \int_{- \infty}^{ \infty } \widetilde{v}(t) e^{i \omega t} d \omega ; \quad \Gamma(t) = \frac{1}{2 \pi} \int_{- \infty}^{ \infty } \widetilde{\Gamma}(t) e^{i \omega t} d \omega	
+\end{equation}
+
+\begin{equation}
+\widetilde{v}(\omega) = \frac{1}{2 \pi} \int_{- \infty}^{ \infty } v(t) e^{i \omega t} dt ; \quad \widetilde{\Gamma}(\omega) = \frac{1}{2 \pi} \int_{- \infty}^{ \infty } \Gamma(t) e^{i \omega t} dt	
+\end{equation}
+
+Now, causality implies that times $t' > t$ have no influence on the process developed up to time $t$:
+
+$$\gamma(t-t') = 0 \quad \textit{for $t'>t$} \Rightarrow $$
+$$ \int_{- \infty}^{ t }  \gamma(t-t') v(t') dt' = \int_{- \infty}^{ \infty }  \gamma(t-t') v(t') dt'$$
+ 
+ That is a convolution integral. Then, Fourier transforming the new equation of motion we obtain:
+ 
+ \begin{equation}
+  i \omega \widetilde{v}(t) = \widetilde{\gamma}(t) \widetilde{v}(t) + \widetilde{\Gamma}(t) \Rightarrow \widetilde{v}(t) = \frac{\widetilde{\Gamma}(t)}{i \omega +  \widetilde{\gamma}(t)} \label{oneast}
+ \end{equation}
+
+Consequently, using  same reasoning for the limit from discrete to continuuous frequencies we have:
+
+\begin{equation}
+I_v(\omega) = \frac{1}{|i\omega+ \widetilde{\gamma}(t)|^2} \label{twoast}
+\end{equation}
+
+To represent the power spectrum of velocity in equilibrium this requires $I_{\Gamma}$ to properly generalize the result with $\gamma = \textit{costant}$, $I_{\Gamma}= \frac{2 k_B T \gamma}{m}$. This generalization could be expressed as:
+
+\begin{equation}
+I_{\Gamma}(\omega)= \frac{2 k_B T}{m} \mathfrak{Re} (\widetilde{\gamma}(\omega)) \label{threeast}
+\end{equation}
+
+Consequently this is a request on correlations form:
+
+\begin{equation}
+\langle \gamma(t_1) \gamma(t_2) \rangle = \frac{k_B T}{m}[ \gamma(t_1-t_2) + \gamma(t_2-t_1) ] \label{fourast} 
+\end{equation}
+
+This choice is not necessarily valid, neither compulsory; also because it means that the \textit{bath depends on the system}.
+In any event, the process is: "i want something e.g. \ref{threeast} because, e.g., I verified it, or for consistency or... and then I deduce properties of the model". First of all, $ \mathfrak{Re} (\widetilde{\gamma}(t)) \geq 0 \textit{, for} \omega \in \mathbbm{R} $ because the power spectrum is not negative.
+Why should we like \ref{threeast} or \ref{fourast}? If we take $\gamma(t) = \gamma \delta(t)$ we fall back on the classical case for the noise $ \langle \gamma(t_1) \gamma(t_2) \rangle = \frac{k_B T \gamma}{m} \delta (t_1-t_2)$ and $$ I_{\Gamma}(\omega)= \frac{2 k_B T}{m} \mathfrak{Re} (\int_{- \infty}^{ \infty} \gamma \delta(t) e^{-i 0 t} dt) = \frac{2 k_B T \gamma}{m} $$ So we have a direct generalization of the white noise case to the \emph{non-white} possibility. Then let us consider a different expression of the mobility, that was obtained by:
+
+\begin{equation}
+\mu = \frac{1}{m \gamma} = \frac{D}{k_B T} = \frac{1}{k_B T} \lim \limits_{t \to \infty} \frac{1}{2t} \langle (x(t)-x(0))^2 \rangle
+\end{equation}
+
+Experimentally, $\mu$ is measured applying a driving dropping (constant) force $K$ and doing work against viscosity; the force is macroscopic, so the equation of motion of the "pollen grain" is $m\dot{v} = -m \gamma v + K $, there is no noise. In stationary state $\dot{v}=0$ so $v_{final} = \frac{K}{m \gamma} = \mu K$ we then have in the steady state:
+
+\begin{align*}
+\mu & = \frac{1}{2 k_B T} \lim\limits_{t \to \infty } \frac{1}{t} \int_{0}^{t} dt_1 \int_{0}^{t} dt_2 \langle v(t_1) v(t_2) \rangle = \frac{1}{2 k_B T} \lim\limits_{t \to \infty } \frac{1}{t} \int_{0}^{t} dt_1 \int_{0}^{t} dt_2 \langle v(0) v(t_2 -t_1 ) \rangle \\
+& =  \frac{1}{2 k_B T} \lim\limits_{t \to \infty } \frac{1}{t} \int_{0}^{t} 2(t-s)  \langle v(0) v(s) \rangle ds = \frac{1}{k_B T} \int_{0}^{\infty} \langle v(0) v(s) \rangle ds
+\end{align*}
+
+The last member is called \emph{Green-Kubo integral}. Therefore we can write the \emph{old relation} for the diffusion coefficient as:
+
+\begin{equation}
+D = \lim\limits_{t \to \infty} \frac{1}{2t} \langle (x(t)-x(0))^2 \rangle  = \int_{0}^{\infty} \langle v(0) v(s) \rangle ds = k_B T \mu = \frac{k_B T}{m \gamma} \label{diffcal}
+\end{equation}
+
+This, for what follows \ref{p12} shows that Einstein-Smoluchowski relation is a special case of the \emph{fluctuation-dissipation relation} (special for the no memory and white noise). 
+
+We think to 
+
+\begin{itemize}
+\item fluctuation: as a variation of any physical quantity around its mean
+\item dissipation: how the system responds to external actions.
+\end{itemize}
+Observe that:
+
+$$
+\int_{- \infty}^{\infty} \langle v(0)v(t) \rangle e^{-i \omega t}dt  = \int_{- \infty}^{0} \langle v(0)v(t) \rangle e^{-i \omega t} dt + \int_{0}^{\infty} \langle v(0)v(t) \rangle e^{-i \omega t} dt
+$$
+
+and that in the steady state $\langle v(0)v(t) \rangle = \langle v(-t)v(0) \rangle$ so that
+
+$$ \int_{- \infty}^{0} \langle v(0)v(t) e^{-i \omega t} dt = \int_{- \infty}^{0} \langle v(-t)v(0) \rangle e^{-i \omega t} dt = \int_{\infty}^{0} \langle v(s)v(0) \rangle e^{i \omega s} (-ds) = \int_{0}^{\infty} \langle v(0)v(s) \rangle e^{i \omega s} ds$$
+
+then
+
+$$ I_v(\omega) = \int_{- \infty}^{\infty} \langle v(0)v(t) \rangle e^{-i \omega t} dt = \int_{0}^{\infty} \langle v(0)v(t) \rangle ( e^{i \omega t}  + e^{-i \omega t}) dt $$
+
+This can be related to a generalization of the mobility, if we consider $\int_{0}^{\infty} \langle v(0)v(t) \rangle dt = k_B T \mu$ as $\frac{1}{2} I_v(\omega)$ at $\omega=0$.
+Recalling equation \ref{oneast}, and our assumption \ref{twoast}, \ref{threeast}, using some complex numbers algebra, yelds:
+
+$$I_v(\omega) = \frac{I_{\Gamma}(\omega)}{ |i\omega + \widetilde{\gamma}(\omega)|^2} = \frac{2 k_B T}{m} \frac{ \mathfrak{Re} ( \widetilde{\gamma}(\omega)) }{|i\omega + \widetilde{\gamma}(\omega)|^2} =  \frac{2 k_B T}{m}\bigg [ \frac{1}{i\omega + \widetilde{\gamma}(\omega)} +  \frac{1}{-i\omega + \widetilde{\gamma}^*(\omega)} \bigg ]$$
+
+Then 
+
+$$I_v(\omega) = \frac{2 k_B T}{m}\bigg [ \frac{1}{i\omega + \widetilde{\gamma}(\omega)} +  \Big ( \frac{1}{i\omega + \widetilde{\gamma}(\omega)} \Big )^* \bigg ]  = \int_{0}^{\infty} \langle v(0)v(t) \rangle e^{i \omega t} dt + \big( \int_{0}^{\infty} \langle v(0)v(t) \rangle e^{i \omega t} dt \big)^*$$
+
+As $\phi_v = \langle v(0)v(t) \rangle $ is real. So we can introduce $\mu(\omega)$ as:
+
+$$
+\frac{ k_B T}{m} \frac{1}{i\omega + \widetilde{\gamma}(\omega)} = \int_{0}^{\infty} \langle v(0)v(t) \rangle e^{i \omega t} dt  = k_B T \mu(\omega) 	
+$$
+
+finally, we get the a \emph{fluctuation dissipation relation of first kind}:
+
+\begin{equation}
+\mu(\omega) = \frac{1}{m(i\omega + \widetilde{\gamma}(\omega))}
+\label{fdfirst}
+\end{equation}
+
+we have $\mu(-\omega) = \mu(\omega)^*$ as desired and $\omega = 0 $ yelds $\mu(0)= \frac{1}{m\widetilde{\gamma}(0)}$; if we choose $\gamma(t) = \gamma \delta(t) \Rightarrow \widetilde{\gamma}(t)=\gamma$, $\mu(\omega) = \frac{1}{m(i\omega + \gamma) }$ and $\mu(0) = \frac{1}{m \gamma} = \mu_{Langevin}$
+
+So $\mu(\omega)$ generalizes the mobility achieved with Langevin approach, which corresponds to the white noise case with no memory (also in the old case we could have considered frequency dependent mobility). Moreover, the old - Einstein's - mobility is the zero frequency, white noise, no-memory $\mu$.
+
+From \ref{threeast} we have what is called \emph{fluctuation-dissipation relation of second kind}:
+
+\begin{equation}
+\mathfrak{Re}(\gamma(\omega)) = \frac{m}{2 k_B T} I_{\Gamma}(\omega) = \frac{m}{2 k_B T} \int_{- \infty}^{\infty} \langle \Gamma(0) \Gamma(t) \rangle e^{-i \omega t} dt
+\label{fdsecond}
+\end{equation}
+
+%%%%% Parte esplicativa (EMA)  %%%
+
+\subsection{Fluctuation-Dissipation Relations}
+For what concerns so far, we have seen the extension of the brownian motion, when considering a \textit{retarded friction}. It's important to notice that in this case we deal with \textit{coloured} noise. We saw that in this case, the mobility $\mu$ is given by a generalization of the Einstein's relation:
+$$k_B T \mu =  \int \diff{t} \, \mean{v(0)v(t)}$$
+where the fluctuation-dissipation relation of the first kind gives:
+$$k_B T \mu(\omega ) = \int \diff{t} \,e^{i\omega t} \mean{v(0)v(t)} $$
+for $\omega \neq 0$ we have then the \textbf{coloured noise}.
+The second kind \textit{fluctuation-dissipation relation} reads:
+$$ \mathfrak{Re}(\gamma(\omega))  = \frac{m}{2 k_B T} \int_{- \infty}^{\infty} \langle \Gamma(0) \Gamma(t) \rangle e^{-i \omega t} dt$$
+\begin{itemize}
+    \item The first kind gives the complex mobility called, in general, \emph{admittance}, in terms of the Fourier transform of the \textbf{velocity autocorrelation}.
+\item The second kind gives the complex resistance called, in general, \emph{impedence}, in terms of the the Fourier transform of the \textbf{random force}.
+\end{itemize}
+
+Together, these two fluctuation-dissipation relations mean that the response of a system to an external disturbance is related to thermal fluctuations spontaneously produced in the system in absence of external forces. As the separation of frictional and random forces is unclear in this model, the first kinds is more fundamental (mahh).
+
+
+
+
+\end{document}

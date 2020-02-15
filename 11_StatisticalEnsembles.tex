@@ -1,0 +1,316 @@
+\documentclass{article}
+
+\usepackage{lipsum}
+\usepackage[margin=1.6in,includefoot]{geometry}
+
+\usepackage{amsmath}
+\usepackage{bbm}
+
+% header and footer stuff
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+%\fancyhead{}
+\fancyfoot{}
+\fancyfoot[R]{\thepage\ }
+\renewcommand{\headrulewidth}{0pt}
+
+%%%%%%% Emanuele
+
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+\newcommand*\Diff[1]{\mathop{}\!\mathrm{d^#1}}
+\newcommand*\Tder[1]{\mathop{}\!\frac{\diff #1}{\diff \mathrm{t}}}
+\newcommand*\tder[1]{\mathop{}\!\frac{\partial #1}{\partial \mathrm{t}} }
+\newcommand*\mean[1]{\mathop{}\!\langle#1 \rangle }
+\newcommand*\xder[1]{\mathop{}\!\frac{\partial #1}{\partial x_i }|}
+\newcommand*\kin{\mathop{}\! \frac{p_i^2}{2m} }
+\newcommand*\derbeta[1]{\mathop{}\!\frac{\partial #1}{\partial \mathrm{\beta}} }
+\newcommand*\derV[1]{\mathop{}\!\frac{\partial #1}{\partial \mathrm{V}} }
+%%%%%%%%%%%
+
+\begin{document}
+
+\begin{titlepage}
+	\begin{center}
+	
+	\line(1,0){300}\\
+	[5mm]
+	\huge{\bfseries Statistical Ensembles}\\
+	[2mm]
+	\line(1,0){200}\\
+	[2cm]
+	\textsc{\Large Meccanica statistica del disequilibrio: fondamenti e applicazioni} \\
+	[8cm]
+	
+	\end{center}
+	
+	\begin{flushright}
+	\textsc{\LARGE Emanuele Marconato}\\
+	[0.5cm]
+	\textsc{\large Universita' degli studi di Torino\\
+	[0.5cm]
+	A.A. 2019/2020 }
+	\end{flushright}
+	
+\end{titlepage}
+
+\section{Statistical Ensembles}\label{sec:langapp}
+Statistical Mechanics poses the problem of deducing the macroscopic properties of matter under the assumption that the world is made of atoms. Let us image atoms described in a classical faction with coordinates $(q,p)$, which can be measured with some resolution $\delta p$,$\delta q$. \\
+Then the phase space in which all atoms are represented as a single point, $\Gamma(q_i,p_i)|_{i=1}^N$, can be thought as subdivided in cells $\Delta$ of volume $(\delta q \delta p)^N$.\\
+In a time $\tau$, $\Delta$ turns into $S^t \Delta$ where $S^t$ depends on the energy $E$:
+$$E(q,p) = T(p) + \Phi(q) = \sum_{i=1}^N \kin +\frac{1}{2} \sum_{ij=1}^N \phi(q_i-q_j)$$
+and we assume a stability condition:
+$$E(q,p) \geq U^0 = \min \limits_\Gamma E(\Gamma) > +\infty $$
+Let us attribute attribute a probability to each cell $\mu(\Delta)$ such that $\mu(S^t \Delta) =\mu(\Delta)$, i.e. an \textbf{invariant} probability on the phase space. The "collection of probabilities" may be identified with a steady state, since it doesn't vary.\\
+Given an observable $f:P(M) \xrightarrow{} \rm I\!R$, such that it has mean:
+$$\Bar{f} = \sum_{\Delta \subset M} \mu(\Delta) f(\Delta)$$
+Changing $\mu$, clearly $\Bar{f}$ changes and we stress that the important observables are (to relate to a macroscopic thermal system):
+\begin{equation*}
+    \begin{aligned}
+    \mathbf{Internal \, Energy}\xrightarrow{} \,U(\mu) &= \sum_\Delta \mu(\Delta) E(\Delta) \\ 
+    \mathbf{Volume  }\xrightarrow{} V(\mu) &= V(\Delta) \\
+    \mathbf{Kinetic \,Energy  }\xrightarrow{} K(\mu) &= \sum_\Delta \mu(\Delta) T(\Delta)\\
+    \mathbf{Pressure  }\xrightarrow{} P(\mu) &= \sum_\Delta \mu(\Delta) P(\Delta)\\
+\end{aligned}
+\end{equation*}
+    
+where $f(\Delta) = \sum_{i=1}^N f(i)$, which is a sum over all particles with coordinates in the $\delta q \delta p$, centered in $\Delta$.\\
+\newline
+\textbf{NOTE:}\\
+This is a finite sum, not a sum or integral over all points of $\Delta$, which are a continuum, each of which represents a whole N-particle system. In practice, particle $i$ has coordinate in $[p_i -\delta p_i/2,p_i+\delta p_i/2] \times [q_i - \delta q_i/2,q_i +\delta q_i/2]=\delta q_i(q_i) \times \delta p_i(p_i)$ and:
+$$ \Delta = \prod_{i=1}^{N} (\delta p_i \times \delta q_i)  $$
+\\
+Therefore, the above averages are computed over the values that the observables take in \underline{identical} N particles systems, found in different phases $\Delta$. Then the collection of probabilities is a steady state for a collection, an \textbf{ensemble} of states, while each single N-particle system may evolve in time.\\
+Consider now the family $\epsilon $ of states $\mu(\Delta)$ and call it \textbf{statistical ensemble}.
+For each $\mu$ we have a set of averages $O(\mu)$ for the observable $O: \epsilon \xrightarrow{} \rm I\!R$.
+\textit{Is it possible that, varying $\mu$ in $\epsilon$, the observable vary such that:}
+\begin{equation}
+   \frac{1}{T} \diff{U} +\frac{P}{T} \diff{V} = \diff{S}  
+\end{equation}
+\textit{with $\diff{S}$ exact differential; where $T$ is proportional to K: $T=\frac{2 K(\mu)}{3N k_B }$, and $k_B$ is to be determined empirically?}
+Then $S$ can be interpreted as the \textbf{Entropy}.\\
+\newline
+\textbf{NOTE:}\\
+Fixing $\mu$ then we know that the phase $\Delta$ of$M$, so it is known the microscopic state, i.e. it is a \underline{microstate}. $\epsilon$, the ensemble of microstates, is the \underline{macrostate}. \\
+\newline
+\textbf{Def:} The ensemble $\epsilon$ verifying the (1) are called orthodes. 
+\subsection{Towards Canonical and Microcanonical Ensembles}
+\textbf{Canonical Ensemble}: Characterizes micro states in a volume $V=V(\Delta) = const$ parametrized by $\beta$ and $V$ as:
+\begin{equation*}
+    \begin{aligned}
+         \mu(\Delta) &= \frac{e^{-\beta E(\Delta)}}{Z(\beta,V)} \\
+        Z(\beta,V) &= \sum_{\Delta} e^{-\beta E(\Delta)}
+    \end{aligned}
+\end{equation*}
+Here $Z(\beta,V)$ is the so called \underline{canonical partiotion function}.\\
+\newline
+\textbf{Microcanonical Ensemble}: parametrized by $U$ and $V$, both constant, as:
+\[
+\mu(\Delta) = \begin{cases} \frac{1}{\Omega(U,V)} & \mbox{if } U-\delta E \leq E(\Delta)\leq U  \\
+0 & \mbox{else} \end{cases}
+\]
+\[
+\Omega(U,V) = \sum_{\Delta\, : \, E(\Delta) \in [U-\delta E,U] } 1 = \begin{cases} \mbox{number of cells such that } \Delta \\
+E(\Delta) \in [U-\delta E,U]\\
+\end{cases}
+\]
+Here $\Omega(U,V)$ is the \underline{microcanonical partition function}, with the care of taking a macroscopic $\delta E$, such that $\delta E << U$. \\
+\subsection{Approaching Canonical Ensemble}
+Let us introduce $h = \delta q_{x_i} \delta p_{x_j}$ for $i,j = 1,2,...$. Then one may approximate the canonical partition function as:
+\begin{equation}
+    Z(\beta,V) \int \diff{p}\diff{q}    \frac{1}{N! h^{3N}}e^{-\beta [T(p)]+\Phi(q)}
+\end{equation}
+where $N!$ accounts for the exact identity of the particles, whose permutations correspond to identical cells. \\
+Let the configuration $\Delta$ be identified by the occupation numbers $n_i$, in cell $c_i $ of size $h^3$, i.e. in the 6-dimensional cells in which a point represents a particle. So, replacing the sums by the integrals we make 2 errors:
+\begin{enumerate}
+    \item $E(q,p) = E(\Delta) $ only in the center of $\Delta$ (analytic error);
+    \item $\Delta \subset \rm I\!R$ described by $n_1,n_2,...$ should be counted as $\frac{N!}{n_1!n_2!...}$ times, instead of $N!$ times, because permutations within $c_i$ also do not change the state (combinatorial error).
+\end{enumerate}
+Boltzmann neglected them both, since they vanish in the limit $h \xrightarrow{} 0 $, and he had no reasons in his classical framework to give any special meaning to $h$. We keep this in mind and go on with these assumptions. Therefore, we anticipate it is all fine at \textit{high temperatures} and for $\Phi = 0$ to take such approximations (ideal gas). We introduce the probability density $\rho$:
+$$\rho_c(\Gamma)  = \frac{e^{-\beta E(\Gamma)} }{N! h^{3N} Z(\beta,V)}$$
+so that one may write:
+\begin{equation*}
+    \begin{aligned}
+    K &= K(\mu) = \int \sum_{i=1}^N \diff{p} \diff{q} \, \kin \frac{e^{-\beta(T(p) +\Phi(q))}}{N! h^{3N} Z(\beta,V} \\
+    v &= \frac{V}{N}\\
+    U &= U(\mu) = - \derbeta{} \log Z(\beta,V) \\
+    p &= P(\mu) = \sum_Q \frac{N}{Z(\beta,V)} \int \diff{q_2}...\diff{q_N}\diff{p} \, \frac{1}{N!h^{3n} } 2m v^2\frac{s}{S} e^{-\beta E(\Gamma)}\\
+    \end{aligned}
+\end{equation*}
+where the sum runs over the small cubes $Q$ adjacent to the boundary of $V$, with area s and $S=\sum_Q s$ in the area of the cubic container, $S = 6V^{2/3}$  and $q_1$ fixed in the center of $Q$. Some algebra then yields: 
+$$ p = \frac{1}{\beta} \derV{} \log Z(\beta,V)$$
+This means that, introducing:
+\begin{equation*}
+    \begin{aligned}
+        F &= - \frac{1}{\beta} \log Z(\beta,V) \\
+        S &= \frac{U-F }{T}
+    \end{aligned}
+\end{equation*}
+one obtains $T = \frac{2 K(\mu) }{3k_B N } = \frac{1}{k_B \beta} $, which has the differential of $\diff{T}/T = -\diff{\beta}/\beta $. Now one simply differentiate the free energy to get a well known form:
+\begin{equation*}
+    \begin{aligned}
+    \diff{F} &= [\frac{1}{\beta^2} \log Z(\beta, V) -\frac{1}{\beta}\derbeta \log Z(\beta,V)] \diff{\beta} + -\frac{1}{\beta} \derV{} \log Z(\beta,V) \diff{V} = \\
+    &= -\frac{1}{\beta} \log Z(\beta,V) \frac{\diff{T}}{T}+\derbeta \log Z(\beta,V) \frac{\diff{T}}{T} - p\diff{V} =\\
+    &= \frac{F - U}{T} \diff{T} - p\diff{V}=\\
+    &= -S \diff{T} - p\diff{V}\\
+    \mathrm{----that}& \, \mathrm{leads}  \,  \mathrm{to----}\\
+    T\diff{S} &= \diff{U} +p \diff{V} 
+    \end{aligned}
+\end{equation*}
+
+as required for $\epsilon$ to be an orthode, and for the canonical ensemble to yield Thermodynamics, it suffices to identify:
+$$ F = -\beta^{-1} \log Z(\beta,V) $$
+Apparently, this doesn't require $N\xrightarrow \infty$, but we recall that we have thought $h$ to be negligible.\\
+\subsection{Approaching Microcanonical Ensemble}
+Up to some errors, we approximate the microcanonical partition function  as:
+$$ \Omega(U,V) = \int_{J_E}  \diff{p}\diff{q} \frac{1}{N!h^{3N}}$$
+$J_E$ being the subset of $M$ such that $E(\Gamma) \in [U-\delta E,U]$.
+The thermodynamic quantities are now defined as before replacing $e^{-\beta H} $ by 1, $Z$ by $\Omega$ and the integral by the one over $J_E$. The temperature is still defined as $ T = 2 K(\mu)/ 3k_B N$ but this time one starts from the Entropy:
+$$ S =k_B \log \Omega(U,V) $$
+rather than from the free energy. To obtain the correct exact differential we take:
+$$ \diff{S} = \frac{k_B}{\Omega(U,V)} [\frac{\partial \Omega}{\partial U}(U,V) \diff{U} +\derV{\Omega} (U,V) \diff{V}]$$
+however, it is rather more difficult than in the canonical case. In particular, one needs to consider averages:
+\begin{equation*}
+    \begin{aligned}
+    \mean{K^\alpha} &= \frac{\int \frac{\diff{p}\diff{q}}{N!h^{3N}} K(p)^\alpha}{\int \frac{\diff{p}\diff{q}}{N!h^{3N}}} \\
+    \mean{K^\alpha}^* &= \frac{\int_{J_E'} \frac{\diff{p}\diff{q}}{N!h^{3N}} K(p)^\alpha}{\int \frac{\diff{p}\diff{q}}{N!h^{3N}}} \\
+    \end{aligned}
+\end{equation*}
+where the integral in $J_E'$ is done considering $q_1$ fixed in the region $\diff{V}$. It's straightforward to demonstrate that it must be:
+\begin{equation*}
+    \begin{aligned}
+    \mean{K^\alpha} &= K(\mu)^\alpha     \\
+    \mean{K^\alpha}^* &= K(\mu)^\alpha (1+\theta_N) 
+    \end{aligned}
+\end{equation*}
+to hold for $N\xrightarrow \infty$, along with $\theta \xrightarrow{N\xrightarrow \infty} 0$. This is done, by taking some "assumptions":
+\begin{itemize}
+    \item STABILITY : there exists $B$ such that $\Phi(q)= \sum_{ij = 1}^N 1/2 \phi(q_i-q_j) \geq - B N $, for every $q=(q_1,...,q_n)$;
+    \item TEMPEREDNESS: there exist $c > 0$,$x> 0$, $R> 0$ such that $|\phi(q-q') \leq c|q-q'|^{-3-x}|$ for $|q-q'|> R$.
+\end{itemize}
+The second condition means that subsystems of a large system have small interaction energy. This exclude Coulomb and Gravitational forces.\\
+To conclude $ h$ has to be negligible, something that requires very large N, but large N and further properties are required for  the microcanonical ensemble to yield Thermodynamics. It's important to bear this in mind when considering small systems, for which N is not too large and $h$ is not negligible!
+
+\section{Equivalnce of Ensembles}
+In the above, $k_B$ appeared in various contexts, but it should have been regarded as an adjustable parameter, different from case to case. However the equivalence of the Thermodynamics produced by the canonical and microcanonical ensembles leads to the recognition of $k_B$ as a universal constant:
+$$k_B = 1.38 \cdot 10^{-16} \mathrm{erg/K}$$
+We begin with the case in which $\phi = 0$. Then the calculation in polar coordinates of the integrals $Z$ and $\Omega$ lead to:
+\begin{equation}
+    \begin{aligned}
+    Z(\beta,V) &= \frac{V^N}{N!h^{3N}} \bigl( \frac{2\pi m}{\beta}  \bigr)^{3N/2}\\
+    \Omega(U,V) &= \frac{V^N}{N! h^{3N}}[(2mU)^{3N/2} - (2mU -2m\delta E)^{3N/2}] \frac{\pi^{3N/2}}{\Gamma(3N/2) \, 3N}
+    \end{aligned}
+\end{equation}
+where the term $\frac{\pi^{3N/2}}{\Gamma(3N/2) \, 3N}$ is the surface of the N-dimensional unit sphere, and $\Gamma(x) = (x-1)!$. Consider the thermodynamic limit:
+$$ N\xrightarrow{} \infty, \quad V \xrightarrow{} \infty, \quad \frac{V}{N} = v, \quad \frac{U}{N} = u,\quad u,v=\mathrm{fixed} $$
+Using the Stirling's formula to approximate the $N!$, we get:
+\begin{equation}
+    \begin{aligned}
+    S &= k_B \log \Omega(U,V) = N k_B \bigl[  \log \frac{V}{N} + \frac{3}{2} \log \frac{U}{N} + \mathrm{const} + O\bigl( \frac{\log N }{N}\bigr)\bigr]\\
+     F&= -  \frac{1}{\beta} \log Z(\beta,V) = -\frac{N}{\beta} \bigl[  \log \frac{V}{N} -\frac{3}{2} \log \beta + \mathrm{const}+  O\bigl( \frac{\log N }{N}\bigr) \bigr]
+    \end{aligned}
+\end{equation}
+where $S$ is interpreted as the Entropy of the microcanonical ensemble, and $F= U - TS$ as the free energy in the canonical ensemble. Therefore, considering both ensembles as orthodic, the pressure can be obtained as:
+\begin{equation*}
+    \begin{aligned}
+    \frac{p}{T} &= \derV{S} (U) = N k_B \frac{1}{V} \implies pV = N k_B T \\
+    p &= - \derV{F}(\beta) = \frac{1}{\beta V} N \implies p V = N k_B T
+    \end{aligned}
+\end{equation*}
+Does this equivalence of canonical and microcanonical ensembles hold for more general situations?\\
+Introduce:
+$$ \Omega_0(U,V) = \int_{E(p,q)\leq U} \frac{\diff{p}\diff{q}}{N! h^{3N}}$$
+so that the integral on phase space in the microcanonical setting becomes $\Omega(U,V) = \Omega_0 (U,V) -\Omega_0 (U-\delta E,V)$. Then one can write for the canonical ensemble:
+$$Z(\beta,V) = \beta \int_{U_0}^\infty \diff{E} \, \Omega_0(E,V) e^{-\beta E} $$
+that integrating by parts, we get:
+\begin{equation*}
+    \begin{aligned}
+    \frac{\partial e^{-\beta E} }{\partial E} &= -\beta e^{-\beta E} \implies \\
+    Z(\beta,V) &= \beta \int_{U_0}^\infty \diff{E} \, \Omega_0(E,V) e^{-\beta E} =  \int_{U_0}^\infty \diff{E} \, \frac{ \partial \Omega_0(E,V)}{\partial E} e^{-\beta E}  
+    \end{aligned}
+\end{equation*}
+where clearly the term $[\Omega_0 e^{-\beta E}]_{U_0}^\infty = 0$. In the canonical ensemble we have for the free energy (in general):
+$$F(\beta,V) =- \frac{1}{\beta} [\log \beta + \log \int_{U_0}^\infty \diff{E}\, \Omega_0 e^{-\beta E}] $$
+and we introduce now the specific (per particle) quantities in the TD limit:
+\begin{equation*}
+    \begin{aligned}
+    v &= \frac{V}{N}\\
+    f_c (\beta, v ) &= \lim_{N\xrightarrow{} \infty} \frac{F(\beta, v}{N}\\
+    u_c(\beta,v) &= \lim_{N\xrightarrow{} \infty} \frac{U(\mu)}{N} = \derbeta{\beta f_c} (\beta,v)\\
+    T_c &= \frac{1}{k_B \beta} = \frac{2 K(\mu)}{3 k_B N}\\
+    p_c &= \lim_{N\xrightarrow{} \infty} P(\mu) =- \derV{f_c} (\beta,v)\\
+    s_c &= \frac{u_c-f_c}{T_c} 
+    \end{aligned}
+\end{equation*}
+In the microcanonical one may write:
+\begin{equation}
+\begin{aligned}
+    v_m &= \frac{V}{N} \\
+    f_m(u_m,v_m) &= -T_m s_m +u_m\\
+    u_m &= \frac{U(\mu)}{N}\\
+    {T_m}^{-1} &= \frac{\partial s_m}{\partial u_m} = \frac{2 K(\mu)}{3 k_B N}\\
+    p_m &= T_m \frac{\partial s_m}{\partial v_m} (u_m,v_m)\\
+    s_m &= \lim_{N\xrightarrow{} \infty} \frac{k_B}{N} \log [ \Omega_0 (U,V) -\Omega_0 (U-\delta E,V)] \\
+    &= \lim_{N\xrightarrow{} \infty} \frac{k_B}{N} \log \Omega_0 (U,V)
+\end{aligned}    
+\end{equation}
+Here for $s_m$ we have two definitions, based on the equivalence we derived in the canonical ensemble that:
+$$ \frac{\partial \Omega_0 }{\partial E} (U,V) \approx \Omega_0 (U,V) +...$$
+where there are other terms that are negligible in the limit $N \xrightarrow{} \infty$ (for a more rigorous derivation look [Huang]). As to the two definitions of $s_m $ above, they show that there exist thermodynamical equivalent formulations of the microcanonical ensemble and, in particular, that one may consider:
+$$\mu(\Delta) = \begin{cases} \frac{1}{\Omega_0(U,V)} & \mathrm{if} \quad U_0 \leq E(\Delta) \leq U \\ 0 & \mathrm{else}  \end{cases} $$
+Concerning the equivalence of the microcanonical and canonical ensemble, for large N one may write:
+\begin{equation*}
+    \begin{aligned}
+    \Omega_0(U,V) &= e^{\frac{s_m N}{k_B}}
+    \frac{\Omega_0 (U-\delta E,V)}{\Omega_0(U,V)} &\approx e^{-\alpha N}
+    \end{aligned}
+\end{equation*}
+with $\alpha > 0$. Then:
+\begin{equation*}
+    \begin{aligned}
+    Z(\beta,V) &= \beta \int_{U_0}^\infty \diff{E}\, \Omega_0(E) e^{-\beta E} =\\
+    &= N\beta \int\diff{u} \, e^{-\beta N u}e^{Ns_m(u)/k_B} =\\
+    &\approx \mathrm{const}\, \sqrt{N} e^{N \max\limits_{u}[-\beta u +s_m(u)/k_B] }
+    \end{aligned}
+\end{equation*}
+if the minimum is \underline{unique} and occurs at $u_0$, one has:
+$$-\beta + \frac{1}{k_B} \frac{\partial s_m}{\partial u} (u_0,v_m) = 0$$
+$$\beta = \frac{1}{k_B} \frac{\partial s_m}{\partial u} (u_0,v_m)$$
+Also one can show that $\lim \limits_{N\xrightarrow{} \infty} u_c = u_0$. Then:
+$$\beta = \frac{1}{k_B} \frac{\partial s_m}{\partial u} (u_c,u_m) = \frac{1}{k_B} T_m^{-1} (u_c,v_m)$$
+and posing $v_c =v_m$ such that $T_c = T_m$, one obtains $u_c = u_m = u_0$ from the expression of $T_c$ and $T_m$. Also we get:
+\begin{equation*}
+\begin{aligned}
+    f_c &= -\frac{1}{\beta} \max \limits_u [-\beta u + s_m(u,v_m)/k_B] =\\
+    &= u_c - s_m(u_c,v_m)/k_B \beta =\\
+    &= u_c -T_c s_m(u_c,v_m) \implies\\
+    f_c(\beta,v_m) &= u_m -T_m s_m = f_m(u_m,v_m)
+\end{aligned}    
+\end{equation*}
+In other words, the microcanonical and the canonical ensemble are equivalent, in the thermodynamic limit $N,V \xrightarrow{} \infty, \quad v = V/N$.
+\section{Non Equivalence between Ensembles}
+The above derivation of equivalence of ensembles is not rigorous, because it does not hold unless certain conditions are satisfied. \\
+The central issue is that $s_m (u,v)$ can be well approximated by $S(U,V)/N$ and that it is concave in $u$ and convex in $v $, while $f_c (\beta,V) $ is concave in both terms. This implies that the maximum of the Legendre transform $-\beta u + s_m(u,v_m)/k_B$ is reached at a point $u_0$ or in one interval $(u_-,u_+)$ where the function is constant in $u$.  Stability and Temperedness of the interactions are necessary for this to be the case. But if the maximum is reached in $(u_-,u_+)$ equivalence fails.\\
+It can be seen that, even if that happens, it does only for special values of $\beta$ and for such a value $\Bar{\beta}$, there exist $\beta',\beta''$ such that:$$ \beta''<\Bar{\beta}<\beta'$$
+[FIGURA A A A]\\
+\newline
+It's clear from the figure that it holds that $u'<u_-$ and $u''>u_+$. Then $u_c(\beta, V)$ has a discontinuity when $\beta$ crosses $\Bar{\beta}$, from $\beta'$ to $\beta''$, jumping from $u_-$ to $u_+$. Because $f_c = u_c - T_c s_c$ is continuous, being convex, then $s_c$ jumps too. This means that the ensemble inequivalence signals the possibility of a \textit{phase transition}. \\
+\newline
+[FIGURAAAA] \\
+\newline
+The equivalence/inequivalence of the ensembles may also be understood as follows. Consider a macroscopic region (in which TD quantities are defined) smaller than the total. The total could be isolated, then microcan. The part, only ideally separated from the rest, exchanges energy with the rest, hence it is canonical or exchanges particles+energy, hence it is grand-canonical. \\
+\newline
+\textbf{NOTE:}
+Equivalence means that, in the TD limit, the observables in $\delta V$ are the same in different representations. Global observables and fluctuations may differ (e.g. Energy fixed, T fluctuates in microcan.; Energy fluctuates, T fixed in can.)\\
+\newline
+Consider the case with fixed $\delta V$ and variable $N \implies$ grand-canonical. A picture of the configuration shows one internal and one external configuration. Take many pictures and select only those whose outer configuration is the same. \textit{Statistically}, the inner configuration should be the same, meaning that the ideal box state is determined by its boundary conditions (the outer environment chosen in a typical config.). All possible states of $\delta V$ should be then represented by the grand-canonical ensemble.If there are more than one equilibrium, they should be identified selecting at random the various outer configurations. Then phase transitions appear as \textit{instabilities} of the TD properties, w.r.t. variations of the boundary conditions.\\
+For instance, keeping the same $T$ and $p$ but changing the outer state leafs to different values for the intensive quantities such as specific energy, specific volume, specific entropy... Even if $\delta V$ is itself very large, hence its boundaries are very far from the core and interaction is, in principle, negligible. In the ensemble the TD quantities appear either as:
+\begin{itemize}
+\item \textbf{parameters}: microcan-$(u,v)$, can-$(\beta,v)$, grandcan-$(\lambda,V)$;   
+\item \textbf{related} to partition function: microcan-$(S)$, can-$(F)$, grancan-$(P)$;
+\item \textbf{derivatives} of the partition function:
+microcan-$(T)$, can-$(P)$, grancan-$(E)$
+\end{itemize}
+As the first 2 types of quantities do not depend on the boundary conditions, in fixed particles cases, phase transitions may be found looking for fixed values of the derivatives, such that the quantity associated with the partition function is not \textit{differentiable}.
+
+
+\end{document}

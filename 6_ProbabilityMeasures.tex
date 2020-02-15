@@ -1,0 +1,548 @@
+\documentclass{article}
+
+\usepackage{lipsum}
+\usepackage[margin=1.6in,includefoot]{geometry}
+
+\usepackage{amsmath}
+\usepackage{bbm}
+
+% header and footer stuff
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+%\fancyhead{}
+\fancyfoot{}
+\fancyfoot[R]{\thepage\ }
+\renewcommand{\headrulewidth}{0pt}
+
+%%%%%%%EMANUELE%%%%%%%%
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+\newcommand*\Diff[1]{\mathop{}\!\mathrm{d^#1}}
+\newcommand*\Tder[1]{\mathop{}\!\frac{\diff #1}{\diff \mathrm{t}}}
+\newcommand*\tder[1]{\mathop{}\!\frac{\partial #1}{\partial \mathrm{t}} }
+\newcommand*\mean[1]{\mathop{}\!\langle #1 \rangle}
+ %%%%%%%%%%%%%%%%%%%%%%%
+ 
+\DeclareMathOperator{\tr}{Tr}
+
+\begin{document}
+
+\begin{titlepage}
+	\begin{center}
+	
+	\line(1,0){300}\\
+	[5mm]
+	\huge{\bfseries Probability Measures}\\
+	[2mm]
+	\line(1,0){200}\\
+	[2cm]
+	\textsc{\Large Meccanica statistica del disequilibrio: fondamenti e applicazioni} \\
+	[8cm]
+	
+	\end{center}
+	
+	\begin{flushright}
+	\textsc{\LARGE Jacopo Pasqualini}\\
+	[0.5cm]
+	\textsc{\large Università degli studi di Torino\\
+	[0.5cm]
+	A.A. 2019/2020 }
+	\end{flushright}
+	
+\end{titlepage}
+
+\section{Probability Measures}\label{sec:langapp}
+
+Let $\dot{x} = F(x)$ describe the microscopic dyniamics i.e. the equation of motion. Let 
+$$\Phi^t: \mathcal{M} \longrightarrow \mathcal{M} \quad \Phi^t : x \longmapsto \Phi^t x, \textit{ where: } x,\Phi^t x \in \mathcal{M} $$
+
+Be the time evolution, so that $\Phi^t x_0$ represents the solution, $x(t;x_0)$, of the equation of motion which initial condition $x_0 \in \mathcal{M}$. We consider time reversal invariant dynamics, so we take $t \in \mathbbm{R}$, and suppose exist an operator, called involution $i:\mathcal{M}\longrightarrow \mathcal{M}$, such that:
+
+\begin{equation}
+i \circ \Phi^t = \Phi^{-t} \circ i \quad , i^2 = 1
+\end{equation}
+
+By definition we have $\Phi^0 = \mathbbm{1}, \Phi^t \circ \Phi^s = \Phi^{t+s} $, then $\Phi = \{ \Phi^t\}_{t \in \mathbbm{R}}$ is a group of transformations which are hopefully differentiable with the respect of $x$, with their inverses, i.e. it is a 1-parameter group of diffeomorphisms.
+
+How do the observables evolve in time? The assumption is thet they are time averages of microscopically defined quantities:
+
+$$A:\mathcal{M}\longrightarrow \mathbbm{R}, \quad \overline{A}(x)=\lim\limits_{t \to \infty} \frac{1}{t} \int_{0}^{t} A(\Phi^s x) ds$$
+
+We are not interested in all functions on $\mathcal{M}$, so suppose they are continuous, at least, but they can not evolve in time. To represent a thermodynamic property the dependence on the initial \emph{microstate} should be irrelevant (something not necessarily true in small systems, in which local thermodynamic equilibrium is not verified). Therefore, also in view of the fact that computing $\Phi^s x$ may be in impossible task, one wonders whether there is a probability distribution that does not evolve in time, $\mu$ on $\mathcal{M}$ such that:
+
+\begin{equation}
+\overline{A}(x) = \int_{\mathcal{M}} A d\mu = \langle A \rangle
+\end{equation}
+
+For almost all microstates $x$ i.e. except for a set $E \in \mathcal{M}$ of vanishing probability 
+
+$$\mu(E)=\int_{E} d\mu =0$$
+
+In general, given a probability measure $\mu$ on $\mathcal{M}$ we have:
+
+\begin{equation}
+\mu(E) \geq 0 \textit{, for the probability of element $E$, i.e. the set of status x which make E}
+\end{equation}
+
+\begin{equation}
+\mu(\mathcal{M}) = \int_{\mathcal{M}} d \mu = 1
+\end{equation}
+
+ Given the class $\mathcal{I}$ of functions $A$ on $\mathcal{M}$ the probability distribution of the ensemble of macrostates which characterizes the macrostate, so that observables take values on $\{ \overline{A} \}_{A \in \mathcal{I}}$.
+ Note that the only accesible information is given by the values $\overline{A}$, hence, operationally $\{ \overline{A} \}_{A \in \mathcal{I}}$ defines $\mu$: $\mu$ means nothing of its own and, indeed, even mathematically it is usually impossible to define it, if not through the specified averages.
+ As the dynamics move the points of $\mathcal{M}$ it moves the sets $E \subset \mathcal{M}$ as well, therefore one may say that the measure of $E$ after a time $t$ is the measure of the points that came in $E$ a time $t$ i.e. 
+ 
+ $$ \Phi^{-t} E = \{ X \in \mathcal{M} :  \Phi^{t} X \in  E  \}$$ 
+
+In other words, let us think of the probability in the phase space as a property of the points, like the mass of a fluid. Then, if the points move, the probability distribution may change: what was initially in $ \Phi^{-t} E$, e.g. $\mu_0( \Phi^{-t} E)$ comes to $E$ at time $t$, so we have a new definition $\mu_t$, such that:
+
+\begin{equation}
+\mu_t(E) = \int_{E} d \mu_t = \mu_0( \Phi^{-t} E) = \int_{\Phi^{-t} E} d \mu_0
+\end{equation}
+
+which expresses the conservation of probability in $\mathcal{M}$ as well as the idea that the probability is a property of phase space points. $\mu_t(E)$ may be different from $\mu_0(E)$, since $E$ may have contained a different mass at time 0.
+What happens to phase space averages? We may define:
+
+$$\langle A \rangle_t = \int_{ \mathcal{M} } A d \mu_t$$
+ and, in general $\langle A \rangle_t \neq \langle A \rangle_0 $ because $\mu_t$ and $\mu_0$ are different distributions.
+ 
+ A steady state is obtained when $\langle A \rangle_t  = \langle A \rangle_0 = \overline{A}(x) \textit{, for almost every } x \in \mathcal{M}$ for all $A \in \mathcal{I}$.
+ 
+In particular introducing:
+
+$$ A(x) = \chi_E (x) = 1 \textit {, if } x \in E \quad,  0 \textit{ otherwise} $$
+
+Step functions can be approximated by continuous functions and viceversa. This means that:
+
+\begin{align*}
+& \int_{ \mathcal{M} } \chi_E (x) d \mu_t(x) = \mu_t(E) = \langle \chi_E \rangle_t \\
+& = \int_{ \mathcal{M} } \chi_{\Phi^{-t}(E)} (x) d \mu_0(x) = \mu_0(\Phi^{-t}(E)) = \langle \chi_{\Phi^{-t}(E)} \rangle_0 \\
+\end{align*}
+
+in other words, the measure must be such that
+$ \langle \chi_{\Phi^{-t}(E)} \rangle_0 = \langle \chi_E \rangle_0$ i.e. :
+
+\begin{equation}
+\mu_0(\Phi^{-t}(E)) = \mu_0(E)
+\end{equation}
+
+If this is the case, for all measurable set $E \subset \mathcal{M} $, $\mu_0$ is called invariant and characterizes a steady state, because $\langle A \rangle_t = \langle A \rangle_0 = \overline{A} $ for all ensembles. It may happen, e.g. in the classical ensambles that:
+
+\begin{equation}
+d \mu_t(x) = f_t(x) dx
+\end{equation} 
+
+where $f_t$, called \emph{probability density} is an integrable non-negative function on $\mathcal{M}$. In this case $\mu_t$ is called \emph{regular}, otherwise it is called singular.
+The evolution of $f_t$ in time may be obtained from the above definitions.
+
+$$\mu_t(E) = \int_{E} f_t(x) dx = \int_{\Phi^{-t}(E)} f_0(x) dx = \mu_0(\Phi^{-t})E$$
+
+To see what this implies for the density, set $y = \Phi^t x$, $x = \Phi^{-t} y$, $J^{-t} = \big | \frac{ \partial \Phi^{-t}(y)}{\partial y} (y) \big |$, so that $dx = J^{-t}(y)dy$ and
+
+$$ \int_{E} f_t(x) dx = \int_{\Phi^{-t}E} f_0(x)dx = \int_{E} f_0(\Phi^{-t}y) J^{-t}(y) dy $$
+
+if this holds for all measurable set $E$:
+
+\begin{equation}
+f_t(x) = f_0(\Phi^{-t} x) J^{-t}(x) \longrightarrow f_0(x) = f_0(\Phi^{-t}(x)) J^{-t}(x)
+\end{equation}
+
+Which means that the density varies along the points of a trajectory in order to account for the compression or expansion of volumes. If the dynamics is hamiltonian
+$J^{-t}(x)=1 \forall x \Rightarrow f_t(x) = f_0(\Phi^{-t}x)$ which means that the evolving density is a constant of motion: mass and volume are preserved along a trajectory, so density is.
+
+If $f_0$ is stationary and the dynamics is hamiltonian $f_0(x) = f_0(\Phi^{-t}x)$ i.e. the phase space trajectories are level curves of $f_0$
+
+For the observables we have:
+
+$$\langle A \rangle_t = \int_{\mathcal{M}} A(x) f_t(x) dx = \int_{\mathcal{M}} A(x) f_0(\Phi^{-t} x) J^{-t}(x) dx$$
+
+and transforming the coordinates with $x = \Phi^t y$ we get:
+
+$$ \int_{ \mathcal{M} } A(\Phi^t y) f_0(y) J^{-t}(\Phi^t y) J^t(y) dy$$
+
+Now, if volumes vary by an amount $J^t(y)$ along a trajectory starting at $y$ and proceeding for a time $t$, they vaty by $1/ J^t(y)$ going back along the trajectory, starting at $\Phi^t y$
+
+NOTE: $\Phi^{-t}$ retraces backward the trajectory; but it is not the time reversed trajectory.
+
+As a consequence:
+
+\begin{equation}
+\langle A \rangle_t = \int_{ \mathcal{M} } A(\Phi^t x) f_0(x) dx = \int_{ \mathcal{M} } A(x) f_t(x)dx
+\end{equation}
+
+which shows that evolution con be considered either on the microscopic observable or on the density.
+
+\newpage
+
+\subsection{Liouville Equation}
+
+Assuming that probability in phase space is a probability that phase points take along with themselves, hence thet probability moves in phase space as a dN-dimensional fluid, the probability density $f: \mathcal{M} \mapsto \mathbbm{R}_{\geq}$, where $\mathcal{M}$ is the phase space, satisfies a dN-dimensional continuity equation.
+Let $\dot{\Gamma} = F(\Gamma)$ be the evolution equation for $\Gamma = (\mathcal{Q},\mathcal{P})$, the continuity equation may be written as:
+
+\begin{equation}
+\frac{\partial f}{\partial t} = - \frac{\partial}{\partial \Gamma}(f \dot{\Gamma}) = - \nabla_{\Gamma} (f F)
+\end{equation}
+
+and is called \emph{Liouville equation}. Using the total derivative, we can write:
+
+\begin{equation}
+\frac{df}{dt} = \frac{\partial f}{\partial t} + \dot{\Gamma} \frac{\partial f}{\partial \Gamma} = -f \nabla_{\Gamma} \dot{\Gamma} = -f \Lambda \quad \textit{, where: } \Lambda = \textit{div}_{\Gamma} \dot{\Gamma}
+\end{equation}
+
+where $\Lambda : \mathcal{M} \mapsto \mathbbm{R}$ is called phase space expansion rate or, its opposite $-\Lambda$ phase space contraction. 
+
+Of course, it is further assumed that $f$ is sufficiently smooth for the derivatives to exist.The former equation may be written as:
+
+\begin{equation}
+\frac{d}{dt} \ln f = - \Lambda
+\end{equation}
+
+For hamiltonian systems:
+
+$$ \Lambda(\Gamma) = \sum_{i=1}^{N} \frac{\partial}{\partial q_i} \dot{q_i} +  \frac{\partial}{\partial p_i} \dot{p_i}= \sum_{i=1}^{N} \frac{\partial}{\partial q_i} \frac{\partial H}{\partial p_i} +  \frac{\partial}{\partial p_i}\frac{\partial H}{\partial q_i} = 0$$
+
+Hamiltonian evolution is a sufficient (not necessary) condition for $ \frac{df}{dt}=0$, the \emph{Liouville Theorem}
+
+Introducing:
+
+\begin{equation}
+\mathcal{L}= -i (\frac{\partial}{\partial \Gamma} \cdot \dot{\Gamma} + \dot{\Gamma} \cdot \frac{\partial}{\partial \Gamma})
+\end{equation}
+
+the f-Liouvillian operator, we can write:
+
+\begin{equation}
+\frac{\partial f}{\partial t} = - i \mathcal{L} f
+\end{equation}
+
+whose solution is, if $\mathcal{L}$ does not depends on time:
+
+$$f_t(\Gamma) = e^{-i \mathcal{L} t } f_0(\Gamma)$$
+
+which can be explicitly obtained as:
+
+$$ \frac{f_{t+\Delta t}(\Gamma) - f_t(\Gamma) }{\Delta t}\approx - i \mathcal{L} f_t(\Gamma) \Rightarrow $$
+
+$$ f_{\Delta t} \approx (1-i\mathcal{L} \Delta t)f_0(\Gamma) + \mathcal{O}(\Delta t^2)$$
+
+$$ f_{2 \Delta t} \approx (1-i\mathcal{L} \Delta t)f_{ \Delta t}(|\Gamma) \approx  (1-i\mathcal{L} \Delta t)^2 + \mathcal{O}(\Delta t^2) ... $$
+
+$$ f_{\Delta t} \approx (1-i\mathcal{L} \Delta t)^n f_0(|\Gamma) + n \mathcal{O}(\Delta t^2)$$
+
+Now let $\Delta t = \frac{t}{n}$ and let $n \to \infty$ so $
+n \mathcal{O}(\Delta t^2) \to 0 $ and:
+
+$$ f_t(\Gamma) = \lim\limits_{n \to \infty} \big (1 - \frac{i \mathcal{L} t}{n} \big )^n f_0(\Gamma) \equiv e^{- i \mathcal{L} t} f_0(t)$$
+
+$e^{- i \mathcal{L} t} $ is called f-propagator. Now, because $-i \mathcal{L} = \frac{\partial}{\partial t}$ we can write 
+
+$$ f_t(\Gamma) = \sum_{i=0}^{\infty} \frac{t^n}{n!} \frac{\partial}{\partial t} f_0(\Gamma)$$
+
+which is the Taylor expansion of $f_t$ about $f_0$.
+
+This solution can be cast in the alternativa form, where the conservation of probability is practically the only ingredient.
+
+Let $E \subset \mathcal{M} $ have any (Borel) measurable set, and let  $ \mu_t(E) = \int_{E} f_t(\Gamma) d \Gamma$ its probability. Then we have $\mu_t(\Phi^t E) = \mu_0 (E) $ if $\Phi^t : \mathcal{M} \mapsto \mathcal{M} $ is the evolution operator, i.e. the evolution of $\dot{\Gamma} = F(\Gamma)$ at time $t$, with i.c. $\Gamma$ is given by $\Phi^t \Gamma$, then:
+
+$$ \int_{\Phi^t E} f_t(\Gamma) d \Gamma = \int_{E} f_0(\Gamma) d \Gamma $$
+
+suggest the coordinates change $\Gamma = \Phi^{-t} x$, whose jacobian is given by
+
+$$ \big | \frac{\partial \Gamma}{\partial x} \big | = e^{- \int_{-t}^{0} \Lambda({\Phi^s x}) ds} = J^{-t}(x)$$
+
+indeed, considered a generic time t and 
+$$y=\Phi^t x_0 \Rightarrow y = \Phi^{ \frac{t}{n}} \circ  \Phi^{ \frac{t}{n}} ... \circ  \Phi^{ \frac{t}{n}} x_0$$
+
+and by the chain rule:
+ % metti a posto x ---> X, y ---> Y
+$$ \frac{ \partial y}{\partial x} \Big |_{x_0} =  (\frac{\partial}{\partial x} \Phi^{\frac{t}{n}} x \Big |_{x_{n-1}}) (\frac{\partial}{\partial x} \Phi^{\frac{t}{n}} x\Big |_{x_{n-2}}) ... (\frac{\partial}{\partial x} \Phi^{\frac{t}{n}} x \Big |_{x_{0}}) $$
+
+and
+
+$$ \frac{\partial}{ \partial x} \Phi^{\Delta t} x \Big |_{x_0} = \frac{\partial}{\partial x} [x + F(x) \Delta t]  \Big |_{x_0} + \mathcal{O}(\Delta t^2) = \mathbbm{1} + \frac{\partial F}{\partial x} \Delta t \Big |_{x_0} + \mathcal{O}(\Delta t^2)$$
+
+therefore, if $x_i = \Phi^{i \Delta t}$, $\Delta t = t/n$
+
+$$ \frac{ \partial y}{\partial x} \Big |_{x_0} \approx (\mathbbm{1} + \frac{\partial F}{\partial x}\Big |_{x_{n-1}}  \Delta t  ) (\mathbbm{1} + \frac{\partial F}{\partial x}\Big |_{x_{n-2}}  \Delta t  ) ... (\mathbbm{1} + \frac{\partial F}{\partial x}\Big |_{x_{0}}  \Delta t  )$$
+
+differently from the calculation of the f-propagator, here we have matrices which may vary along trajectory, hence the result is not a mere exponential, but is a \emph{left ordered exponential}:
+
+$$ \exp_L({\int_{0}^{t} \frac{\partial F}{\partial x} \big |_{\Phi^s x_0} ds}) $$
+
+The left ordered exponential may also be obtained by iterative methods, and expressed as a Dyson series:
+
+\begin{align*}
+\exp_L ({\int_{0}^{t} \frac{\partial F}{\partial x} \big |_{\Phi^s x_0} ds}) &=\\ 
+ = \mathbbm{1} + \int_{0}^{t} dt_1 T(1) &+ \int_{0}^{t} dt_1 \int_{0}^{t_1} dt_2 T(t_1) T(t_2) + \int_{0}^{t} dt_1 \int_{0}^{t_1} dt_2 \int_{0}^{t_2} dt_3 T(t_1) T(t_2)  T(t_3) + ...
+\end{align*}
+
+As the operators $T(t_i)$, $T(t_j)$ do not necessarily commute, the order is important and
+
+$$\int_{0}^{t} dt_1 \int_{0}^{t_1} dt_2 ... \int_{0}^{t_{n-1}} dt_n T(t_1) T(t_2) ... T(t_n) \neq \frac{(Tt)^n}{n!}$$
+
+which it would be e.g. from constant $T$, so
+
+$$\exp_L({\int_{0}^{t} \frac{\partial F}{\partial x} \big |_{\Phi^s x_0} ds}) \neq \textit{standard exponential ( e.g. } e^{Tt} \textit{)}$$
+
+Nevertheless, some useful relations,valid in the case of standard exponential, hold for $e_L$ as well, like:
+
+Let $\mathcal{L} = \mathbbm{1}-e^A$, (* stands for standard exponential) $\log \det ({e^A}_*) = \tr(A)$ because $\det(\mathbbm{1}-\mathcal{L}) = exp \big ( - \sum_{n=1}^{\infty} \frac{1}{n} \tr \mathcal{L}^n \big )$
+
+and the Campbell-Beker-Hausdorff theorem, which states
+
+$$e^A e^B = e^C, \quad C = A + B +\frac{1}{2}[A,B]+\frac{1}{12} \{ [[A,B],B]+[[B,A],A] \} + ...$$
+
+In which one considers that the traces of commutators vanish, because $\tr AB = \tr BA$. Therefore, the determinant of the left exponentialequals the exponential of the trace of $ \frac{\partial F}{\partial x}$ integrated, i.e. the exponential of the integral of the divergence of F (or $\dot{\Gamma}$).
+
+%labelhere%
+In practice, integrating (LH), one has:
+
+$$ \int_{f_0(x)}^{f_t(\Phi^t x)} d \ln f = - \int_{0}^{t} \Lambda(\Phi^s x) ds$$
+
+i.e.
+
+$$ \ln f_t(\Phi^t x) - \ln f_0(x) =  - \int_{0}^{t} \Lambda(\Phi^s x) ds $$
+
+$$ f_t(\Phi^t x) =  f_0(x) e^{ - \int_{0}^{t} \Lambda(\Phi^s x) ds }$$
+
+Or, setting $\Gamma = \Phi^t x$ %labelhere%
+
+$$ f_t(\Gamma) =  f_0(\Phi^{-t} \Gamma ) e^{ - \int_{0}^{t} \Lambda(\Phi^{s-t} \Gamma) ds } =  f_0(\Phi^{-t} \Gamma ) e^{ - \int_{0}^{t} \Lambda(\Phi^s \Phi^{-t} \Gamma) ds } = f_0(\Phi^{-t} \Gamma) J^{-t}(\Gamma)$$
+
+which shows that
+\begin{equation}
+J^{-t}(x) = e^{- \int_{0}^{t} (\nabla F)(\Phi^{s-t} x) ds} = e^{- \int_{-t}^{0} (\nabla F)(\Phi^{u} x) du} 
+\end{equation}
+
+\begin{equation}
+J^t(x)= e^{\int_{0}^{t} \Lambda(\Phi^ux) du}= e^{\int_{-t}^{0} \Lambda(\Phi^{t+s}) ds}= \frac{1}{J^{-t}(\Phi^t x)}  
+\end{equation}
+
+As time goes, also the observables change following the rule:
+
+\begin{equation}
+\langle O \rangle = \int_{\mathcal{M}} O(\Gamma) f_t(\Gamma) d \Gamma = \int_{\mathcal{M}} O(\Gamma) (e^{-i\mathcal{L}t} f_0) (\Gamma) d \Gamma = \int_{\mathcal{M}} (e^{iLt} O)(\Gamma) f_0(\Gamma) d \Gamma
+\end{equation}
+
+which defines the \emph{observable evolution operator} L.
+
+%%%EMANUELE %%%%
+\subsection{Another Derivation from Dyson's Series}
+To obtain the same result as before for the evolution of the probability density $\rho$, we will use a common derivation used in \textit{Quantum Field Theory}. First of all, we introduce again the Liouvillian operator $\mathcal{L}$, which is defined as:
+$$-i \mathcal{L} \rho = \tder{\rho}$$
+In general $\mathcal{L}(t)$ is function of time, so we formally integrate the expression as:
+\begin{align*}
+\diff\rho &= -i \mathcal{L}(t) \rho(t) \diff t\\
+ \rho(t) -\rho(t_0) &= -i\int_{t_0}^t \diff{t'} \: \mathcal{L}(t') \rho(t') 
+\end{align*}
+
+which becomes by iterations:
+$$\rho(t) = \rho(t_0) -i\int_{t_0}^t \diff{t'} \: \mathcal{L}(t') \rho(t_0) - \int_{t_0}^t \diff{t_1} \: \int_{t_0}^{t_1} \diff{t_2} \: \mathcal{L}(t_1) \mathcal{L}(t_2) \rho (t_0) +... $$
+That's the same result obtained previously:
+$$\rho (t) =  \exp_L \Big [{ -i \int_{0}^{t} \mathcal{L} (s) ds} \Big ] \: \rho (t_0)$$
+
+
+
+
+
+%INTRO ERGODICITA'%
+
+\newpage
+\section{Ergodicity and Mixing}
+
+Ergodicity is characterized as follows:
+
+\begin{itemize}
+
+%%%%%%%%%
+\item 
+
+E1) $\forall f:\mathcal{M} \mapsto \mathbbm{R}$ integrabile, media temporale e media di fase coincidono
+	
+$$\overline{f}(x) = \langle f \rangle \quad \textit{a.e 		in } \mathcal{M}$$
+
+%%%%%%%%%
+\item
+E2) Per ogni sottoinsieme misurabile $A \subset \mathcal{M}$, il tempo medio di soggiorno in $A$ vale $\tau_A(x) = \mu(A)$ q.o. in $\mathcal{M}$, con
+	
+$$ \tau_A(x) = \lim\limits_{t \to \infty} \frac{1}{t} \int_{0}^{t} \chi_A(\Phi^s x) ds$$
+
+%%%%%%%%%
+\item
+E3) Non esistono integrali del moto non banali, cioè se
+
+$$ f(\Phi^tx)=f(x) \forall t \textit{ q.o. in } \mathcal{M} \textit{ ed f è integrabile} \rightarrow f = cost \textit{ q.o. in } \mathcal{M} $$
+
+%%%%%%%%%
+\item
+
+E4) Il sistema è metricamente indecomponibile, ovvero se $\Phi^t A = A $ per $t \neq 0 $ allora o tale insieme è l'intero spazio delle fasi ( $\mu(A)=1$ ) o è un sottoinsieme di misura nulla dello stesso ( $\mu(A)=0$ ), per ogni $A \subset \mathcal{M}$ misurabile. Si dice allora che ogni scomposizione $\mathcal{M} = A \cup (\mathcal{M} \backslash A)$ misurabile e invariante è metricamente banale.
+
+\end{itemize}
+
+Questi ne sono i significati
+
+\begin{itemize}
+
+\item E1) risponde all'esigenza di calcolare le proprietà fisiche (medie temporali) senza dover integrare tutta la dinamica
+
+\item E2) risponde all'idea di Boltzmann che ad una osservazione fatta ad un istante casuale corrisponde una probabilità di trovare lo stato del sistema in $A$ pari alla misura di $A$. In questo caso il volume assume un significato di probabilità, visto che Boltzmann assume come teoria della misura quella di Lebesgue. Ora ogni aperto avrà misura positiva, ossia tutte le traiettorie generiche sono dense in $\mathcal{M}$, perchè spenderanno un certo tempo, sempre positivo, in ogni insieme a misura positiva.
+
+\item E3) corrisponde all' unicità dello stato di equilibrio, nel senso di Gibbs: se lo stato evolve con una densità di probabilità $\rho_t(x) = \rho_0(\Phi^{-t} x)$ allora l'unico stato con una densità tale che $\rho_t = \rho_0$ per ogni $t$ è quello uniforme; che poi sia raggiunto o meno a partire da uno stato diverso è da vedere.
+
+\item E4) torna utile in molte dimostrazioni per la sua semplicità geometrica.
+
+\end{itemize}
+
+Ognuna di questa assunzioni è invariante per isomorfismi, e sono tutte equivalente tra loro.
+\newline 
+Finally we can conclude with the following  \textit{definition}:
+$$ \mu_t \to \mu_{\infty} \quad  \mathrm{ if } \: \lim\limits_{t \to \infty} \int_{\mathcal{M}} f d \mu_t = \int_{\mathcal{M}} f d \mu_{\infty} \quad \forall f \in L_2(\mathcal{M},\mu)$$
+
+
+\subsection{Mixing Systems}
+Ci sono due proprietà equivalenti che definiscono i sistemi mescolanti:
+
+\begin{itemize}
+
+\item M1) Per ogni coppia di sistemi misurabili $A,B \subset \mathcal{M} $, si ha
+
+\begin{align*}
+\lim\limits_{t \to \infty} \mu(\Phi^{-t} A \cap B) &= \mu(A) \mu(B) \\
+\lim\limits_{t \to \infty} \mu(A \cap  \Phi^{-t} B) &= \mu(A) \mu(B) \\
+\end{align*}
+
+\item M2) $\forall f,g \in L_2(\mathcal{M},\mu)$ si ha:
+
+$$ \lim\limits_{t \to \infty} \int_{\mathcal{M}} (f \circ \Phi^t) g d\mu = \int_{M} f d\mu  \int_{M} g d\mu $$
+
+ovvero
+
+$$ \lim\limits_{t \to \infty} \langle (f \circ \Phi^t) g \rangle = \langle f \rangle \langle g \rangle$$
+
+\end{itemize}
+
+M1 significa che $\Phi^{-t} A$, pur conservando la misura (per la conservazione della probabilità), gradualmente si diluisce uniformemente in $\mathcal{M}$ per effetto della dinamica; ovvero $\Phi^t B$ si sparge uniformemente (secondo $\mu$) in $\mathcal{M}$, così che la sua frazione in $A$ è semplicemente $\mu(A)$. Infratti, per l'invarianza di $\mu$ si ha $\mu(A \cap \Phi^t B) = \mu(\Phi^{-t} (A \cap \Phi^t B)) = \mu(\Phi^{-t} A \cap B)$, come pure $\mu(A)\mu(\Phi^t B) = \mu(A)\mu(B)$
+
+M2, invece, ci parla della perdita di correlazione tra le "osservabili". In generale, la funzione
+
+$$G(t) = \langle (f \circ \Phi^t) g \rangle - \langle f \rangle \langle g \rangle$$
+
+è detta funzione di correlazione di $f$ e $g$ (se $f=g$ si parla di autocorrelazione). Se $G(t) \neq 0$ le misurazioni delle due osservabili $f$ e $g$ \emph{non} sono indipendenti.
+
+Si vede anche che M2 implica la convergenza debole della misura, per una dinamica hamiltoniana: $\mu_t \to \mu_{\infty}$ perchè
+
+$$\int_{\mathcal{M}} f \rho_t dx = \int_{\mathcal{M}} f (\rho_0 \circ \Phi^{-t}) dx =  \int_{\mathcal{M}} (f \circ \Phi^t )\rho_0 dx$$
+
+e supponiamo che se M2 vale quest'ultimo integrale converge. Qui abbiamo usato nuovamente il fatto che $f \circ \Phi^t$ comporta un cambio di variabili, del tipo $x = \Phi^t x'$, con jacobiano unitario.
+
+\textit{Proposition}: M1 ed M2 sono equivalenti \newline
+
+\textit{Proof}: (M2$\Rightarrow M1$)
+
+Si prenda $f=\chi_A$, $g=\chi_B$ e si noti che $\chi_A \circ \Phi^t = \chi_{\Phi^{-t} A}$ allora:
+
+$$ \int_{\mathcal{M}} \chi_{\Phi^{-t} A}  d \mu = \int_{\mathcal M}(f \circ \Phi^t) g d \mu = \mu(\Phi^{-t} A \cap B)$$
+
+e
+
+$$  \int_{\mathcal{M}} \chi_A d \mu = \mu(A) \quad \int_{\mathcal{M}} \chi_B d \mu = \mu(B)$$
+
+(M2$\Rightarrow M1$)
+
+Si parta con due funzioni f e g, scomponibili come:
+
+$$f = \sum_{i} f_i \chi_{A_i} \quad g = \sum_{i} g_i \chi_{B_i} \rightarrow \chi_{A_i} \circ \Phi^t = \chi_{\Phi^{-t} A_i}$$
+
+Allora è possibile calcolare la grandezza $\langle (f \circ \Phi^t) g \rangle$
+
+$$\langle (f \circ \Phi^t) g \rangle = \sum_{i,j} f_i g_i \langle \chi_{\Phi^{-t} A_i} \chi_{B_j} \rangle =  \sum_{i,j} f_i g_i \mu(\Phi^{-t} A_i \cap B_j) \rightarrow $$
+
+$$  \sum_{i,j} f_i g_i =\mu(A_i) \mu(B_j) =  \sum_{i,j} f_i g_i \langle \chi_{A_i} \rangle \langle \chi_{B_j} \rangle = \langle f \rangle \langle g \rangle$$
+
+Ma le funzioni semplici sono dense in $L_2$
+
+Take initial density $f_0$ and dynamics mixing with respect to dx. Compute 
+
+$$\langle \Phi \rangle_t = \int \Phi(x) f_t(x) dx = \langle (\Phi \circ s^t) f_0\rangle_{dx} \rightarrow $$
+
+$$ t \to \infty \langle \Phi \rangle_{dx} \infty \langle f_0 \rangle_{dx} = \infty \langle \Phi \rangle_{dx} \int f_0 dx = \infty \langle \Phi \rangle_{dx} $$
+
+So it seems that mixing implies relaxation from initial state determined by $f_0$ to final state given by microcanonical distribution. But there are two difficulties:
+
+\begin{itemize}
+\item mixing is a property of the final state so it does not speak of the pervious transient states
+\item it is not legitimate to consider $f_0$ or $f_t$ as a phase space variable to form a prior in the correlation functions witch two functions 
+\end{itemize}
+
+$f_t$ is not a phase space variable in the sense of an observable; $f_t$ is part of a probability distribution ond can not be separated by its volume element. At best $f_t$ gives a property of a collection of object whose microstates are close to $\Gamma$; $\Phi(\Gamma)$ is a property of the single system with microstates in $\Gamma$: kinetic energy is kinetic energy of a given system
+
+
+%% 	QUI CI SONO ALCUNE PAGINE CON IL TEOREMA DI FLUTTUAZIONE MA SONO DA UN LIBRO (PAG 14 - 26)
+\newpage 
+\section{Boltzmann \textit{H}-Theorem}
+
+
+Let be a system of $N$ particles be described by a density probability function:
+
+$$f_N^{(N)}(\Gamma) = f(q_1,p_1;...;q_N,p_N)$$
+
+Suppose the particles are hard spheres, so they do not interact except for collision. Then the Liouville equation , for hamiltonian dynamics in absence of external forces ($\dot{p}=0$), takes the form:
+
+$$ \frac{\partial f_N^{(N)}}{\partial t} = - \Big( \frac{\partial}{\partial \Gamma} \dot{\Gamma} + \dot{\Gamma} \frac{\partial}{\partial \Gamma} \Big) f  $$
+
+the first term in parenthesis is null, so a part relative to momenta of the second. If we take the particles masses $m=1$, we get:
+
+$$ \frac{\partial f_N^{(N)}}{\partial t} + \sum_{i=1}^{N} p_i \frac{ \partial f_N^{(N)} }{ \partial q_i}  = 0$$
+
+Let
+
+$$f_N^{(s)}(q_1,p_1;...;q_s,p_s) = \int \diff q_{s+1} \diff p_{s+1} ... \diff q_N \diff p_N f_N^{(N)}((q_1,p_1;...;q_N,p_N)) $$
+ be the s-particle distribution function. Then, integrating the Liouville equation one obtains:
+ 
+ $$  \frac{\partial f_N^{(s)}}{\partial t} + \sum_{i=1}^{s} p_i \frac{ \partial f_N^{(s)} }{ \partial q_i} = F( f_N^{(s+1)}, f_N^{(s+1)'} )$$
+ 
+Where $F$ is a function of the $(s+1)$ particles distribution before collision $f_N^{(s+1)}$, ond of the corresponding distribution ofter collision $f_N^{(s+1)}$.
+The important fact is that computing $f_N^{(s)}$ requires the knowledge of $f_N^{(s+1)}$, in particular:
+
+$$ \frac{\partial f_N^{(1)}}{\partial t} + p_1 \frac{ \partial f_N^{(1)} }{ \partial q_i}  = (N-1) \sigma^2 \int [f_N^{(2)'} - f_N^{(2)} ] |v \cdot n | \diff n \diff p_{\ast}$$
+
+Boltzmann obtained this equation by assuming $f_n^{(2)}(q_1,p_1;q_{\ast},p_{\ast}) = f_N^{(1)}(q_1,p_1)f_N^{(1)}(q_{\ast},p_{\ast}) $ which is known in literature as \emph{stosszahlansatz} (molecolar chaos). This makes sense for particle which come from for to collide, since they have not yet interacted and can be considered as independent. But clearly this independence is not valid for those which have just collided. However, it can be seen that independence is worse for higher $s$, because $s$ particles occupy a volume $\Delta \sigma^3$ within which correlations persist; there particles feel correlations, since they cannot overlap with each other.\newline
+
+Therefore, one may hope that the limit $N \to \infty, \sigma \to 0$ makes the stosszahlansatz not at variance with the Liouville equation, keeping $N \sigma^2$ bounded, so that $N \sigma^3 \to 0$. Indeed, assuming that $f_N^{(s)}$ exists and is well behavied for any fixes $s$, when $N \to \infty$  one obtains that $f_N^{(s)}$ remains factorized in time, as product of $s \textit{ } f_N^{(1)}$, if it is factorized at the beginning.
+\newline
+
+Why should it be factorized at $t=0$ ? 
+
+First of all, note that the construction (23) of the Boltzmann equation proceeds from expressing the distribution function of molecules which have just collided in terms of the molecules entering the collision. Then, if the distribution is smooth at $t=0$, it remains such if the system evolves, in average, in such a way not to increase inhomogeneities.
+
+Therefore, assuming initial smoothness, we imply that we are describing evolution which move towards higher homogeneity.
+
+\textbf{Homogeneity}, in turn, means \textbf{disorder} in phase space. The highest disorder is the uniform distribution, i.e. the \emph{microcanonical} one. Disorder is of course correct, if we assume lack of correlations, i.e. factorization of the probability distributions.
+
+Disorder should be a result of the collisions among the particles, forward in time, hence the argument appears to be sensible.
+
+Indeed, disordered states are even much more aaa than ordered ones. For instance $HHHH$ is realized only in one way, while $3H3T$ is realized in 20 different ways. Think about $10^{23}$ objects.
+
+Let's se what happens in an adiabatic expansion. We have the same amount of gas but in the second state the physical volume available is doubled. Velocity space $V$ is unchanged, but each particle has twiche volume $Q$ in second case if particles are uncorrelated, phase space is the product of single particle phase spaces and we have 
+
+$$ \Gamma_{I} = V^N \textit{x} \frac{Q}{2}^N \rightarrow \Gamma_{II} = V^N \textit{x} Q^N \rightarrow \frac{\Gamma_{II}}{\Gamma_{I}} = 2^N $$
+
+But is this trend towards homogeneity proven? Because the laws of mechanics are and any initial condition leading to uniformity has a counuterpart leading to inhomogeneity.The situation is not still fully clarified, only for hard particles and not all.
+
+So the Boltzmann equation cannot describe all possible evolutions but it does describe the relevant ones, at least for hard particles in the $N \to \infty$, $\sigma \to 0$ limit, such that $N \sigma^2$ is bounded.
+
+This is reflected in the \emph{H-Theorem}. Let's introduce the quantity:
+
+$$ \mathcal{H} = \int f \log f dv \quad \mathcal{H}_i = \int v_i f \log f dv$$
+
+where $f$ satisfies the Boltzmann equation where $f=Nmf_N^{(1)}$. Then one has:
+
+$$\frac{d}{dt} \int \mathcal{H}(x)dx \leq 0$$
+
+And $=$ holds only for the Maxwell-Boltzmann distribution, under boundary condition of relflecting walls (isolated system).
+
+The Boltzamnn equation and the H-Theorem are based, then, on the \emph{ergodic hypothesis} and on \emph{large $N$}. It has been proposed by Gallavotti and Cohen that systems far from equilibrium, in nonequilibrium steady states, whose distribution can't be smooth need a new hypothesis. They proposed the \emph{chaotic hypothesis}: a reversible, particle system in a steady states, beahaves as a transitive Asonov system, as for as its observables are converned.
+
+
+
+\end{document}

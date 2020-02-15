@@ -1,0 +1,444 @@
+\documentclass{article}
+
+\usepackage{lipsum}
+\usepackage[margin=1.6in,includefoot]{geometry}
+
+\usepackage{amsmath}
+\usepackage{bbm}
+
+% header and footer stuff
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+%\fancyhead{}
+\fancyfoot{}
+\fancyfoot[R]{\thepage\ }
+\renewcommand{\headrulewidth}{0pt}
+%%%%%%%EMANUELE%%%%%%%%
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+\newcommand*\Diff[1]{\mathop{}\!\mathrm{d^#1}}
+\newcommand*\Tder[1]{\mathop{}\!\frac{\diff #1}{\diff \mathrm{t}}}
+\newcommand*\tder[1]{\mathop{}\!\frac{\partial #1}{\partial \mathrm{t}} }
+ %%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Onsager-Machlup \& Extensions}
+\author{Simone Azeglio}
+\date{September 2019}
+
+\begin{document} 
+\maketitle
+
+\section{Assumptions}
+\textbf{A.1} (or \textit{Onsanger's Regression Hypothesis}): the decay of a system from a non-equilibrium state produced by a spontaneous fluctuation obeys on average the macroscopic law describing the decay from the same state, when that has been produced by a macroscopic constraint suddenly removed. 
+\newline 
+\newline 
+\textbf{A.2}: the ensembles are \textit{Gaussian random variables} (This requires N \textgreater \textgreater 1 independent particles)
+\newline 
+\newline 
+\textbf{A.3}: (or \textit{Bridge Law}): at each time  \textit{t}, $k_B log[Prob(\Gamma(t))] = \rho(\Gamma) + const$.
+\newline 
+\newline 
+\textbf{A.4}: the state  $\Gamma(t_1)$ is statistically independent of $\Gamma(t_2)$ if $|t_1 - t_2| > \tau_d$ with $\tau_d$ as the \textit{decorrelation time}
+\newline 
+\newline 
+\textbf{A.5}: the evolution is a \textit{Gaussian stochastic process}, i.e. $(X_{t_1}, X_{t_2},..., X_{t_k})$ is a multivariate normal random variable, for all choices of $(t_1, t_2, ..., t_k)$
+\newline 
+\newline 
+\textbf{A.6}: microscopic dynamics are \textit{Time Reversal Invariant} (TRI)
+\newline 
+\newline 
+\textbf{A.7}: observables are chosen so that they are \textit{markovian}, i.e. the right ones to determine S (Not too many - deterministic- and not too few - not markovian)
+\newline 
+\newline 
+\textbf{A.8}: the system is in \textit{Local Thermodynamic Equilibrium} (LTE) 
+\newline 
+\newline 
+\textbf{A.9}: the fluxes $\dot{\alpha_i}$ of quantities $\alpha_{i}$ depend linearly on the thermodynamic forces $x_{j}$:
+\begin{align*}
+\dot{\alpha_i} = \sum_{j = 1}^{n}L_{ij}x_j 
+\quad\quad\quad
+x_i = \sum_{j=1}^{n}R_{ij}\dot{\alpha_j}
+\end{align*}
+\newline 
+\textbf{A.10}: the processes are \textit{stationary}, i.e. 
+\begin{align*}
+&Prob(\alpha(t_k) \leq \alpha^{(k)}, k=1, ... , p) = F_p(\alpha^{(1)}, t_1 ;\alpha^{(2)}, t_2; ... ; \alpha^{(p)}, t_p) = \\&\quad
+F_p(\alpha^{(1)}, t_1+ \tau ;\alpha^{(2)}, t_2+ \tau; ... ; \alpha^{(p)}, t_p + \tau) = Prob(\alpha(t_k + \tau) \leq \alpha^{(k)}, k=1, ... , p) 
+\end{align*}
+and have probability density $f_p(\alpha^{(1)}, t_1 ; \alpha^{(2)}, t_2; ... ; \alpha^{(p)}, t_p)$ such that
+\begin{align*}
+F_p(\alpha^{(1)}, t_1 ;\alpha^{(2)}, t_2; ... ; \alpha^{(p)}, t_p) = \int_{-\infty}^{\alpha^{(1)}}d\alpha_1 ...\int_{-\infty}^{\alpha^{(p)}}d\alpha_p f_p(\alpha_1, t_1 ; \alpha_2, t_2; ... ; \alpha_p, t_p)
+\end{align*}
+
+\section{Selection rules for the extensive complete set of $\alpha$'s}
+ \begin{enumerate} 
+ \item $\alpha$ must be a macroscopic variable, referring to a subsystem containing very many particles.
+ \item $\alpha$ must be an algebraic sum of molecular variables, so that by the Central Limit Theorem (CLT) their fluctuations are Gaussians centered on the equilibrium values. 
+ \item $\alpha$ must be even functions of the molecular variables which are odd functions of time (i.e. must be TRI)
+ \end{enumerate}
+Let $\alpha_1$, $\alpha_2$, ... ,$\alpha_n$ be this set of variables. The goal is to obtain the probability distribution of the fluctuation paths. 
+Let $S(\alpha) = S(\alpha_1, \alpha_2, ... , \alpha_n)$ be the entropy and let $\alpha_i$ be the shift of that quantity with respect to equilibrium so that:
+\begin{align*}
+S_{max} = S_0 = S(0, 0, ..., 0) \implies \frac{\partial S}{\partial \alpha_i} \bigg\rvert_{\alpha = 0} = 0 
+\end{align*}
+Linearity implies that we can expand and truncate $S$ (This comes from thermodynamics, not from Boltzmann principle. One assumes that the two are consistent with each other)
+\begin{align*}
+S = S_0 - \frac{1}{2} \sum_{i,j = 1}^{n}s_{ij}\alpha_i \alpha_j
+\end{align*}
+
+
+Furthermore, the thermodynamic forces may be defined as 
+
+\begin{equation}
+x_i = \frac{\partial s}{ \partial \alpha_i} = - \sum_{j=1}^{n} s_{i,j} \alpha_j
+\end{equation}
+
+Because of equations assumed in 9, this implies:
+
+\begin{equation}
+\sum_{j=1}^{n} R_{i,j} \dot{\alpha}_{j} = - \sum_{j=1}^{n} s_{i,j} \alpha_j \rightarrow \sum_{j=1}^{n}[ R_{i,j} \dot{\alpha}_{j} +  s_{i,j} \alpha_j ] = 0
+\end{equation}
+
+Let us introduce a function of the "rate of change of the state" $\Phi$ and a function of "the state" $\Psi$, for any two states $\alpha$, $\beta$ as:
+
+\begin{equation}
+\textit{DEF : } \quad \Phi(\dot{\alpha},\dot{\beta}) = \frac{1}{2} \sum_{i,j=1}^{n} R_{i,j} \dot{\alpha}_i \dot{\beta}_j
+\end{equation}
+
+$$ \textit{ where } \alpha = (\alpha_1,...,\alpha_n), \beta = (\beta_1,...,\beta_n) $$
+
+\begin{equation}
+\textit{DEF : } \Psi(x,y) = \frac{1}{2} \sum_{i,j=1}^{n} L{i,j} X_i Y_j 
+\end{equation}
+
+$$ \textit{ where } X = (X_1,...,X_n),  Y = (Y_1,...,Y_n) where X=X(\dot{\alpha}) , Y=Y(\dot{\beta})$$
+
+We observe that:
+
+\begin{align}
+\dot{S} & = \frac{d}{dt} [ S_0 - \frac{1}{2} \sum_{i,j=1}^{n} s_{i,j} \alpha_i \alpha_j ] =  - \frac{1}{2} \sum_{i,j=1}^{n} s_{i,j} [ \dot{ \alpha_i } \alpha_j  + \alpha_i \dot{ \alpha_j } ] \\
+& = - \sum_{i,j=1}^{n} s_{i,j}  \dot{ \alpha_i } \alpha_j =  - \sum_{i=1}^{n} \dot{\alpha}_i  \sum_{j=1}^{n}  s_{i,j} \alpha_j \\
+& =  - \sum_{i=1}^{n} \dot{\alpha}_i  \sum_{j=1}^{n} R_{i,j} \dot{\alpha_j} =  \sum_{i,j=1}^{n}  R_{i,j}  \dot{\alpha}_i  \dot{\alpha}_j = 2 \Phi(\dot{\alpha},\dot{\alpha})
+\end{align}
+
+Also:
+
+\begin{align}
+\dot{S} & =  \sum_{i=1}^{n} \dot{\alpha}_i X_i = \sum_{i=1}^{n} X_i \sum_{j=1}^{n}  L_{i,j} X_j \\
+&= \sum_{j=1}^{n} L_{i,j} X_i X_j = 2 \Psi(X,X)
+\end{align}
+
+Therefore in the deterministic (hydrodynamic) evolution one has:
+
+$$ \Phi(\dot{\alpha},\dot{\alpha}) = \Psi(X,X) = \frac{1}{2} \dot{S}$$
+
+But in general $  \Phi(\dot{\alpha},\dot{\alpha}) \neq \Psi(X,X) \neq \frac{1}{2} \dot{S}$ if $\dot{\alpha} \neq \dot{\beta}$, $ X \neq Y$ or $\dot{\alpha}$ and $X$ are not related as in assm.9
+
+In the macroscopic dynamics $\alpha(t)$ is the solution of equation (2) and no other paths are allowed, although other paths exist in the $\alpha$-space. Indeed, if one looks more finely, one finds that things don't go that simply, because the reversible and chaotic motion of the microscopic state, allows $
+\alpha$ to fluctuate around $\alpha(t)$: 
+
+%% GRAFICOOOOO
+
+and fluctuations may also be so large to go (..)stream, every now and then. This happens as if a \emph{random force} acts on $\alpha$, so that its equation of evolution becomes:
+
+\begin{equation}
+\sum_{j=1}^{n}[ R_{i,j} \dot{\alpha}_{j} +  s_{i,j} \alpha_j ] = \epsilon_i
+\end{equation}
+
+With $\langle \epsilon_i \rangle =0$. This makes sense to speak of the probability of a path $\beta(t) \neq \alpha(t)$.
+
+Let $f_1(\alpha^{(1)},t_1)$ the probability density for $\alpha$ to be close to $\alpha^{(1)}$ at time $t_1$, which is assumed do be known from the Boltzmann's principle and to be indipendent of $t_1$.
+
+Let $f_1(\alpha^{(i)},t_i|\alpha^{(i-1)},t_{i-1})$ be the conditional probability density for $\alpha(t_i)$ to be close to $\alpha^{(i)}$ if it was $\alpha(t_{i-1}) = \alpha^{(i-1)}$.
+
+In a Markov process one then has
+
+$$f_t(\alpha^{(1)},t_1,...,\alpha^{(p)},t_p) = f_1(\alpha^{(p)},t_p|\alpha^{(p-1)},t_{p-1}) \cdot ... \cdot f_1(\alpha^{(2)},t_2|\alpha^{(1)},t_{1}) f_1(\alpha^{(1)},t_{1})$$
+
+Definition: the average regression of each $\alpha_i$, starting from a state $\alpha'$ is given by:
+
+\begin{equation}
+\langle \alpha_i,t+\tau|\alpha,t \rangle = \int d \alpha_1 ... d \alpha_n \alpha_i f_1 (\alpha,t+\tau|\alpha',t)
+\end{equation}
+
+which is to say that does not matter how $\alpha'$ was created (this is the Onsager hypothesis in formulae, our first assumption)
+
+Let us consider explicitly the case for a single variable :
+
+$$ R \dot{\alpha} + s \alpha = \epsilon \quad \langle \epsilon \rangle = 0 , \quad \langle \epsilon(t) \epsilon(t') \rangle = q \delta (t-t') $$
+
+On average:
+
+$R \langle\dot{\alpha} \rangle + s \langle \alpha \rangle = 0 \rightarrow \langle \alpha \rangle (\tau) = k e^{- \frac{s \tau}{R} }$
+In case all evolutions start from some $\alpha_0$, we have :
+
+$$ \langle \alpha \rangle (t + \tau) = \langle \alpha,t+\tau|\alpha_0,t \rangle = \int d \alpha f_1(\alpha,t+\tau | \alpha_0,t ) = \alpha_0 e^{-\frac{s \tau}{R}}$$
+
+On average, in time evolves from $\alpha_0$ independently on how it got there and when. Also, $\alpha$ must become independent of $\alpha_0$, when $ \tau \to \infty$, hence:
+
+$$ f_1(\alpha,t+\tau|\alpha_0,t) \to f_1(\alpha,t+\tau) \approx e^{S(\alpha)/k_B}$$
+
+As $S(\alpha) = S_0 - \frac{1}{2} s \alpha^2$
+
+$$ f_1(\alpha,t+\tau|\alpha_0,t) \to C e^{-\frac{s \alpha^2}{2 k_B} } $$
+	
+On the other hand, $\lim_{\tau \to 0}\, f_1(\alpha,t+\tau|\alpha_0,t) = k \delta(\alpha - \alpha_0))$.
+
+This is fine if these distributions are gaussian with given mean and variance grows from 0 to $k_B$ as $\tau \to \infty$.
+
+As a matter of fact, if the one $\alpha$ dynamics has a gaussian process from $\epsilon$, its solution $\alpha(t)$ is still a gaussian process, because it is a linear combination of jointly gaussian variables $\epsilon(t)$ independently distributed for every t.
+
+Then it suffices to compute the mean and the variance of $\alpha(t)$.
+
+Very informative is the approach of Chandrasekhar, now explained and modernized in many texts (e.g. Risken et al.)
+
+$$f_1(\alpha,t+\tau | \alpha_0,t) = \frac{1}{\sqrt{2 \pi}} \frac{s}{k_B} \frac{ \exp \Big({- \frac{s(\alpha-e^{-\frac{s \tau }{R}}\alpha_0 )^2}{2 k_B(1-e^{\frac{2s\tau}{R}})} } \Big )}{\sqrt{1-e^{\frac{-2s\tau}{R}}}} $$
+
+Divide $(t,t+\tau)$ in p small intervals of size $\Delta \tau = \frac{\tau}{p}$ and introduce $t_i = t +(i-1)\Delta \tau$ with $i=1...p+1$.
+
+Then consider a given path for $\alpha$:
+
+$$ \alpha(t_1) = \alpha^{(1)};...; \alpha(t_{p+1}) = \alpha^{(p+1)} \rightarrow $$
+
+$$f_1(\alpha^{(p+1)},t_{p+1},\alpha^{(1)},t_1) = \int d\alpha_2 ... d\alpha_p f_1(\alpha^{(p)},t_p|\alpha^{(p-1)},t_{p-1}) ...  f_1(\alpha^{(2)},t_2|\alpha^{(1)},t_{1})$$
+
+since we assumed Markov evolution.
+
+This evolution in steps of size $\Delta \tau$ is appropriate also in place of the stochastic differential equation, because speaking of thermodynamic phenomena in LTE, means considering infinitesimal the mesoscopic times. So rewriting the evolution of $\alpha$ with the Ito discretization:
+
+\begin{equation}
+R \frac{\alpha^{(k)} - \alpha^{(k-1)}}{ \Delta \tau} + s \alpha^{k-1} \approx \epsilon(t_k)
+\end{equation}
+
+and note that one could have chosen the difference $\alpha^{(k+1)} - \alpha^{(k)}$ for the same $\epsilon(t_k)$.
+
+$$ \alpha^{(k)} - (1-\frac{s \Delta \tau }{R}) \alpha^{(k-1)} \approx \frac{\Delta \tau }{R} \epsilon (t_k)$$
+
+we can write, using bottom of page 6 (...) 
+
+$$ \alpha^{(k)} - \alpha^{(k-1)}e^{-\frac{s \Delta \tau}{R}} \simeq \alpha^{(k)} - \alpha^{(k-1)}(1-\frac{s \Delta \tau}{R}) \simeq \frac{ \Delta \tau}{R} \epsilon(t_k)$$
+
+Then, using Chandrasekhor's expression we can write:
+
+$$ f_1(\alpha^{(k)},t_{k-1}+\Delta \tau| \alpha^{(k-1)},t_{k-1}) = \frac{1}{2 k_B} \sqrt{\frac{sR}{\pi \Delta R}} e^{-\frac{R}{4 k_B} [\frac{\epsilon(t_k)}{R}]^2 \Delta \tau } $$
+
+Then multiplying all $f_1$ from $t_1$ to $t_p$ one obtains:
+
+\begin{equation}
+f_1(\alpha^{(k)},t_{k-1} + \tau| \alpha^{(1)},t) = (\frac{1}{2 k_B})^p (\frac{sR}{\pi \Delta \tau})^{p/2} \int d\alpha^{(2)}...d\alpha^{(p)} exp \Big [-\frac{R}{4 k_B} \sum_{k=1}^{p}(\dot{\alpha}(t_k) + \frac{s}{R}\alpha(t_k))^2 \Delta \tau \Big ]
+\end{equation}
+
+Because the integral is the exponential of a negative quantity, its minimum is obtained when te sum
+
+$$ \sum_{k=1}^{p} [\dot{\alpha}(t_k) + \frac{s}{R}\alpha(t_k)]^2 \Delta \tau \approx \int_{t}^{t+\tau} [\dot{\alpha}(t_k) + \frac{s}{R}\alpha(t_k)]^2 $$
+
+is minimum over all possible paths $(\alpha,\dot{\alpha})(t)$ connecting $\alpha^{(1)}$ to $\alpha^{(p+1)}$. Furthermore, because $\alpha$, $\dot{\alpha}$ are extensive quantities, there is an enormous unbalance between the point of maximum and the immediately close other values. Therefore, the integral substantially reduces to the integrand, except for the normalization factor.
+
+Indeed, if one has $I(N) = \int dx e^{-N f(x)}$ , where $f(x)$ has a minimum in $x_0$, and is analytic, one can write:
+
+$$ f(x) = f(x_0) + \frac{1}{2} f''(x_0)(x-x_0)^2+... \quad f''(x_0)$$
+
+$$I(N) \approx \int dx e^{-N f(x_0)} e^{-\frac{N}{2} f''(x_0)(x-x_0)^2} = e^{-N f(x_0)} \int d(x-x_0) e^{-\frac{N}{2} f''(x_0)(x-x_0)^2} $$
+
+$$ = \sqrt{\frac{2 \pi}{N f''(x_0)}} e^{-N f(x_0)}$$
+
+Therefore, except for the normalization factor, one has
+
+$$ f_1(\alpha^{(k)},t_{k-1} + \tau| \alpha^{(1)},t) \approx  exp \Big [-\frac{R}{4 k_B} \sum_{k=1}^{p}(\dot{\alpha}(t_k) + \frac{s}{R}\alpha(t_k))^2 \Delta \tau \Big ]_{min} $$
+
+subject to $\alpha(t)=\alpha^{(1)}, \alpha(t+\Delta t)=\alpha^{(2)},...,\alpha(t+\tau)=\alpha^{(p+1)}$
+
+The joint 2-gates probability density is given by:
+
+\begin{equation}
+f_2(\alpha^{(2)},t_2 ,\alpha^{(1)},t_1) = f_1(\alpha^{(2)},t_2 |\alpha^{(1)},t_1) f_1(\alpha^{(1)})
+\end{equation}
+
+the same holds for all scalar variables.
+Observe now that one may diagonalize the $L$ and $R$ matrices (if dealing with n variables, trivial otherwise) so that one may write
+
+$$ S = S_0 -\frac{1}{2} \sum_{i=1}^{n} s_i \alpha^2_i , \quad \frac{dS}{dt} = - \sum_{i=1}^{n} s_i \alpha_i \dot{\alpha}_i$$
+
+$$ \Phi(\dot{\alpha},\dot{\alpha}) = \frac{1}{2}  \sum_{i=1}^{n} R_i \dot{\alpha}^2_i $$
+
+$$ \Psi(X,X) =  \frac{1}{2} \sum_{i=1}^{n} \frac{1}{R_i} X^2_i =  \frac{1}{2} \sum_{i=1}^{n} \frac{1}{R_i} s_i^2 \alpha^2_i $$
+
+because $X_i = \frac{\partial S}{\partial \alpha_j} = - s_j \alpha_j$ in the diagonal representation.
+
+Then the n-dimensional generalization of the integral above:
+
+$$ \sum_{i=1}^{n}R_i (\dot{\alpha}_i + \frac{s_i}{R_i}\alpha_i)^2 $$
+
+yields
+
+\begin{equation}
+\sum_{i=1}^{n}(R_i \dot{\alpha_i^2}+2s_i \alpha_i \dot{\alpha}_i + \frac{s_i^2}{R_i} \alpha^2_i) = 2 \Phi(\dot{\alpha},\dot{\alpha}) -2 \dot{S}(\alpha) + 2\Psi(X(\alpha),X(\alpha)) \equiv \mathcal{L}(\alpha,\dot{\alpha})
+\end{equation}
+
+where we have introduced the \emph{Lagrangian} $\mathcal{L}$ in which $\alpha,\dot{\alpha}$ are indipendent variables, until the thermodynamic path has been identified. This is done computing the Lagrange equations:
+
+$$\frac{d}{dt} \frac{\partial \mathcal{L}}{\partial \dot{\alpha}} -  \frac{\partial \mathcal{L}}{\partial\alpha}$$
+
+under the condition $\alpha(t_i) = \alpha^{(i)}$ , $i=1,2,..$. We have:
+
+\begin{align}
+& \frac{d}{dt} \frac{\partial \mathcal{L}}{\partial \dot{\alpha}} = \frac{d}{dt} [2 R_j \dot{\alpha}_j + 2 s_j \alpha_j ] = 2 R_j \ddot{\alpha}_j +2s_j \dot{\alpha}_j \\
+& \frac{\partial \mathcal{L}}{\partial\alpha} = s s_j \dot{\alpha}_j + 2 \frac{s_i^2}{R_i} \alpha_j \\
+\rightarrow \quad & R_j \ddot{\alpha}_j -\frac{s_i^2}{R_i} \alpha_j = 0
+\end{align}
+
+which has solution:
+
+\begin{equation}
+ \alpha_j(t) = c_1 e^{-\frac{s_j}{R_j} t} + c_2 e^{\frac{s_j}{R_j} t}
+\end{equation}
+
+We can now separate two opposite behaviors:
+
+\begin{itemize}
+	\item Relaxation to equilibrium : $\alpha(t \to \infty) = 0$
+	\item Spontaneous fluctuation from equilibrium state : $\alpha(t \to - \infty) = 0$
+\end{itemize}
+
+For the first behavior, we need $c_2=0$, and we obtain
+
+$$ \alpha_j(t)=\alpha^{(0)}_j e^{-\frac{s_j}{R_j} t} $$
+
+Where $\alpha^{(0)}_j$ now represent the value reached it $t=0$ by a spontaneous fluctuation. As a matter of fact, equation (19)  is double the order of the phenomenological laws, and contains then as a special case, which is
+
+$$ \dot{\alpha}_j -\frac{s_j}{R_j} \alpha_j = 0 $$
+
+But the equation of motion for fluctuations contains also the mirror image of the phenomenological equation, i-e. :
+
+$$ \dot{\alpha}_j -\frac{s_j}{R_j} \alpha_j = 0 $$
+
+which describes the process of spontaneous fluctuation from equilibrium. 
+
+This can best be seen noting that the minimum of the quantity in the exponential of () can be indifferently obtained by satisfying two different expressions one of which leads to process 1 and the other to process 2.
+
+We will return to this in a more general setting, in a while. Here we note that, under our assumption, of gaussianity and markovianity, besides considering states around equilibrium, the spontaneous fluctuation follow and "adjoint" hydrodynamics which is the mirror image in time of the hydrodynamics.
+
+\newpage
+
+In [GRV] it is shown that asymmetric fluctuation-relaxation path may be observed even in deterministic, time reversal invariant, dissipative dynamics with a finite number of degrees of freedom if they are sufficiently chaotic and the source of chaos is not separate from that of dissipation. This is inspired by a large-deviation theory for stochastic process, developed by [BDGJL]. In [PSR], the argument of [GRS] is strengthened.
+
+Here, we follow the approach of [FW]. Consider 
+
+$$\dot{\rho} = D(\rho) \quad \rho \in \mathcal{M} \subset \mathbbm{R}^n $$
+
+Where D is a vector field with a globally attracting fixed point $\hat{\rho}$. The n components of $\rho$ may represent the values of a scalar quantity at n distinct sites of an extended system. 
+
+Like in Onsager-Machlup theory, assume that the effect of a mesoscopic fluctuations be represented by a gaussian, $\delta$-correlated noise $\xi$ such that $\langle \xi \rangle = 0$, $\langle \xi_i(t) \xi_j(t') = K_{i,j} \delta(t-t')$, where $k=(k_{i,j})$ is a symmetric and positive defined $n x n$ matrix. Consider
+
+\begin{equation}
+\dot{\rho} = D(\rho) + \xi
+\end{equation}
+
+To make sense of this equation, assume that it is obtained by taking the continuous limit of the difference equation
+
+$$ \frac{1}{\Delta t} (\rho(k+1) - \rho(k)) = D(\rho(k)) + \xi_k$$
+
+with
+
+$$ \langle \xi_k \rangle = 0 \quad \langle \xi_{l,i} \xi_{k,i} \rangle =  \frac{1}{\Delta t} \delta_{l,k} $$
+
+where $k=0,1,2...$ labels time variable, and
+
+$$ p(\xi) = \sqrt{ \frac{\Delta t}{(2 \pi)^n |k|} } e^{- \frac{\Delta t}{2} \langle \xi, \xi \rangle }$$
+
+Is the probabilistic density of the noise, and $\langle x,y, \rangle = x^T k^{-1} y$ is a scalar product on $\mathcal{M}$. In this case, the probability density for $\rho(k+1)$ to equal $r_{k+1}$ if $\rho$ equals $r_k$ is given by
+
+\begin{align}
+& P(\rho(k+1)=r_k | \rho(k)=r_k) = \int d\xi_k p(\xi_k) \delta( \frac{ r_{k+1} -r_k}{\Delta t} - D(r_k) - \xi_k) \\
+& = \sqrt{ \frac{\Delta t}{(2 \pi)^n |k|} } exp \Big [- \frac{\Delta t}{2} \langle  \frac{ r_{k+1} -r_k}{\Delta t} - D(r_k),  \frac{ r_{k+1} -r_k}{\Delta t} - D(r_k) \rangle \Big ] \\
+\end{align}
+
+where the integral represents the sum over all noises realizations which lead from $r_k$ to $r_{k+1}$.
+
+If one considers a path $\gamma = {\rho_i = r_0, \rho_1 = r_1,...,\rho_k=r_k}$ where $\rho_1$ ,$\rho_k$ are the fixed initial and final states, and the Markov property is assumed one obtains
+
+$$ P(\gamma) = (\sqrt{ \frac{\Delta t}{(2 \pi)^n |k|} })^m exp \Big [- \frac{\Delta t}{2} \sum_{k=0}^{m-1}\langle \frac{ r_{k+1} -r_k}{\Delta t} - D(r_k),  \frac{ r_{k+1} -r_k}{\Delta t} - D(r_k) \rangle \Big ]- P_0(r_0)$$
+
+Where $P_0(\rho)$ is the density of the initial states. As $\Delta t \to 0$ the sum terms turns into an integral, and the exponent into:
+
+$$ -\frac{1}{2} \int_{t_i}^{t_f} \langle \dot{\rho} -D(\rho),\dot{\rho}-D(\rho) \rangle dt = - I_{[t_i,t_f]}(\gamma)$$
+
+Computed along the chosen path with $\rho(t_i) = \rho_i$ and  $\rho(t_f) = \rho_f$.
+
+The vector field $D(\rho)$ can be commonly decomposed in two orthogonal pieces: 
+
+$$D(\rho) = -\frac{1}{2} K \nabla_{\rho} V(\rho) + \mathcal{A}(\rho), \quad \langle K \nabla_{\rho} V(\rho), \mathcal{A} \rangle =0 $$
+
+where V is a scalar function with a minimum in $\hat{\rho}$, and $V(\hat{\rho}=0$.
+This way, we separate the conservative$ -\frac{1}{2} K \nabla_{\rho} V(\rho)$, the part that does not contribute to the entropy production, from its dissipative part $\mathcal{A}$.
+
+Because  $I_{[t_i,t_f]}$ is extensive in the number of particles N, the $N \to 	infty $ limit leads to a probability density P which is negligible for all but the path that minimizes $I_{[t_i,t_f]}$:
+
+$$ e^{-I_{[t_i,t_f]}(\gamma)} = e^{-NJ_{[t_i,t_f]}(\gamma)}$$
+
+which is intensive in J.
+
+So let use compute and minimize I.
+
+\begin{align*}
+(I) I_{[t_i,t_f]}(\gamma) & = \int_{t_i}^{t_f} \frac{1}{2} \langle \dot{\rho} +\frac{1}{2} K \nabla_{\rho} V - \mathcal{A} , \dot{\rho} +\frac{1}{2} K \nabla_{\rho} V - \mathcal{A} \rangle dt \\
+& =  \frac{1}{2} \int_{t_i}^{t_f} \Big [ \langle  \dot{\rho},  \dot{\rho} \rangle +  \frac{1}{2}  \langle \dot{\rho},  K \nabla_{\rho} V \rangle -  \langle  \dot{\rho},\mathcal{A} \rangle + \\
+& +  \frac{1}{2} \langle K \nabla_{\rho} V , \dot{\rho} \rangle + \frac{1}{4} \langle K \nabla_{\rho} V , K \nabla_{\rho} V \rangle -  \frac{1}{2} \langle K \nabla_{\rho} V ,\mathcal{A} \rangle  \\
+& - \langle \mathcal{A}, \dot{\rho} \rangle - \frac{1}{2}  \langle \mathcal{A},  K \nabla_{\rho} V \rangle +  \langle \mathcal{A}, \mathcal{A} \rangle \Big] dt \\
+\end{align*}
+
+At the same time:
+
+\begin{align*}
+&(II) \int_{t_i}^{t_f} \frac{1}{2} \langle \dot{\rho} -\frac{1}{2} K \nabla_{\rho} V - \mathcal{A} , \dot{\rho} - \frac{1}{2} K \nabla_{\rho} V - \mathcal{A} \rangle dt = \\
+& =  \frac{1}{2} \int_{t_i}^{t_f} \Big [ \langle  \dot{\rho},  \dot{\rho} \rangle -  \frac{1}{2}  \langle \dot{\rho},  K \nabla_{\rho} V \rangle -  \langle  \dot{\rho},\mathcal{A} \rangle  \\
+& -  \frac{1}{2} \langle K \nabla_{\rho} V , \dot{\rho} \rangle + \frac{1}{4} \langle K \nabla_{\rho} V , K \nabla_{\rho} V \rangle +  \frac{1}{2} \langle K \nabla_{\rho} V ,\mathcal{A} \rangle  \\
+& - \langle \mathcal{A}, \dot{\rho} \rangle + \frac{1}{2}  \langle \mathcal{A},  K \nabla_{\rho} V \rangle +  \langle \mathcal{A}, \mathcal{A} \rangle \Big] dt = \\ 
+& =  \frac{1}{2} \int_{t_i}^{t_f} \langle \dot{\rho} +  \frac{1}{2}  K \nabla_{\rho} V -\mathcal{A},  \dot{\rho} +  \frac{1}{2}  K \nabla_{\rho} V -\mathcal{A}  \rangle dt \\
+& -  \frac{1}{2} \int_{t_i}^{t_f} [\langle \dot{\rho} , K \nabla_{\rho} V \rangle + \langle K \nabla_{\rho} V,\dot{\rho}\rangle] \\
+\end{align*}
+
+Furthermore
+
+$$ \langle \dot{\rho}, K \nabla_{\rho} V \rangle = \dot{\rho}^T K^{-1} K  \nabla_{\rho} V = \dot{\rho}^T  \nabla_{\rho} V = \sum_{i=1}^{n} \dot{\rho}_i \frac{\partial V}{\partial \rho_i} = \frac{d V}{d t} = \langle K \nabla_{\rho} V ,\dot{\rho} \rangle $$
+
+So one obtains:
+
+$$ \frac{1}{2} int_{t_1}^{t_2} \langle \dot{\rho},K \nabla_{\rho} V \rangle + \langle K \nabla_{\rho} V , \dot{\rho} \rangle =  int_{t_1}^{t_2} \frac{dV}{dt} dt = V(\rho_f) - V(\rho_i)$$
+
+is a fixed quantity with vanishing variation.
+
+This implies that minimizing $I_{[t_i,t_f]}(\gamma)$ can be indifferently obtained from the minimization of the two former formulas (I), (II).
+
+As the integrands are equivalent forms, os in the Onsager-Machlup case, the minimum is obtained when either:
+
+$$\dot{\rho} = D(\rho) = \frac{1}{2} K \nabla_{\rho} V(\rho) + \mathcal{A}(\rho)$$
+$$- \dot{\rho} = D(\rho) = - \frac{1}{2} K \nabla_{\rho} V(\rho) - \mathcal{A}(\rho)$$
+
+In the theory of Onsager and Machlup $\mathcal{A}=0$, which is not true in most cases, as described even for the TRI dynamics in [GRV,SPR].
+
+Here $\dot{\rho} = D(\rho)$ yields the thermodynamic relaxation paths, while $\dot{\rho} = - D^*(\rho)$ yelds the anti-thermodynamic fluctuation path, which can be observed at the mesoscopic scale. $D^* = D - 2\mathcal{A}$, so the symmetry, which implies the macroscopic irreversibility turns out to depend on the \emph{non dissipative term}, the one which does not contribute to transport or entropy production.
+As a matter of fact, it further results that V is a Lyapunov function whose time derivative is indipendent of $\mathcal{A}$:
+
+$$ \dot{V}(\rho) = \langle K \nabla_{\rho} V(\rho),D(\rho)\rangle = - \frac{1}{2} \langle K \nabla_{\rho} V(\rho) , K \nabla_{\rho} V(\rho) \rangle + \langle K \nabla_{\rho} V(\rho), \mathcal{A} \rangle $$
+$$= - \frac{1}{2} \langle K \nabla_{\rho} V(\rho) , K \nabla_{\rho} V(\rho) \rangle \leq 0 $$ 
+
+The dynamics $$ \dot{\rho} = + D^*(\rho)$$ is called adjoint hydrodynamics. In general $\mathcal{A} \neq 0$ so the fluctuations are not symmetric to relaxations and the real dynamics result irreversible.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%% \langle \rangle
+\end{document}
+

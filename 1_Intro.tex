@@ -1,0 +1,310 @@
+\documentclass{article}
+
+
+\usepackage{bbold}
+\usepackage{amsmath}
+\usepackage{bbm}
+\usepackage{graphicx}
+ 
+\usepackage{lipsum}
+\usepackage[margin=1.6in,includefoot]{geometry}
+
+\usepackage{amsmath}
+\usepackage{bbm}
+
+% header and footer stuff
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+%\fancyhead{}
+\fancyfoot{}
+\fancyfoot[R]{\thepage\ }
+\renewcommand{\headrulewidth}{0pt}
+
+
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+\newcommand*\Diff[1]{\mathop{}\!\mathrm{d^#1}}
+\newcommand*\Tder[1]{\mathop{}\!\frac{\diff #1}{\diff \mathrm{t}}}
+\newcommand*\tder[1]{\mathop{}\!\frac{\partial #1}{\partial \mathrm{t}} }
+
+
+
+\begin{document}
+
+\begin{titlepage}
+	\begin{center}
+	
+	\line(1,0){300}\\
+	[5mm]
+	\huge{\bfseries Introduction and Conservation of Energy}\\
+	[2mm]
+	\line(1,0){200}\\
+	[2cm]
+	\textsc{\Large Meccanica statistica del disequilibrio: fondamenti e applicazioni} \\
+	[8cm]
+	
+	\end{center}
+	
+	\begin{flushright}
+	\textsc{\LARGE Emanuele Marconato}\\
+	[0.5cm]
+	\textsc{\large Universita' degli studi di Torino\\
+	[0.5cm]
+	A.A. 2019/2020 }
+	\end{flushright}
+	
+\end{titlepage}
+
+\newpage
+\section{Introduction}
+Classical mechanics gives us a well done predictive model for Physics in the macroscopic scale. Being questionable whether the limit applies, at what scale  the description fails and what are the phenomena in the interplay between classical and quantum domains, in the macroscopic limit we shall give a description that should resemble the most our view of Nature. Matter appears as a continuum, so we shall give a description keeping in mind this proposition. By considering a piece of matter, composed of different masses $m_k$, one finds a reasonable limit to define the density of matter:
+$$\rho_k = \lim_{\Delta V \xrightarrow{} 0} \frac{\Delta m_k}{\Delta V}$$
+Taking the definition of limit one fixes the reference scale for such a sentence being reasonable. The limit can be cast as:
+$$ |\frac{\Delta m}{\Delta V} - \Bar{\rho}|<\epsilon \implies |\Delta V|< \delta_\epsilon$$
+where $\Bar{\rho}$ is the expected value of the density in the limit, experimentally measurable. This proposition fixes once again the scale, so we should expect to find a interval of validity, obtaining ${\Delta V \xrightarrow{} 0} $ (see figure below).
+
+\begin{figure*}[htp]
+    \centering
+    \includegraphics[scale=0.5]{fig1.png}
+    \caption{}
+    \label{fig:my_label}
+\end{figure*}
+
+
+The choice of the scale of our observation changes what are the relevant elements of the theory. We usually classify Nature in 3 different scales:
+\begin{itemize}
+    \item Macroscopic: $(L,t) $
+    \item Mesoscopic:  $(\delta L, \delta t) $
+    \item Microscopic: $(l,\tau)$
+\end{itemize}
+Depending on the context, the separation on scales is usually of the order of $10^{2 \div 3}$ but it'll be clear in the following which are the parameters describing the change of scales\footnote{In general one finds a "order parameter" $\delta$ that describes the change from a scale to another. $\delta$ can be \underline{regular} or \underline{singular}. It's interesting that the only regular parameter we find in physical theories is $\delta = v/c$, in special relativity (the same holds for GR). In the case of quantum to classic it's still not clear if the parameter is regular: statistical mechanics, for example, needs ad hoc postulates (such as ergodicity) to validate the Boltzmann's law $S = -k_b \log W$. For  a more specific understanding we suggest the book.   }. 
+\newpage
+\def \x_v{\mathbf{x}}
+\def \v_v{\mathbf{v}}
+\section{Energy Balance in Continuum Mechanics}
+Now that we have specified to what scale we refer to, the next step is to describe the evolution of the system. We consider a body \textbf{D} in the space of coordinates $\mathrm{I\! R}^3$. Suppose the body is made of different mass densities $\rho_k(\x_v,t)$, for any of which we want to describe the general motion. We have then:
+$$m(D) = \sum_k \int_\mathbf{D} \Diff3 \x_v \rho_k(\x_v,t)  $$
+Then by taking the derivative respect to time:
+$$ \Tder{m(\x_v) } = \sum_k \int_D \Diff3{\x_v} \tder{\rho_k(\x_v,t)}  $$
+Now we analyze the $k$ part of the total mass: all the variations are due by the flux on the surface $\partial D $ and by the chemical reactions between components with ratio $R_j$ and with coefficient $\nu_{kj}$, which states for the change $j\xrightarrow{} k$ (the sign of $R_j$ fixes the direction of production from a quantity to another). Then we have:
+\begin{equation}
+\int_D \diff{V} \tder{\rho_k(\x_v)} = -\int_{\partial D} \diff{w} \rho_k {\v_v}_k \cdot \hat{n} + \int_V \diff{V} \sum_{j=1}^r \nu_{kj}R_j     
+\end{equation}
+where $r$ is the number that quantifies the chemical-active materials in the body D. Using Gauss's Theorem on equation (1), the equation reads:
+\begin{equation*}
+    \begin{aligned}
+    \tder{\rho_k(\x_v)} &= - \mathbf{\nabla} \cdot  (\rho_k {\v_v}_k ) + \sum_{j=1}^r \nu_{kj}R_j  \\
+    \tder{\rho(\x_v)} &= - \mathbf{\nabla} \cdot  (\rho {\v_v} )
+    \end{aligned}    
+\end{equation*}
+where $\rho = \sum_k \rho_k$ and $\v_v = \sum_k \frac{\rho_k}{\rho} \v_v_k$. The summation over $k$ for the chemical active materials gives: $\sum_k \sum_j \nu_{kj}R_j  = 0$, since mass is conserved by chemical reactions.\\
+Now reminding that the total derivative on time reads $\Tder{} = \tder{} + \v_v \cdot \nabla $, we find the variation of Energy in the Lagrangian picture:
+\begin{equation}
+    \begin{aligned}
+    \Tder{\rho_k} &= -\nabla \cdot (\rho_k \v_v )+ \sum_j \nu_{kj}R_j +\v_v \cdot \nabla(\rho_k)\\
+    \Tder{\rho} &= -\rho \nabla \cdot \v_v
+    \end{aligned}
+\end{equation}
+
+Now introducing $c_k = \frac{\rho_k}{\rho}$ and $\mathop{J}_k = \rho_k (\v_v_k -\v_v)$, we can derive a continuity equation for the fractional density of mass k:
+\begin{equation*}
+    \begin{aligned}
+    \Tder {c_k} &= \frac{1}{\rho} \Tder {\rho_k} -\frac{\rho_k}{\rho^2}\Tder \rho \\
+    &= \frac{1}{\rho}[-\nabla \cdot (\rho_k \v_v_k)]+\frac{1}{\rho} \v_v \cdot \nabla \rho_k +\frac{1}{\rho}\sum_j \nu_{jk}R_j +\frac{\rho_k}{\rho^2}\rho \nabla \cdot \v_v
+    \end{aligned}
+\end{equation*}
+That leads to:
+$$\rho \Tder{c_k} = -\nabla \cdot \mathbf{J}_k + \sum_j \nu_{jk}Rj $$
+Introducing the inverse of density $\omega = 1/\rho$, we can write (2) as: 
+$$\rho \Tder{\omega} = \nabla \cdot \v_v$$
+
+
+
+
+\subsection{Equations of Motion}
+
+\begin{figure*}[b]
+    \centering
+    \includegraphics[scale=0.3]{fig2.png}
+    \caption{Caption to approximately explain the model.}
+    \label{fig:my_label}
+\end{figure*}
+
+
+To improve our model we look at what causes the variation of the mass density. Let $\Delta V$ be a small volume section of the body D, in the point $\x_v$: $\Delta V = ([x,x+\Delta x],[y,y+\Delta y],[z,z+\Delta z])$. Now we consider the flux on the $\hat{x}$ direction:
+\begin{equation*}
+    \begin{aligned}
+    & (\rho v_x)v_x  |_x \Delta y  \Delta z - (\rho v_x)v_x|_{x+\Delta x} \, \Delta y  \Delta z \\ 
+    & (\rho v_x)v_y  |_y \Delta x  \Delta z - (\rho v_x)v_x|_{y+\Delta y} \, \Delta x  \Delta z \\
+    & (\rho v_x)v_z  |_x \Delta x  \Delta y - (\rho v_x)v_z|_{z+\Delta z} \, \Delta x  \Delta y 
+    \end{aligned}
+\end{equation*}
+Summing up the elements in the different surface, we have:
+$$-(\partial_x (\rho v_x v_x) + \partial_y (\rho v_x v_y) +\partial_z (\rho v_x v_z))\Delta x\Delta y\Delta z $$
+It's clear that the other 6 terms, referring on the contributions of $\hat{y}$ and $\hat{z}$ are similar but with $(\rho v_y)$,$(\rho v_z)$. The general contribution is then:
+$$- (\nabla \cdot (\rho v_x \v_v)+ \nabla \cdot (\rho v_y \v_v)+\nabla \cdot (\rho v_z \v_v)) \Delta x\Delta y\Delta z $$
+By introducing the matrix $\v_v \v_v^T$ we have a more concise expression for the contribution to the change of mass density:
+\begin{equation}
+  \Tder{\rho \v_v^T} = -\nabla^T (\rho \v_v\v_v^T)  
+\end{equation}
+
+\subsubsection{Forces}
+Equation (3) describes the evolution of a body not subdued to external changes. In the following we remind briefly what kind of interactions has a system with the environment. We analyze in particular when the body is in equilibrium:
+\begin{itemize}
+        \item  If the system is not changing its volume such that there are no active forces changing its dimension, the body it's in \textbf{Mechanical Equilibrium}.
+        \item  If the components of the systems do not change in time, such that there are no chemical reactions, the body it's in \textbf{Chemical Equilibrium}.
+        \item If the system evolves in time adiabatically with the environment, such that any change done to the system is made without using thermal sources (or in the case of reversible transformations, with the complete control of the work exchanged with the system), the body is in \textbf{Thermal Equilibrium}.
+\end{itemize}
+To generalize equations (3) to the case of active forces, we have to specify what forces act on the system and their Nature. Forces acting on the whole system are called "Volume Forces" (for example gravity), whether forces acting on the surface are called "Pressure Forces". Considering a small element of the surface $\diff{S}$ we have 3 different forces acting on the surface: 2 of them are tangent, the other one is orthogonal. 
+\subsection{Balance Equations and First Law of Thermodynamics}
+We consider again a small element of volume $\diff V$, where we evaluate the contributions of pressure. Let $\mathbf{P}^T_x = (P_{xx},P_{xy},P_{xz})$ be the force acting on the  $\hat{x}$ component of the momentum $\rho v_x$. By considering the infinitesimal contribution, we obtain:
+$$(P_{xx}|_x - P_{xx}|_{x+\Delta x})\Delta y \Delta z + ...$$
+$$-\nabla \cdot \mathbf{P}_x $$
+The Volume Forces give the contribution:
+$$\sum_k \rho_k \mathbf{f}_k$$
+Then we obtain the Balance Equation for the momentum (Eulerian picture): 
+\begin{equation}
+    \tder{\rho \v_v^T} = -\nabla \cdot (\Vec{\Vec{P}} + \rho \v_v \v_v^T) +\sum_k \rho_k \mathbf{f}_k^T
+\end{equation}
+where $\Vec{\Vec{P}}$ is the tensor composed of pressure contributions:
+\[
+\Vec{\Vec{P}}=
+  \begin{bmatrix}
+    P_{xx} & P_{xy} & P_{xz}\\
+    P_{yx} & \cdot & \cdot \\
+    P_{zx} & \cdot &\cdot
+  \end{bmatrix}
+  \]
+In the Lagrangian Picture the balance equation (4) reads:
+\begin{equation}
+    \rho \Tder{\v_v^T} = -\nabla \cdot \Vec{\Vec{P}} + \sum_k \rho_k \mathbf{f_k}^T
+\end{equation}
+Equation (4) and (5) can be reduced to the Balance of kynetic energy by multiplying for $\v_v$. Then we have:
+$$\frac{\rho}{2} \Tder{\v_v^2} = - \nabla \cdot (\Vec{\Vec{P}}\v_v)+ (\Vec{\Vec{P}}^T \nabla) \cdot \v_v +\sum_k\rho_k \mathbf{f}_k \cdot \v_v$$
+This result alone doesn't tell us very much on what we were expecting about energy. To have a complete picture of what's happening, together with kinetic energy we have to look for a balance equation for total energy. Introducing $k$ potentials, such that:
+\begin{align*}
+          \Vec{f}_k &= -\nabla \psi_k   \\
+                \Tder{\psi_k} &=0\\
+                \rho \psi &= \sum_k \rho_k \psi_k
+\end{align*}
+$$  \\$$
+Taking the derivative respect to time for $\rho\psi$ gives the balance for the potential energy:
+\begin{equation*}
+    \begin{aligned}
+        \tder{\rho\psi} &= \sum_k \tder{\rho_k}\psi_k = \\
+        &=\sum_k(-\psi_k\nabla \cdot (\rho_k \v_v_k)+\sum_j \psi_k\nu_{kj}R_j) =\\
+        &= \sum_k( -\nabla \cdot (\rho_k\v_v_k\psi_k)+\rho_k\v_v_k\cdot \nabla\psi_k )= \\
+        &=   -\nabla \cdot (\sum_k \mathbf{J}_k\psi_k + \rho\v_v \psi) -\sum_k (\rho_k \mathbf{f}_k +\mathbf{J}_k \cdot \mathbf{f}_k ) 
+    \end{aligned}
+\end{equation*}
+where we used that\footnote{This equivalence can be cast as "chemical reactions conserve the potential energy".} $\sum_k \psi_k\nu_{kj} = 0 $  and in the last line the equivalence $v_k = v_k +v -v$, reminding that $\mathbf{J}_k = \rho_k(\v_v_k -\v_v)$. Now combining the two expressions for the balance of kinetic and potential energy we get:
+\begin{equation}
+\begin{aligned}
+     \tder{}\rho({\frac{\v_v^2}{2} + \psi}) = -\nabla \cdot [\rho(\frac{\v_v^2}{2}+\psi)\v_v &+ \Vec{\Vec{P}}\v_v +\sum_k \psi_k \mathbf{J}_k]\\
+     &+(\Vec{\Vec{P}}\nabla) \cdot \v_v -\sum_k \mathbf{J}_k \cdot \mathbf{f}_k
+\end{aligned}
+\end{equation}
+The first line of (6) is the continuity equation for the energy, while the latter gives us a non-physical term which violates the continuity equation. Every model in Physics is about conservation of the total energy (kin + pot), but so far there are no guarantees of this constraint for continuum bodies. At this point it's clear we've missed an important term that enters in equation (6) to satisfy the continuity equation. We suppose that there is a total energy $e = \frac{\v_v^2}{2} +\psi+ u$ such that:
+\begin{equation}
+\tder{\rho e } = -\nabla\cdot \mathbf{J}_e
+\end{equation}
+The energy $u$ is called "Internal Energy" and it's, indeed, a Thermodynamic (TD) quantity. Whether it can be debated to what is referred (such as molecular agitation + interactions,...) we treat it as a TD potential. In this specific case we look at the specific form it has:
+$$\mathbf{J}_e = \rho e \v_v + \Vec{\Vec{P}}\v_v +\sum_k \psi_k \mathbf{J}_k +\mathbf{J}_q $$
+Here $\mathbf{J}_q$ is the "Heat Flow", a new form of flux of the internal energy. It's important to notice that this flow is not related to the motion of matter, neither due to the work performed on the system: it must be something that arises as a thermal gradient (in some sense, gradients are sources of heat). When we have $\mathbf{J}_q \neq 0$, we can introduce the quantity "Heat" that is:
+\begin{equation}
+   \rho \Tder{q} = -\nabla \cdot \mathbf{J}_q 
+\end{equation}
+Having this in mind, we can write the balance equation for internal energy $u$ by looking at equation (6):
+\begin{equation}
+    \tder{\rho u} = -\nabla \cdot (\rho u \v_v +\mathbf{J}_q) -(\Vec{\Vec{P}}\nabla)\cdot\v_v +\sum_k \mathbf{J}_k\cdot \mathbf{f}_k
+\end{equation}
+\subsection{First Law of Thermodynamics}
+Now that we have a differential equation for the balance of the internal energy $u$, we can derive the first law of TD. Before proceeding, we stress that the balance equation (9) contains terms that violate the continuity law: this is nothing more than the change of internal energy to mechanical energy (the term is exactly the negative one in eq. (6)). We rewrite the pressures tensor can be divided in 2 terms: $\Vec{\Vec{P}} = p \mathbb{1} + \Vec{\Vec{\Pi}} $, where $\Vec{\Vec{P}}$ contains the off-diagonal terms.
+
+Taking the derivative respect to time of the term $\rho u$ we get:
+\begin{equation}
+       \begin{aligned}
+    \Tder{\rho u} &= \tder{\rho u} +\v_v \cdot \nabla (\rho u)  \\
+    \rho \Tder{u}+u\Tder{\rho} &= -\nabla \cdot (\rho u \v_v + \mathbf{J}_q ) - p\nabla \cdot \v_v -(\Vec{\Vec{\Pi^T}}\nabla)\cdot \v_v +\sum_k \mathbf{J}_k \cdot\mathbf{f}_k +v\cdot \nabla (\rho u) \\
+    \rho \Tder{u} &= \rho \Tder{q} - p\rho \Tder{\omega} -(\Vec{\Vec{\Pi}}^T\nabla)\cdot \v_v +\sum_k \mathbf{J}_k \cdot\mathbf{f}_k \\
+    \Tder{u} &=  \Tder{q} - p \Tder{\omega} -\omega(\Vec{\Vec{\Pi}}^T\nabla)\cdot \v_v +\omega\sum_k \mathbf{J}_k \cdot\mathbf{f}_k
+    \end{aligned}
+\end{equation}
+The result is easily obtained reminding that:
+\begin{equation*}
+    \begin{aligned}
+    \omega &= 1/\rho \\
+    \Tder{\rho} &= -\rho \nabla \cdot \v_v\\
+    \rho \Tder{q}&= -\nabla \cdot \mathbf{J}_q\\
+    \rho \Tder{\omega} &= -\nabla\cdot \v_v\\
+    \end{aligned}
+\end{equation*}
+Equation (10) is the First Law of TD: it's also to stress that this results hold only in LTE, where are satisfied all conditions for equilibrium. Assuming that conservation of energy holds, it requires to accept that there is a quantity $u$ related to non-mechanical energy. It's possible to estimate the order of this quantity in a realistic solid. For sake of simplicity, we consider in the spirit of the atomistic view, the solid composed by $N_A$ number of particles. For every particle contained in a small region $\Delta V$ we can assert that its velocity is $\v_v_i =v_v +\Vec{\nu}_i $, where $\nu_i$ is the deviation from the mean velocity $\v_v$. The total energy of the system is given by:
+$$ K = \frac{1}{2} \sum_{i=1}^N (\v_v +\Vec{\nu}_i)^2 = \frac{N\v_v^2}{2} + \frac{\sum\Vec{\nu_i}^2}{2} =  K_{macro}+K_{micro}$$
+where the first order in $\sum_i\nu_i$ vanishes. To compare the orders of magnitude between $K_{macro}$ and the latter, we use $m \approx 10^{-23} \mathrm{kg}$ and $|v| \approx 10^{-2} \mathrm{m/s}$ and $T \approx 300 \mathrm{K}$:
+$$ \frac{K_{macro}}{K_{micro}} = \frac{0.5N\v_v^2}{1.5 k_B T} \approx 10^{-9} $$
+This result highlights that the most relevant quantity is given by the motion in the microscopic scale that is not visible at the macroscopic level. Then this internal energy is huge reservoir that can hardly be diminished by extracting work. To conclude we stress that ordered motion can produce work (water in the mills), while disordered motion cannot be converted to work
+
+\section{Entropy}
+$S$, called Entropy, is introduced as a thermodynamic quantity, that is well defined for every equilibrium state (for a macroscopic system). Increase of Entropy (which can be seen,in the atomistic view, as the increase of the disorder of the system) is often related to the passing of time: consider a table with balls in a specific configuration. We can recognise the passing of time by looking at what is the more disordered situations between the two, then it corresponds to the increase of Entropy. We remember that is possible while treating a huge number of particles, whether for a small number of particles we cannot recognise the passing of time by looking at the order of the configuration. 
+
+The variation of Entropy can therefore happen by changes inside the system or with exchange with the environment:
+\begin{equation}
+    \diff{S} = \diff_e{S} +\diff_i{S}
+\end{equation}
+This last expression is valid only for equilibrium states, where evolve infinitesimally from the equilibrium. The internal change is always $\diff_i S \ge 0$, where $=$ holds for reversible transformations. Then for an isolated system it must be:
+$$\diff{S} = \diff_i S \ge 0$$
+This is the Second Law of TD, in the case of LTE. From Clausius' and Kelvin's Theorem, we can give to entropy an operational definition:
+$$\diff{S} \ge \frac{\diff{Q}}{{T}}$$
+where $T$ is the absolute temperature. Any reversible transformation is very slowly, approx to infinity, because any rapid change on the transformation would lead to a higher gain of entropy. For a region $D$ we define:
+$$S= \int_D\diff{x} \,\rho s $$
+Here $s$ is the specific Entropy. We can also write that: 
+$$ \Tder{_eS} = - \int_{\partial D} \mathbf{J}_{s,tot} \cdot \hat{n} \diff{S} \quad \mathrm{and} \quad \Tder{_iS} = \int_D {\sigma} \Diff3 x   $$
+where $\mathbf{J}_{s,tot}$ is the entropy flow per unit area and time, $\sigma$ is the entropy rate production per unit of volume. Writing $\diff{S}$ as the sum of internal and external entropy changes and using the specific entropy one finds:
+$$\tder{\rho s} = -\nabla\cdot \mathbf{J}_{s,tot} + \sigma$$
+or in the Lagrangian picture:
+\begin{equation}
+    \rho \tder{s} = -\nabla \cdot \mathbf{J}_s +\sigma
+\end{equation}
+with $J_s = J_{s,tot} - \rho s \v_v$. 
+\subsection{Exercise: Free Expansion of a Gas}
+We consider a process like the one in the picture: we have a gas contained in a volume $V_0$ that expands into an empty region towards a total volume $V$. We want to evaluate the increase of Entropy during the process. 
+
+What should $\sigma$ equals to? In this case we haven't a clear point of view of what's happening: during the expansion the gas is not in equilibrium, so in principle we cannot apply the description we gave so far. It's important to notice that when equilibrium is reached we are at the state $(E,V,p,T)$. While energy, pressure and temperature didn't change, the only quantity changed is the volume $V_0 \xrightarrow{} V$. But there's no work done, we can confirm that $U_0 = U$, where $U$ is the internal energy when the expansion is over (and a new TD equilibrium is reached). For the Entropy we have that:
+$$\Delta S_i = N k_b \log \frac{V}{V_0} > 0$$, then the process is irreversible. The change in entropy is not valuable with the $\sigma$, being the process out of equilibrium, TD quantities are not defined. 
+
+The only method we have to compute $\diff{s}$ is by following a reversible process. The change in entropy $s = s(u,\omega,c_1,...,c_K)$ in full equilibrium reads:
+$$\diff{q} = T\diff{s} = \diff{u} +p \diff{\omega} -\sum_k \mu_k \diff{c_k}$$
+The corresponding equation for the time evolution is:
+\begin{equation*}
+    \begin{aligned}
+        T\Tder{s} &= \Tder{u} + p\Tder{\omega} - \sum \mu_k \Tder{c_k}\\
+        \rho T \Tder{s} &=\rho \Tder{q} - \rho p\Tder{\omega} - (\Vec{\Vec{\Pi}}^T \nabla ) \cdot \v_v +\sum_k \mathbf{J}_k \cdot \mathbf{f}_k + \rho p\Tder{\omega} -\sum_k \mu_k (-\nabla \cdot \mathbf{J}_k + \sum_j \nu_{jk}R_j ) \\
+        \rho \Tder{s} &= -\frac{1}{T}  \nabla \cdot \mathbf{J}_q - \frac{1}{T}(\Vec{\Vec{\Pi}}^T \nabla) \cdot \v_v +\frac{1}{T}\sum_k \mathbf{J}_k \cdot \mathbf{f}_k + \frac{1}{T}\sum_k \mu_k\nabla \cdot \mathbf{J}_k  -\sum_j R_j A_j
+    \end{aligned}
+\end{equation*}
+We denoted the affinity $A_j = \sum_k \mu_k \nu_{kj}$ By regrouping the terms in the last expression we have:
+\begin{equation}
+    \rho \Tder{s } = -\nabla \cdot \mathbf{J}_s +\sigma
+\end{equation}
+with:
+\begin{equation*}
+    \begin{aligned}
+    \mathbf{J}_s &= \frac{1}{T} [\mathbf{J}_q - \sum_k\mu_k \mathbf{J}_k] = \mathrm{entropy \, flux} \\ 
+    \sigma &= -\frac{1}{T^2} \mathbf{J}_q \cdot \nabla T -\frac{1}{T} \sum_k \mathbf{J}_k \cdot [T\nabla (\frac{\mu_k}{T}) - \mathbf{f}_k] -\frac{1}{T} (\Vec{\Vec{\Pi}}^T \nabla)\cdot \v_v -\frac{1}{T}\sum_j R_j A_j =\mathrm{entropy \, production\, rate}            \end{aligned}
+\end{equation*}
+Equation (13) highlights some properties of the first order derivative of entropy:
+\begin{itemize}
+    \item If $\sigma = 0$, we are at equilibrium;
+    \item $\sigma$ is invariant under Galilei's transformations;
+    \item It holds $\Tder{S} \ge -\int_{\partial D} -\mathbf{J}_s \cdot \hat{n} \diff{S}$.
+\end{itemize}
+\textbf{Remark}\\
+The contribution due to diffusion requires the presence of at least $n = 2$ ($n$ is the total number of components of matter$k$). Indeed $J_k$ vanishes if we have only one $k$: $\v_v_k = \v_v$ (end of the fair).\\
+\textbf{Remark}\\
+Each contribution to $\sigma$ is a product of a flow $(J_q,J_k,\Pi, R_j )$ times an intensive variable $(T, \mu_k,\v_v$. Moreover, $\sigma$ can contain external forces or affinities. Usually the terms multiplying the flows are called "Thermodynamic Forces".
+
+
+\textbf{BISOGNA INSERIRE IMMAGINI E COMPLETARE PROBLEMA ESPANSIONE GAS. RICONTROLLARE STESURA}
+
+
+\end{document}

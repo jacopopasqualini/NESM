@@ -1,0 +1,293 @@
+\documentclass{article}
+
+\usepackage{lipsum}
+\usepackage[margin=1.6in,includefoot]{geometry}
+
+\usepackage{amsmath}
+\usepackage{bbm}
+
+% header and footer stuff
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+%\fancyhead{}
+\fancyfoot{}
+\fancyfoot[R]{\thepage\ }
+\renewcommand{\headrulewidth}{0pt}
+%%%%%%EMANUELE%%%%%%%%
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+\newcommand*\Diff[1]{\mathop{}\!\mathrm{d^#1}}
+\newcommand*\Tder[1]{\mathop{}\!\frac{\diff #1}{\diff \mathrm{t}}}
+\newcommand*\tder[1]{\mathop{}\!\frac{\partial #1}{\partial \mathrm{t}} }
+ %%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+\begin{titlepage}
+	\begin{center}
+	
+	\line(1,0){300}\\
+	[5mm]
+	\huge{\bfseries Langevin Approach to Brownian Motion}\\
+	[2mm]
+	\line(1,0){200}\\
+	[2cm]
+	\textsc{\Large Meccanica statistica del disequilibrio: fondamenti e applicazioni} \\
+	[8cm]
+	
+	\end{center}
+	
+	\begin{flushright}
+	\textsc{\LARGE Jacopo Pasqualini}\\
+	[0.5cm]
+	\textsc{\large Università degli studi di Torino\\
+	[0.5cm]
+	A.A. 2019/2020 }
+	\end{flushright}
+	
+\end{titlepage}
+
+\section{Langevin approach to Brownian Motion}\label{sec:langapp}
+
+A stochastic process $z$ is gaussian if the joint probability distribution of its values $z_1,z_2,...,z_n$ at times $t_1,t_2,...t_n$ is given by:
+
+\begin{equation}
+w_n(z_1,t_1;z_2,t_2;...z_n,t_n) = \frac{1}{ \textit{N} } \cdot \exp \Big \{  - \frac{1}{2} \sum_{j,k=1}^{n} (z_j - m_j ) a_{j,k} (z_k - m_k) \Big \}
+\end{equation}
+
+with $ m_j =\mathbbm{E} [z_j] = \mathbbm{E} [z(t_j)]$, $A = (a_{i,j})$ is a positive definite matrix, which defines the correlations between the variables of the system: $(A_{j,k}^{-1}) = \mathbbm{E}[(z_j-m_j)(z_k-m_k)]$
+
+The brownian motion is a gaussian stochastic process if there's a non-trivial stochastic term $\Gamma$, because any linear transformation of a gaussian variable $z$ that can be written in the following form is gaussian. We can say that linear transformations allow inheritance of gaussian property between variables:
+
+$$ y(t) = \int_{a}^{b} c(t,t') z(t') dt'$$
+
+We can calculate the moments and cumulants for the variable $y(t)$:
+
+$$ \mathbbm{E} [y(t)]_c = \int_{a}^{b} c(t,t') \mathbbm{E}[z(t')]_c dt' $$
+$$ \mathbbm{E} [y(t_1)y(t_2)]_c = \int_{a}^{b} c(t,t') \mathbbm{E}[z(t_1') z(t_2')]_c dt'$$
+
+Then for the normal distribution, $N(m,\sigma)$ we have:
+
+$$ \mathbbm{E}[x]_c = m ,\; \mathbbm{E}[x^2]_c = \sigma, \; \mathbbm{E}[x^m]_c = 0 \;  \mathrm{for} \, n \geq 3 $$
+
+A stochastic process is stationary if its probability densities do not change under time translation:
+\begin{align*}
+w_1(x_1,t_1) &=w_1(x_1,t_1+\tau)\\
+w_2(x_1,t_1;x_2,t_2) &= w_2(x_1,t_1+\tau;x_2,t_2+\tau)\\ &\textit{etc.}
+\end{align*}
+
+Remembering the approach of the last section, we considered the equation of motion for the pollen grain:
+
+$$ \dot{v} = - \gamma v + \Gamma(t) $$
+
+And integrated it formally, as a standard ODE, with result:
+
+\begin{equation}
+v(t) = v(0) e^{-\gamma t} + \int_{0}^{t} e^{- \gamma (t-t')} \Gamma(t') dt'
+\end{equation}
+
+Considering this formula with the statistical properties of $\Gamma(t) $ we obtained three important results:
+
+\begin{itemize}
+
+\item The asymptotic behavior of the mean:
+$$ \mathbbm{E}[v(t)] \xrightarrow{t\rightarrow \infty} 0$$
+
+\item The asymptotic  behavior of the autocorrelation:
+$$\mathbbm{E}[v(t_1)v(t_2)] \xrightarrow{t_1, t_2 \rightarrow \infty} \frac{q}{2\gamma} e^{-\gamma|t_1-t_2|} $$
+
+which, with the steady state average kinetic energy of the system and the energy equipartition theorem, leads to an expression for $q$, given measurable or known quantities:
+
+$$ \mathbbm{E}[E_k] = \lim\limits_{t \to \infty} \frac{m}{2} \mathbbm{E}[v(t)^2] = \frac{mq}{4\gamma}$$
+
+$$ \frac{1}{2} k_B T =  \frac{mq}{4\gamma} \Rightarrow q = \frac{2k_B T \gamma}{m}$$
+
+\item Last but not least, the \textit{Einstein-Smoluchowsi relation}, which leads to a formula that correlates various important quantities of the system, the fluctuation-dissipation theorem:
+
+$$ \mathbbm{E}[x(t)^2] \sim 4 D t \Rightarrow D = \mu k_B T $$
+
+\end{itemize}
+
+The last relation tell us how fluctuation and dissipation are linked in our system. Now we have a piece of theory that tell us how the system reacts to external actions, represented by the different values of temperatures that one can set during an experiment. In this particular case, for the fluctuation-dissipation theorem is called Einstein relation. Can we do similar calculations in higher dimension?
+ 
+\subsection{Extension to Higher Dimension} 
+
+Now $v$ will be a vector of $\mathbbm{R}^d$:
+
+$$ \dot{v}_i = -\gamma v_i + \Gamma_i(t), i=1,...,d$$
+
+one may assume that there are no correlation among coordinates, assuming that the system is isotropic. So each variable con be treated separately:
+
+$$ \mathbbm{E}[\Gamma_i(t)] = 0$$
+
+$$ \mathbbm{E}[\Gamma_i(t)\Gamma_j(t')] = q \delta_{i,j} \delta(t-t') $$
+
+the only consequence of this generalization comes when we apply the equipartition energy theorem:
+
+$$ \mathbbm{E}[E_k] = \sum_{i=1}^{d} \lim\limits_{t \to \infty} \frac{m}{2} \mathbbm{E}[v(t)^2] =  \lim\limits_{t \to \infty} \sum_{i=1}^{d} \frac{m}{2} \mathbbm{E}[v(t)^2] =  \sum_{i=1}^{d} \mathbbm{E}[E_k] = \frac{d}{2} k_B T $$
+
+In any event in the $t \to \infty $ limit, the process is gaussian with $ \sigma^2 = q / 2 \gamma$:
+
+$$ f(v) = c e^{- \frac{v^2}{2 \frac{q}{2 \gamma} } } = c e^{- \frac{\gamma v^2}{q}} = \sqrt{ \frac{\gamma}{\pi q}} e^{- \frac{\gamma v^2}{q}} $$
+
+If we accept the equipartition principle that yields $q / \gamma = 2 k_B T / m $, so the probability density becomes the \textit{Maxwell-Boltzmann} distribution in one dimension:
+
+\begin{equation}
+f_{MB} (v) = \sqrt{ \frac{m}{2 \pi k_B T}} e^{- \frac{ m v^2}{2k _B T}}
+\end{equation}
+
+This has straightforward consequences in the interpretation of brownian motion. Since $ \sigma^2 = \frac{k_B T}{m}$, and $T$ fixed:
+
+\begin{itemize}
+
+\item large $m$ yield small uncertainty on velocities i.e. they are \textit{practically deterministic}
+
+\item small $m$ implies large uncertainty, i.e. they are \textit{totally random}
+\end{itemize}
+
+Indeed, given the equation of motion $\dot{v} = - \gamma v + \Gamma(t)$, where the "intensity" of $\Gamma$ is related to $	q$, one observes that large $q/ \gamma$ means that random forces determinate the deterministic viscous force, while small $q/ \gamma$ is the opposite situation, in which hydrodynamics holds. 
+
+For a test particle of the size of water the motion is random and feels no viscosity, for a boat is deterministic and no atoms appear. The brownian motion lies at the border between the \textit{micro} and \textit{macro} worlds (that happily coexist even though very different) and reveals both.
+
+While micro does not know about viscosity and energy is not dissipated (hence motion does not stay), macro does not know about molecules, it dissipates energy, hence the motion stays.
+
+In general, one has an \textit{Ornstein-Uhlenbeck} process:
+
+\begin{equation}
+\dot{ \xi_i} = - \sum_{i=1}^{N} \gamma_{i,j} \xi_j + \Gamma_i(t)
+\end{equation}
+
+\newpage
+\subsection{Stochastic Processes}
+
+We recall some results on stochastic process (Gardiner, 4.3.2, 4.3.3 ).
+Consider the equation:
+\begin{align*}
+\diff x(t) & = a(x(t),t) \diff t+b(x(t),t) \diff W(t) 
+\end{align*}
+
+With the formal integration for $x$ we have:
+
+\begin{equation}
+x(t) = x(t_0) + \int_{t_0}^{t} dt' a(x(t'),t')dt+ \int_{t_0}^{t} dt' b(x(t'),t')dW(t')
+\end{equation}
+
+As we started with the brownian motion, we are mostly interested to focus on the previous case of study. Now we consider the stochastic differential equation for the pollen grain $1 D$, in other words the differential equation for the velocity $v$:
+\begin{align*}
+\diff v(t) = -\gamma v \diff t + \diff W \\
+\mathrm{where} \; a= -\gamma v, \textit{;  } b=1 
+\end{align*}
+
+Consider a new variable $f(x)$ , $\textit{e.g. } f(v)=v^2$: as $\diff v^2=2vdv$ one may think that $v^2$ follows the equation $dv^2=2v(-\gamma v dt + dW)$, but this is not the case.
+Expanding $df$ to second order in $dW$:
+
+\begin{align*}
+\diff f(x(t)) & = f( x(t)+\diff x(t) ) - f( x(t) ) = \\
+&= f^{'}( x(t) ) \diff x(t) + \frac{1}{2}f^{''}(x(t))(\diffx(t))^2+...  = \\
+	   & = f^{'}( x(t) ) [ a(x(t),t)\diff t+b(x(t),t) \diff W(t) ] + \frac{1}{2}f^{''}(x(t))b^2(x(t),t)\diff W^2(t) + ... \\
+\end{align*}
+
+Here the point is that the second order terms in $\diff W$ do not need to be negligible, while $\diff t^\alpha$, for $\alpha > 1$ is negligible. Indeed, one can prove that $dW^2=dt$ also using the independence of $x$ and $W$ that leads to get 0 from averages involving terms with differential $\diff x\diff W$. It also follows that one can take $\diff t \diff W$ as $\diff t^{3/2}$ which is negligible compared to $\diff t$. Now we can write the equation for the variable $v^2(t)$, according to Ito:
+
+\begin{align*}
+\diff v^2(t) & = 2v(t)\diff v+\diffW^2(t) =  \\
+	   & = 2v(t)(-\gamma v \diff t + \diff W)+\diff W^2(t) =\\
+	   & = (1-2\gamma v(t)^2) \diff t + \sqrt{ v(t)^2}\diff W(t)
+\end{align*}
+\textbf{NOTE:} \newline
+Stratonovich is natural for real (not white) noise, with finite correlation time $\tau$, but it makes calculations almost impossible. However for a precise limit $\tau \to 0$ there is equivalence
+\newline
+% F I N E  D I G R E S S I O N E S T O C A S T I C I 
+\subsection{Probabilistic approach to Stochastic Processes}
+By definition of probability density and transition probability we can write for the probability density $w$:
+
+\begin{equation}
+w(x,t+\tau) = \int p(x,t+\tau | x',t) w(x',t) dx'
+\end{equation}
+
+suppose we have the moments of $P$:
+
+\begin{equation}
+\mu_n(x',t,\tau) = \mathbbm{E} [\xi(t+\tau)-\xi(t))^n ] \big |_{\xi(t)=x'} = \int (x-x')^n p(x,t+\tau|x',t) dx
+\end{equation}
+
+we can the construct the characteristic function:
+\begin{equation}
+c(u,x',t,\tau) = \int_{- \infty }^{ \infty } e^{iu(x-x')} p(x,t+\tau|x',t) dx = 1 + \sum_{n=1}^{\infty} \frac{(iu)^n}{n!}M_n(x',t,\tau)
+\end{equation}
+
+which can be inverted to give the transition probability:
+
+$$ p(x,t+\tau|x',t) = \frac{1}{2\pi}  \int_{- \infty }^{ \infty } e^{-iu(x-x')} c(u,x',t,\tau) du = \frac{1}{2\pi}  \int_{- \infty }^{ \infty } e^{-iu(x-x')} \big [ 1 + \sum_{n=1}^{\infty} \frac{(iu)^n}{n!}M_n(x',t,\tau) \big ] du $$
+
+\begin{equation}
+=  [ 1 + \sum_{n=1}^{\infty} \frac{(iu)^n}{n!} \big ( - \frac{ \partial}{\partial x} \big )^n M_n(x',t,\tau) \big ] \delta(x-x')
+\end{equation}
+
+where in the last passage we used the properties of the $\delta$ function and Fourier transform. Then we can write an expression for the probabilty $w(x,t+\tau)$:
+
+$$ w(x,t+\tau) = \int w(x',t) \delta(x-x')dx' - \frac{\partial}{\partial x} M_1(x,t,\tau) \int w(x',t) \delta(x-x') dx' + ... $$
+
+\begin{equation}
+= \big[ 1- \frac{\partial}{\partial x} M_1 + \frac{1}{2} \frac{\partial^2}{\partial x^2}M_2 +... \big]w(x,t) 
+\end{equation}
+
+% passaggio dubbio: se divido entrambi i membri per tau non rimane anche nella parte con i momenti?
+
+Now we can divide both member by $\tau$ do the limit $\tau \to 0$, obtaining the \textit{Fokker-Planck} equation:
+
+\begin{equation}
+\lim\limits_{\tau \to 0} \frac{w(t+\tau)-w(t)}{\tau} = \frac{\partial}{\partial t} w(x,t)= - \frac{\partial}{\partial x} M_1 w(x,t) + \frac{1}{2} \frac{\partial^2}{\partial x^2}M_2 w(x,t)
+\end{equation}
+
+which describes the evolution of the probability density of a stochastic process. For temporal variations of the probability density drift and diffusion terms are needed. It results from a second order expansion of the formal exact solution and, for N-dimensional process $x$ takes the form:
+
+\begin{equation}
+\frac{\partial}{\partial t} w(x,t) = \Big [ - \sum_{i=1}^{n} \frac{\partial}{\partial x_i} D^{(1)}_i + \frac{1}{2}  \sum_{i,j=1}^{n} \frac{\partial^2}{\partial x_i^2 x_j^2} D^{(2)}_{i,j} \Big ] w(x,t) 
+\end{equation}
+
+The drift vector $D^{(1)}$ and the diffusion tensor $D^{(2)}$ can be obtained fro the equations of the microscopic dynamics, i.e. the stochastic process. For the Langevin equation:
+
+\begin{equation}
+\dot{\xi_i} = h_i(\xi,t) + \sum_{j=1}^{n} g_{i,j}(\xi,t) \Gamma_j(t)
+\end{equation}
+
+with the usual conditions on $\Gamma$, $\mathbbm{E}[ \Gamma_i(t)]=0 \textit{,   } \mathbbm{E}[\Gamma_i(t)\Gamma_j(t')]=\delta_{i,j}\delta(t-t')$ ,one obtains (Risken, sect 3.4):
+ 
+\begin{equation}
+D_i^{(1)} = h_i(x,t) + \sum_{j,k=1}^{n} g_{k,j}(x,t) \frac{\partial}{\partial x}g_{k,j}(x,t) \textit{  ,   }  D_{i,j}^{(2)} =\sum_{k=1}^{n} g_{i,k}(x,t) g_{j,k}(x,t)
+\end{equation}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

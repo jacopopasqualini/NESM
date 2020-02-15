@@ -1,0 +1,215 @@
+\documentclass{article}
+
+\usepackage{lipsum}
+\usepackage[margin=1.6in,includefoot]{geometry}
+
+\usepackage{amsmath}
+\usepackage{bbm}
+
+% header and footer stuff
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+%\fancyhead{}
+\fancyfoot{}
+\fancyfoot[R]{\thepage\ }
+\renewcommand{\headrulewidth}{0pt}
+%%%%%%EMANUELE%%%%%%%%
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+\newcommand*\Diff[1]{\mathop{}\!\mathrm{d^#1}}
+\newcommand*\Tder[1]{\mathop{}\!\frac{\diff #1}{\diff \mathrm{t}}}
+\newcommand*\tder[1]{\mathop{}\!\frac{\partial #1}{\partial \mathrm{t}} }
+\newcommand*\mean[1]{\mathop{} \! \langle #1 \rangle}
+ %%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+\begin{titlepage}
+	\begin{center}
+	
+	\line(1,0){300}\\
+	[5mm]
+	\huge{\bfseries Equipartition of energy}\\
+	[2mm]
+	\line(1,0){200}\\
+	[2cm]
+	\textsc{\Large Meccanica statistica del disequilibrio: fondamenti e applicazioni} \\
+	[8cm]
+	
+	\end{center}
+	
+	\begin{flushright}
+	\textsc{\LARGE Jacopo Pasqualini}\\
+	[0.5cm]
+	\textsc{\large Università degli studi di Torino\\
+	[0.5cm]
+	A.A. 2019/2020 }
+	\end{flushright}
+	
+\end{titlepage}
+
+\section{Equipartition of energy}\label{sec:langapp}
+
+The principle of equipartition of energy in classical statistical mechanics states that the contribution to internal energy of each degree of freedom which appears quadratically in the Hamiltonian equals $\frac{k_B T}{2}$.
+
+This result is based on the use of classical statistics, on the \emph{canonical ensemble} in particular.
+
+Let be $H$ the Hamiltonian of the system; we suppose that $H$ is separable as:
+
+$$H(p_1,...,p_{n},q_1,...,q_{n}) = H(x_1,...,x_N) = H_0(x_1,...,x_r) + H_1(x_{r+1},...,x_N)$$
+
+where $N=2n$ and we assume $H_0$ to be \emph{only} quadratic in the variables $x_1,...,x_r$: if one these coordinates appear quadratically \emph{and} otherwise in $H$ does not appear in $H_0$. So $H_1$ contains all other dependencies plus the former "spurious" ones. We built $H_0$ to be positive definite and homogeneous of degree 2. \newline
+
+%% nota
+\textbf{NOTA:}\newline
+1) Positive definite function mean $f:\mathbbm{R} \to \mathbbm{C}$ continuous in a finite region and odd in $\mathbbm{R}$; $f(-x)^*=f(x) \forall x_1...x_m \in \mathbbm{R} \textit{ and } \forall \rho_1,...,\rho_m \in \mathbbm{R} \Rightarrow \sum_{i=1}^{m} \sum_{j=1}^{m} f(x_i-x_j) \rho_i \rho_j^* \geq 0 $ i.e. the matrix $a_{i,j} = f(x_i-x_j)$ is positive definite.
+
+2) homogeneous of degree 2 means $f(\lambda x) = \lambda^2 f(x)$
+\newline
+
+
+Then, by Euler's theorem for homogeneous functions : $$x \cdot \nabla H_0(x) = \sum_{i=1}^{n} x_i \frac{\partial H_0}{\partial x_i} = 2 H_0(x)$$
+
+We can use this theorem to calculate $\mean{H_0}$ in the canonical ensemble, which gives:
+\begin{align*}
+\mean{H_0} &= \frac{\int \Diff{N}{x}  \, H_0 e^{-\beta (H_0+ H_1)} }{\int \Diff{N}{x}  \, e^{-\beta (H_0+ H_1)}  } = \\
+&= \frac{\int \Diff{r}{x} \, H_0 e^{-\beta H_0} }{\int \Diff{r}{x} \, e^{-\beta H_0}} = \\
+&= \frac{1}{2} \frac{\int \Diff{r}{x} \, \nabla H_0 \cdot x \,  e^{-\beta H_0}  }{\int \Diff{r}{x} \, e^{-\beta H_0}} =  \\
+&=  - \frac{1}{2 \beta} \frac{\int \Diff{r}{x} \, \nabla  e^{-\beta H_0} \cdot x }{\int \Diff{r}{x} \, e^{-\beta H_0} } =\\
+&= \frac{1}{2\beta} \frac{\int \Diff{r}{x} \, e^{-\beta H_0} \nabla \cdot x}{\int \Diff{r}{x} \, e^{-\beta H_0} } = r\frac{k_B T}{2}
+\end{align*}
+
+In other words, each of the $r$ degrees of freedom contributes $\frac{k_B T}{2}$ to the internal energy. So, in canonical ensemble if the momentum $p$ appears only in \emph{kinetic energy} then $k_B T \approx K$. In other ensembles (e.g. away from equilibrium) the microscopic definition of temperature is not obvious.  
+
+This is a principle (not a theorem, since the assumption of canonical distribution is not necessarily valid) of very wide applicability in equilibrium statistical mechanics. Indeed, any classical Hamiltonian in the momenta and almost quadratic in the (\emph{small}) deviations from equilibrium of the position coordinates. \newline
+
+Now, if $T$ is high, we take $H_0 = K(p) \approx T$ and interactions are (comparatively) weak, we have that $U=\mean{H_0+H_1 }\approx \mean{ H_0}$ because the interactions are part of $H_1$
+
+As a matter of fact, the potential energy $\Phi$ of $n$ particles in a fixed volume $V$ is not affected by changes in $T$ since $\mean \Phi$ depends on the average positions. So, when $T$ is high, $K$ can be very high compared to $\mean\Phi$, and $H_1$, which contains all of  $\mean\Phi$ in just a part, becomes negligible with respect to $\mean {H_0}$. In particular, the internal energy $U$ approximately equals $\mean{H_0}$ and if $\mean{H_0}= \mean K$ one approximately has, for $n$ particle in 3 dimensions:
+
+$$U = 3n \frac{k_B T}{2} = \frac{3}{2}n k_B T$$
+
+Then the heat capacity on constant volume, for a mono-atomic gas is:
+
+$$C_V = \frac{\partial U}{\partial T} \big |_V = \frac{3}{2}n k_B$$
+
+It is implicit here not only that $\Phi \ll K$ but also that \emph{variations of $\Phi$ with the respect of T are negligible}. If we have rigid diatomic molecules, which have 5 degrees of freedom in 3 dimension we obtain $C_V = \frac{5}{2} n k_B$. \newline
+
+For a crystal of point-like particles which oscilate with small amplitude around their equilibrium positions, under Hooke's forces, not only the momenta but also the positions appear quadratically in the hamiltonian $H$. Therefore $E=\frac{3}{2}n k_B T + \frac{3}{2}n k_B T = 3nk_BT$ and $C_V = 3nk_BT$
+For this to be the case, the oscillations have to be small, so that harmonic law applies, hence the kinetic energy and $T$ have to be small, unlike the mono-atomic case above, which requires high $T$. In that case, $\Phi$ is not quadratic in the positions, and only the kinetic part of the energy plays a role.
+
+Clearly, these results must be modified in relativistic effects must be accounted for, especially, if quantum mechanics is relevant, because the canonical ensemble does not apply anymore. Accounting quantum effects, it turns out that $C_V$ depends on $T$.
+\newline
+The obtained result, however, is still very important for a conceptual point of view because clearly identifies the ingredients underlying many calculations in statistical mechanics and sets a stage for more accurate calcuations, where necessary. Let us now use the equipartition of energy principle together with the \textit{virial theorem}. 
+\newpage
+\section{ Towards the Virial Theorem}
+
+Consider a general system of point masses subjected to forces $F_i = \dot{p_i} = m_i a_i$.
+
+Introduce the quantity:
+
+\begin{equation}
+G = \sum_{i=1}^{n} p_i q_i
+\end{equation}
+
+And calculate its derivative respect to time:
+
+$$\frac{dG}{dt}= \sum_{i=1}^{n} \dot{p_i} q_i + p_i \dot{q_i}$$
+
+Observe that:
+
+$$ \sum_{i=1}^{n} p_i \dot{q_i} =  \sum_{i=1}^{n} \frac{p_i}{m} p_i = \sum_{i=1}^{n} \frac{p_i^2}{m} = 2K$$
+
+$$\sum_{i=1}^{n} \dot{p_i} q_i = \sum_{i=1}^{n} F_i q_i $$
+
+Then:
+
+$$ \frac{dG}{dt}=2K+ \sum_{i=1}^{n} F_i q_i $$
+
+Averaging in time, with $\tau$ the time of the observation of the sytem, we obtain:
+
+\begin{equation}
+\frac{1}{\tau} \int_{0}^{\tau}  \frac{dG} dt = \frac{2}{\tau}  \int_{0}^{\tau} K(p(t;q_0,p_0))dt + \frac{1}{\tau} \int_{0}^{\tau}  \sum_{i=1}^{n} F_i (t;q,q_0)q_i(t,q_0,p_0) dt
+\end{equation}
+
+which can be written as:
+
+\begin{equation}
+2 \overline{K}^{\tau}(q_0,p_0) = - \overline{\sum_{i=1}^{n} F_i  \cdot q_i(q_0,p_0)}^{\tau} + \frac{G(S^{\tau},x_0)-G(x_0)}{\tau}
+\end{equation}
+
+Where $S^{\tau}$ is the evolution at time $\tau$ of $x_0$, and we have stressed the role of the initial conditions $x_0=(p_0,q_0)$. Assume now that positions $q$ and momenta $p$ are bounded (e.g. a system with a finite energy in a finite volume). Then $G$ is also finite and $G(S^{\tau},x_0)-G(x_0)$ likewise, and $\tau \to \infty$, we then have:
+
+$$\lim\limits_{\tau \to \infty} \overline{K}^{\tau}(x_0) = \lim\limits_{\tau \to \infty} \Big [ \frac{G(S^{\tau}x_0)-G(x_0)}{2\tau}
+- \frac{1}{2} \overline{\sum_{i=1}^{n} F_i  \cdot q_i(q_0,p_0)}^{\tau} \Big] $$
+
+Note the dependence on $x_0$. For infinite time average:
+
+\begin{equation}
+\overline{K}(x_0) = - \frac{1}{2} \overline{\sum_{i=1}^{n} F_i  \cdot q_i(x_0)}
+\end{equation}
+
+This is the \emph{virial theorem}, whose right hand is called virial of Clausius. 
+\newline
+
+If the forces are sums of conservative and frictional forces (proportional to the velocities) $F_i=f_i+c_i$, only the conservative forces matter.
+
+Indeed if $f_i=-\gamma_i \dot{q_i}$, we have:
+
+$$ \frac{1}{\tau} \int_{0}^{\tau} (-\gamma_i \dot{q_i} ) \cdot q_i dt = -\frac{\gamma_i}{2 \tau} \int_{0}^{\tau} \frac{d}{dt} q_i^2 dt = -\frac{\gamma_i}{2 \tau}[q_i^2(S^{\tau} x_0)-q_i^2(x_0)] \to 0 \textit{ as } \tau \to \infty$$
+
+if the motion is bounded and grows less than diffusion. Of course if the friction is not balanced by an energy source, everything becomes trivial, all the velocities tend to 0. If the forces derive from a potential:
+
+$$F_i = -\frac{\partial \Phi}{\partial q_i} \Rightarrow \overline{K}(x_0) =  \frac{1}{2} \overline{\sum_{i=1}^{n} \frac{\partial \Phi}{\partial q_i}   \cdot q_i(x_0)}$$
+
+In particular consider $\Phi = a r^{m+1}$, and the above takes the form:
+
+$$q_i \frac{\partial ar^{m+1}}{\partial q_i} = (m+1)\Phi$$
+
+Then, for a single particle, we obtain that the average kinetic energy equals the average potential energy times $m+1$:
+
+$$ \overline{K}(x_0) =  \frac{1}{2} (m+1)  \overline{\Phi}(x_0)$$
+
+But now consider the case which the $N$ particle constitute a monoatomic gas in a volume $V$ Let its temperature be $T$. Then, if the equipartition principle applies, every atom has an average kinetic energy of $\frac{3}{2} k_B T$ and $ \overline{K}(x_0)  = \frac{3}{2} N k_B T$ indipendent of the initial condition (NOTE: ergodicity, which make $x_0$ irrilevant, is possible also for $N=1$).
+\newline
+\subsection{The Equation of Perfect Gasses}
+For a perfect gas, $\Phi$ is negligible with the respect to $K$. There are, however, the forces exerted by the walls of $V$, which we assume are localized at the walls and act only thwn a particle impacts on them.
+
+When this happen, the force can be referred to the unit area of the wall, giving $dF_i = - P \hat{n}dA$ if $\hat{n}$ is the outward normal and $P$ is thus defined to be the pressure. Then, the sum of the forces equals the integral over the surface. So, integrating over the surface and summing over all the particles and using Gauss theorem:
+
+$$\frac{1}{2} \overline{\sum_{i=1}^{n} F_i  \cdot q_i(x_0)} = - \frac{P}{2} \int_{S} \hat{n} \cdot q dA = \frac{P}{2} \int_{V} \nabla q dV = \frac{3}{2} PV$$
+
+Taking P out of the integral and computing only P, in the virial expression is possible only if the potential energy is negligible, otherwise one would have the sum over particles interactions. So the virial theorem becomes:
+
+\begin{equation}
+PV = NK_BT
+\end{equation}
+
+So we obtained Boyle's law in consequence of
+
+\begin{itemize}
+\item canonical ensemble, for equipartition 
+\item $\Phi \ll K$, so interaction between particles are negligible in calculations
+\end{itemize}
+
+Note that one effect of the validity of the canonical ensemble has been that of making $ \overline{K}$ independent of the initial conditions and the size of $N$. But is it really so? Does thermodynamics comes from mechanics? Not really.
+
+Ensemble theory shows that $N$ should be large for the canonical ensemble to hold. Alse, one thing is small $\Phi$, another is $\Phi=0$. With $\Phi=0$ the indipendence of $K$ from $x_0$ can not be obtained and there can be no equipartition.
+
+So it appears that mechanics by itself could have not produced themodynamic law. Local themodynamical equilibrium, in particular, requires proper $\Phi$, besides large $N$.
+
+But is also important to note that proper $\Phi$ excludes central forces, which extend to large distances and make  $\Phi$ comparable to $K$. One needs potential wich decay very fast: faster than any power of distance. Hard particles would be right if they don't collide too often.
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
